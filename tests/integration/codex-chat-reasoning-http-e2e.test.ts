@@ -9,13 +9,13 @@ import { once } from "node:events";
 
 const CODEX_RESPONSES_URL = "https://chatgpt.com/backend-api/codex/responses";
 const ENCRYPTED_CONTENT_SENTINEL = "encrypted-codex-state:" + "A".repeat(910);
-const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-codex-chat-http-"));
+const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-codex-chat-http-"));
 
 process.env.DATA_DIR = TEST_DATA_DIR;
 process.env.DISABLE_SQLITE_AUTO_BACKUP = "true";
 process.env.API_KEY_SECRET = "codex-chat-http-e2e-secret-123456";
 process.env.REQUIRE_API_KEY = "false";
-process.env.OMNIROUTE_LOG_REQUEST_SHAPE = "0";
+process.env.AERA_ROUTER_LOG_REQUEST_SHAPE = "0";
 
 const core = await import("../../src/lib/db/core.ts");
 const providersDb = await import("../../src/lib/db/providers.ts");

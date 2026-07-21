@@ -75,14 +75,14 @@ describe("proxyDispatcher connection pool", () => {
 
   it("allows operators to force a single proxy connection for diagnostics", () => {
     const options = __getProxyDispatcherOptionsForTest({
-      OMNIROUTE_PROXY_DISPATCHER_CONNECTIONS: "1",
+      AERA_ROUTER_PROXY_DISPATCHER_CONNECTIONS: "1",
     });
     assert.equal(options.connections, 1);
   });
 
   it("caps excessive proxy connection overrides", () => {
     const options = __getProxyDispatcherOptionsForTest({
-      OMNIROUTE_PROXY_DISPATCHER_CONNECTIONS: "9999",
+      AERA_ROUTER_PROXY_DISPATCHER_CONNECTIONS: "9999",
     });
     assert.equal(options.connections, 256);
   });

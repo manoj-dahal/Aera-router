@@ -2,7 +2,7 @@ import {
   getAllModelLockouts,
   clearModelLock,
   type ModelLockoutInfo,
-} from "@omniroute/open-sse/services/accountFallback";
+} from "@aera-router/open-sse/services/accountFallback";
 
 export type AvailabilityReportItem = Pick<
   ModelLockoutInfo,

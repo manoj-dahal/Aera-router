@@ -1,1 +1,1 @@
-- fix(packaging): move fumadocs-mdx from dependencies to devDependencies to avoid pulling its build-only yuku-analyzer/yuku-ast toolchain into `npm install -g omniroute` (#7661)
+- fix(packaging): move fumadocs-mdx from dependencies to devDependencies to avoid pulling its build-only yuku-analyzer/yuku-ast toolchain into `npm install -g aera-router` (#7661)

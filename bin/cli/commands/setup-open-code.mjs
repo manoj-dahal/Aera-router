@@ -1,9 +1,9 @@
 /**
- * omniroute setup opencode — Wire the bundled @omniroute/opencode-plugin
+ * aera-router setup opencode — Wire the bundled @aera-router/opencode-plugin
  * into a local OpenCode install.
  *
- * Closes the gap where `npm install -g omniroute` ships the plugin
- * inside the omniroute package (`@omniroute/opencode-plugin/dist/`) but
+ * Closes the gap where `npm install -g aera-router` ships the plugin
+ * inside the aera-router package (`@aera-router/opencode-plugin/dist/`) but
  * OpenCode discovers plugins via `~/.config/opencode/plugins/` or
  * via entries in `opencode.json`. Without this command, the user has
  * to extract the tarball and wire it up by hand (see the plugin README,
@@ -12,10 +12,10 @@
  * What it does, in order:
  *   1. Resolves the bundled plugin path (source + built dist).
  *   2. Resolves the OpenCode config directory (XDG-aware).
- *   3. Copies the built plugin into `<opencode>/plugins/omniroute/`.
+ *   3. Copies the built plugin into `<opencode>/plugins/aera-router/`.
  *   4. Creates or updates `opencode.json` with a single `plugin` entry
  *      pointing at the local copy (so OC ≥1.15 picks it up).
- *   5. Optionally runs `opencode auth login --provider omniroute`
+ *   5. Optionally runs `opencode auth login --provider aera-router`
  *      so the next `opencode` invocation already has the API key.
  *
  * Idempotent: re-running with the same `--provider-id` updates the
@@ -34,18 +34,19 @@ import { resolveActiveContext } from "../contexts.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// We walk up from this file to find the omniroute package root. The script
-// lives at `<omniroute>/bin/cli/commands/setup-open-code.mjs`, so the
+// We walk up from this file to find the aera-router package root. The script
+// lives at `<aera-router>/bin/cli/commands/setup-open-code.mjs`, so the
 // package root is three levels up. Using import.meta.url (not process.cwd())
 // means the command works the same way whether you run it from the source
 // repo, a global install, or a symlinked location.
 const PACKAGE_ROOT = resolve(__dirname, "..", "..", "..");
 
-// The bundled plugin ships at PACKAGE_ROOT/@omniroute/opencode-plugin/
-// (see root package.json `files`: ["@omniroute/", ...]). The env override
+// The bundled plugin ships at PACKAGE_ROOT/@aera-router/opencode-plugin/
+// (see root package.json `files`: ["@aera-router/", ...]). The env override
 // exists so tests can point at a fixture without building the real plugin.
 const BUNDLED_PLUGIN_DIR =
-  process.env.OMNIROUTE_OPENCODE_PLUGIN_DIR || join(PACKAGE_ROOT, "@omniroute", "opencode-plugin");
+  process.env.AERA_ROUTER_OPENCODE_PLUGIN_DIR ||
+  join(PACKAGE_ROOT, "@aera-router", "opencode-plugin");
 
 /**
  * Resolve the OpenCode config directory. Honours XDG_CONFIG_HOME and the
@@ -79,11 +80,11 @@ function resolveOpenCodeDirs() {
 }
 
 /**
- * Locate the bundled @omniroute/opencode-plugin dist. The plugin may be
+ * Locate the bundled @aera-router/opencode-plugin dist. The plugin may be
  * present in two states:
  *
  *   - Built (`dist/index.cjs` + `dist/index.js` exist) — preferred,
- *     ships from a published omniroute tarball after Step 8.8 of
+ *     ships from a published aera-router tarball after Step 8.8 of
  *     `scripts/build/prepublish.ts` runs.
  *   - Unbuilt (only `src/index.ts`) — local dev / fresh clone. We surface
  *     a clear error instead of running tsup here, because the CLI runtime
@@ -94,10 +95,10 @@ function resolveOpenCodeDirs() {
 function resolveBundledPlugin() {
   if (!existsSync(BUNDLED_PLUGIN_DIR)) {
     throw new Error(
-      `Bundled @omniroute/opencode-plugin not found at ${BUNDLED_PLUGIN_DIR}.\n` +
-        `This usually means omniroute was installed from a source tree that does not ` +
-        `include the workspace package. Try reinstalling omniroute (npm install -g omniroute) ` +
-        `or run \`cd @omniroute/opencode-plugin && npm install && npm run build\` from the source repo.`
+      `Bundled @aera-router/opencode-plugin not found at ${BUNDLED_PLUGIN_DIR}.\n` +
+        `This usually means aera-router was installed from a source tree that does not ` +
+        `include the workspace package. Try reinstalling aera-router (npm install -g aera-router) ` +
+        `or run \`cd @aera-router/opencode-plugin && npm install && npm run build\` from the source repo.`
     );
   }
 
@@ -105,7 +106,7 @@ function resolveBundledPlugin() {
 
   if (!existsSync(esmEntry)) {
     throw new Error(
-      `@omniroute/opencode-plugin dist/ not built (looked for ${esmEntry}).\n` +
+      `@aera-router/opencode-plugin dist/ not built (looked for ${esmEntry}).\n` +
         `Run \`cd ${BUNDLED_PLUGIN_DIR} && npm install && npm run build\` and re-run this command.`
     );
   }
@@ -116,15 +117,15 @@ function resolveBundledPlugin() {
 }
 
 /**
- * Copy the plugin package into `<opencodeConfig>/plugins/omniroute/`. We
+ * Copy the plugin package into `<opencodeConfig>/plugins/aera-router/`. We
  * copy the entire package (dist/ + package.json) so the dist file's
  * require/import of `zod` and `@opencode-ai/plugin` resolves against the
  * copy's own node_modules. Without the copy, OpenCode would need to
- * resolve the peer deps from the omniroute package's tree, which is
+ * resolve the peer deps from the aera-router package's tree, which is
  * unreliable.
  */
 function installPluginToOpenCode(pluginInfo, opencodeConfigDir) {
-  const targetDir = join(opencodeConfigDir, "plugins", "omniroute");
+  const targetDir = join(opencodeConfigDir, "plugins", "aera-router");
   mkdirSync(dirname(targetDir), { recursive: true });
   mkdirSync(targetDir, { recursive: true });
 
@@ -163,7 +164,7 @@ function registerPluginInOpenCodeConfig({
     } catch (err) {
       throw new Error(
         `Failed to parse existing ${configPath}: ${err.message}\n` +
-          `Fix or remove the file manually, then re-run \`omniroute setup opencode\`.`
+          `Fix or remove the file manually, then re-run \`aera-router setup opencode\`.`
       );
     }
   }
@@ -175,7 +176,7 @@ function registerPluginInOpenCodeConfig({
   // we use that. The "module path" is a file:// URL relative to the
   // opencode config dir — that is what opencode ≥1.15 resolves.
   const entry = [
-    `./plugins/omniroute/dist/index.js`,
+    `./plugins/aera-router/dist/index.js`,
     {
       providerId,
       baseURL,
@@ -184,18 +185,18 @@ function registerPluginInOpenCodeConfig({
   ];
 
   // Idempotency: drop any prior entry for the same providerId. We also
-  // drop a legacy `opencode-omniroute-auth` entry if present — that
-  // package is the obsolete predecessor of @omniroute/opencode-plugin
+  // drop a legacy `opencode-aera-router-auth` entry if present — that
+  // package is the obsolete predecessor of @aera-router/opencode-plugin
   // and was the root cause of issue #3711.
   const filtered = plugins.filter((p) => {
     if (typeof p === "string") {
-      return !p.includes("opencode-omniroute-auth");
+      return !p.includes("opencode-aera-router-auth");
     }
     if (Array.isArray(p) && p[1] && typeof p[1] === "object") {
       const pid = p[1].providerId;
       if (pid === providerId) return false;
       // Also drop the legacy auth plugin if it's there.
-      if (typeof p[0] === "string" && p[0].includes("opencode-omniroute-auth")) {
+      if (typeof p[0] === "string" && p[0].includes("opencode-aera-router-auth")) {
         return false;
       }
     }
@@ -260,7 +261,7 @@ export function runOpenCodeAuth(providerId) {
  * drive it without spawning a subprocess.
  *
  * @param {object} opts
- * @param {string} [opts.providerId="omniroute"]
+ * @param {string} [opts.providerId="aera-router"]
  * @param {string} [opts.baseURL="http://localhost:20128"]  (Commander camelCases
  *   `--base-url` into `baseUrl`, so both spellings are accepted.)
  * @param {string} [opts.configDir]  Override the OpenCode config dir (tests / non-standard installs).
@@ -270,12 +271,12 @@ export function runOpenCodeAuth(providerId) {
  * @returns {Promise<{ exitCode: number, configPath?: string, pluginTargetDir?: string }>}
  */
 export async function runSetupOpenCodeCommand(opts = {}) {
-  const providerId = opts.providerId || "omniroute";
+  const providerId = opts.providerId || "aera-router";
   // Remote-aware: explicit --remote/--base-url → active context → localhost.
   let baseURL = opts.remote || opts.baseURL || opts.baseUrl;
   if (!baseURL) {
     try {
-      const ctx = resolveActiveContext(opts.context ?? process.env.OMNIROUTE_CONTEXT);
+      const ctx = resolveActiveContext(opts.context ?? process.env.AERA_ROUTER_CONTEXT);
       baseURL = ctx?.baseUrl;
     } catch {
       /* no context */
@@ -286,7 +287,7 @@ export async function runSetupOpenCodeCommand(opts = {}) {
   const wantsAuth = Boolean(opts.auth);
   const nonInteractive = Boolean(opts.nonInteractive);
 
-  printHeading("OmniRoute → OpenCode Plugin Setup");
+  printHeading("Aera Router → OpenCode Plugin Setup");
 
   const resolvedDirs = resolveOpenCodeDirs();
   const opencodeConfigDir = opts.configDir || resolvedDirs.configDir;
@@ -363,9 +364,9 @@ export async function runSetupOpenCodeCommand(opts = {}) {
 }
 
 /**
- * Register the `omniroute setup opencode` subcommand on the parent
+ * Register the `aera-router setup opencode` subcommand on the parent
  * `setup` command. Commander builds the doc/help from the chain, so
- * `omniroute setup --help` automatically shows the new subcommand.
+ * `aera-router setup --help` automatically shows the new subcommand.
  *
  * @param {import("commander").Command} setupCommand  the registered `setup` command
  */
@@ -374,20 +375,20 @@ export function registerSetupOpenCode(setupCommand) {
     .command("opencode")
     .description(
       t("setup.opencode") ||
-        "Install and register the bundled @omniroute/opencode-plugin with a local OpenCode install"
+        "Install and register the bundled @aera-router/opencode-plugin with a local OpenCode install"
     )
     .option(
       "--provider-id <id>",
-      "OpenCode provider id to register (default: omniroute)",
-      "omniroute"
+      "OpenCode provider id to register (default: aera-router)",
+      "aera-router"
     )
     .option(
       "--base-url <url>",
-      "OmniRoute base URL the plugin should talk to (default: active context or http://localhost:20128)"
+      "Aera Router base URL the plugin should talk to (default: active context or http://localhost:20128)"
     )
     .option(
       "--remote <url>",
-      "Remote OmniRoute URL, e.g. http://192.168.0.15:20128 (overrides --base-url and the context)"
+      "Remote Aera Router URL, e.g. http://192.168.0.15:20128 (overrides --base-url and the context)"
     )
     .option("--display-name <name>", "Display name in the OpenCode UI (optional)")
     .option(

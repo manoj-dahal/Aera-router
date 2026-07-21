@@ -3,14 +3,14 @@
  * Phase 3-4 of #3384). Structural twin of webSearchFallback.ts: pure request-body /
  * tool-array transformation only, no HTTP fetch, no streaming/SSE, no abort-signal
  * handling here. Rewrites a provider-native `web_fetch` tool declaration into a
- * synthetic `omniroute_web_fetch` function tool; the actual `/v1/web/fetch` call
+ * synthetic `aera_router_web_fetch` function tool; the actual `/v1/web/fetch` call
  * happens later, once the model emits that synthetic tool call, through the existing
  * generic tool-call execution path (@/lib/skills/interception::handleToolCallExecution).
  */
 
 import { FORMATS } from "../translator/formats.ts";
 
-export const OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME = "omniroute_web_fetch";
+export const AERA_ROUTER_WEB_FETCH_FALLBACK_TOOL_NAME = "aera_router_web_fetch";
 // "web_fetch" mirrors the Responses-API-style built-in tool type convention already
 // used for web_search; "web_fetch_20250910" is Anthropic's dated server-tool type.
 const WEB_FETCH_TOOL_TYPES = new Set(["web_fetch", "web_fetch_20250910"]);
@@ -63,7 +63,7 @@ function buildFallbackParameters(): JsonRecord {
 }
 
 function buildFallbackTool(targetFormat?: string | null): JsonRecord {
-  const name = OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME;
+  const name = AERA_ROUTER_WEB_FETCH_FALLBACK_TOOL_NAME;
   const description = [
     "Fetch and extract the content of a specific URL.",
     "Use this when the user references a URL or asks you to read or summarize a specific page.",
@@ -156,7 +156,7 @@ export function prepareWebFetchFallbackBody<T extends JsonRecord>(
 
   const isResponsesTarget = options.targetFormat === FORMATS.OPENAI_RESPONSES;
 
-  if (!toolNames.has(OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME)) {
+  if (!toolNames.has(AERA_ROUTER_WEB_FETCH_FALLBACK_TOOL_NAME)) {
     preservedTools.unshift(buildFallbackTool(options.targetFormat));
   }
 
@@ -168,8 +168,8 @@ export function prepareWebFetchFallbackBody<T extends JsonRecord>(
   if (isBuiltInWebFetchToolChoice(body.tool_choice)) {
     nextBody.tool_choice = (
       isResponsesTarget
-        ? { type: "function", name: OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME }
-        : { type: "function", function: { name: OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME } }
+        ? { type: "function", name: AERA_ROUTER_WEB_FETCH_FALLBACK_TOOL_NAME }
+        : { type: "function", function: { name: AERA_ROUTER_WEB_FETCH_FALLBACK_TOOL_NAME } }
     ) as T["tool_choice"];
   }
 
@@ -177,7 +177,7 @@ export function prepareWebFetchFallbackBody<T extends JsonRecord>(
     body: nextBody,
     fallback: {
       enabled: true,
-      toolName: OMNIROUTE_WEB_FETCH_FALLBACK_TOOL_NAME,
+      toolName: AERA_ROUTER_WEB_FETCH_FALLBACK_TOOL_NAME,
       convertedToolCount: builtInFetchTools.length,
     },
   };

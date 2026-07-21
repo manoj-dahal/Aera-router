@@ -1,4 +1,4 @@
-// Regression test for #7913: `omniroute setup opencode --auth` spawns the
+// Regression test for #7913: `aera-router setup opencode --auth` spawns the
 // `opencode.cmd` shim on win32. Since Node's CVE-2024-27980 hardening,
 // spawning a `.cmd`/`.bat` shim with `shell:false` throws EINVAL — the same
 // class already fixed for codex (bin/cli/commands/launch-codex.mjs,
@@ -14,19 +14,19 @@ import assert from "node:assert/strict";
 import { resolveOpenCodeAuthSpawn } from "../../bin/cli/commands/setup-open-code.mjs";
 
 test("resolveOpenCodeAuthSpawn: win32 spawns opencode.cmd with shell:true (repro #7913)", () => {
-  const spawn = resolveOpenCodeAuthSpawn("omniroute", "win32");
+  const spawn = resolveOpenCodeAuthSpawn("aera-router", "win32");
   assert.equal(spawn.command, "opencode.cmd");
   assert.equal(
     spawn.options.shell,
     true,
     `expected shell:true on win32 (the EINVAL fix), got shell:${spawn.options.shell}`
   );
-  assert.deepEqual(spawn.args, ["auth", "login", "--provider", "omniroute"]);
+  assert.deepEqual(spawn.args, ["auth", "login", "--provider", "aera-router"]);
 });
 
 test("resolveOpenCodeAuthSpawn: linux/darwin spawn bare opencode with shell:false (no regression)", () => {
   for (const platform of ["linux", "darwin"]) {
-    const spawn = resolveOpenCodeAuthSpawn("omniroute", platform);
+    const spawn = resolveOpenCodeAuthSpawn("aera-router", platform);
     assert.equal(spawn.command, "opencode", `command on ${platform}`);
     assert.equal(
       spawn.options.shell,

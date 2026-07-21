@@ -8,9 +8,9 @@
  * Response: { provider, url, content, links, metadata, screenshot_url }
  */
 
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
-import { handleWebFetch } from "@omniroute/open-sse/handlers/webFetch.ts";
+import { errorResponse } from "@aera-router/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@aera-router/open-sse/config/constants.ts";
+import { handleWebFetch } from "@aera-router/open-sse/handlers/webFetch.ts";
 import * as log from "@/sse/utils/logger";
 import {
   extractApiKey,

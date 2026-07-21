@@ -1,4 +1,4 @@
-import { getRegistryEntry } from "@omniroute/open-sse/config/providerRegistry.ts";
+import { getRegistryEntry } from "@aera-router/open-sse/config/providerRegistry.ts";
 import type { ProviderModelsConfigEntry } from "./discovery/providerModelsConfig";
 
 /**

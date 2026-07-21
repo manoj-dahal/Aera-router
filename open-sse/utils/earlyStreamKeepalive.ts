@@ -3,7 +3,7 @@
  *
  * Strict HTTP clients (notably Codex CLI's `reqwest`, which has a ~5s idle-read
  * timeout) drop the connection if no bytes arrive shortly after the request.
- * OmniRoute, however, holds the streaming response until `ensureStreamReadiness`
+ * Aera Router, however, holds the streaming response until `ensureStreamReadiness`
  * observes the upstream's first useful byte — which can exceed 5s for reasoning
  * models that "think" before emitting any token (#2544). `curl` has no such
  * idle timeout, so it was never affected, which is why the bug looked
@@ -27,12 +27,12 @@
  */
 
 const ENCODER = new TextEncoder();
-const KEEPALIVE_FRAME = ENCODER.encode(": omniroute-keepalive\n\n");
+const KEEPALIVE_FRAME = ENCODER.encode(": aera-router-keepalive\n\n");
 // OpenAI-compatible keepalive: a syntactically valid empty streaming chunk.
 // Some OpenAI-compatible clients parse every non-empty SSE line as JSON and
 // reject legal SSE comments before their first provider chunk arrives.
 export const OPENAI_KEEPALIVE_FRAME = ENCODER.encode(
-  'data: {"id":"omniroute-keepalive","object":"chat.completion.chunk","created":0,"model":"omniroute","choices":[{"index":0,"delta":{},"finish_reason":null}]}\n\n'
+  'data: {"id":"aera-router-keepalive","object":"chat.completion.chunk","created":0,"model":"aera-router","choices":[{"index":0,"delta":{},"finish_reason":null}]}\n\n'
 );
 // Anthropic Messages-format keepalive: a REAL `ping` SSE event, not a comment.
 // Anthropic clients (Claude Code, the Anthropic SDK) reset their stream/first-token
@@ -55,7 +55,7 @@ export type EarlyStreamKeepaliveOptions = {
   signal?: AbortSignal | null;
   /**
    * Frame emitted on each keepalive tick. Defaults to an SSE comment
-   * (`: omniroute-keepalive`). Anthropic-format routes (/v1/messages) must pass
+   * (`: aera-router-keepalive`). Anthropic-format routes (/v1/messages) must pass
    * `ANTHROPIC_PING_FRAME` instead, because Anthropic clients ignore SSE comments
    * for their stream watchdog and only a real `event: ping` keeps them from aborting.
    */

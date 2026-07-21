@@ -2,8 +2,8 @@ import { getSyncedAvailableModelsByConnection } from "@/lib/db/models";
 import { getProviderConnections } from "@/lib/db/providers";
 import { getDbInstance } from "@/lib/db/core";
 import { getAllCircuitBreakerStatuses } from "@/shared/utils/circuitBreaker";
-import { getAllModelLockouts } from "@omniroute/open-sse/services/accountFallback";
-import { getWebSessionPoolHealth } from "@omniroute/open-sse/services/webSessionPoolHealth";
+import { getAllModelLockouts } from "@aera-router/open-sse/services/accountFallback";
+import { getWebSessionPoolHealth } from "@aera-router/open-sse/services/webSessionPoolHealth";
 
 type JsonRecord = Record<string, unknown>;
 

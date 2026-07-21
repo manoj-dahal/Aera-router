@@ -470,19 +470,19 @@ function ensureCodexReasoningSummary(body: Record<string, unknown>): void {
 }
 
 function consumeResponsesStoreMarker(body: Record<string, unknown>): unknown {
-  const marker = body._omnirouteResponsesStore;
-  delete body._omnirouteResponsesStore;
+  const marker = body._aeraRouterResponsesStore;
+  delete body._aeraRouterResponsesStore;
   return marker;
 }
 
 /**
- * Global Codex WebSocket kill-switch (feature flag OMNIROUTE_CODEX_WS_ENABLED,
+ * Global Codex WebSocket kill-switch (feature flag AERA_ROUTER_CODEX_WS_ENABLED,
  * default ON). Fail-open: if the flag store is unreachable (e.g. DB not yet
  * ready), treat as enabled so codex routing is never broken by the read itself.
  */
 function isCodexWsGloballyEnabled(): boolean {
   try {
-    return isFeatureFlagEnabled("OMNIROUTE_CODEX_WS_ENABLED");
+    return isFeatureFlagEnabled("AERA_ROUTER_CODEX_WS_ENABLED");
   } catch {
     return true;
   }
@@ -493,7 +493,7 @@ export function isCodexResponsesWebSocketRequired(_model: string, credentials: u
   // transport — even per-connection codexTransport=websocket falls back to the
   // HTTP Responses SSE endpoint.
   if (!isCodexWsGloballyEnabled()) return false;
-  // OmniRoute is an HTTP→SSE gateway — WebSocket transport is unnecessary and
+  // Aera Router is an HTTP→SSE gateway — WebSocket transport is unnecessary and
   // breaks when upstream requests go through an HTTP proxy (403 on WS upgrade).
   // Default to the standard HTTP Responses SSE endpoint for all Codex models.
   // Users who need WebSocket can opt in via the provider codexTransport setting.
@@ -581,7 +581,7 @@ function toCodexResponseFailedEvent(parsed: Record<string, unknown>): Record<str
 // tear the stream down, surfacing as "Invalid state: Controller is already
 // closed". Opt-in so the default still forwards them for clients that want them.
 function codexDropNonstandardEvents(): boolean {
-  const v = process.env.OMNIROUTE_CODEX_DROP_NONSTANDARD_EVENTS;
+  const v = process.env.AERA_ROUTER_CODEX_DROP_NONSTANDARD_EVENTS;
   return v === "true" || v === "1" || v === "yes";
 }
 
@@ -591,7 +591,7 @@ function codexDropNonstandardEvents(): boolean {
 // encodeResponseSseEvent never runs for it. When the kill-switch is on, strip
 // every `codex.*` event block from the byte stream before it reaches the client.
 // Exported for unit testing (#4715). Strips `codex.*` SSE event blocks from a
-// streaming Response when the OMNIROUTE_CODEX_DROP_NONSTANDARD_EVENTS kill-switch is on.
+// streaming Response when the AERA_ROUTER_CODEX_DROP_NONSTANDARD_EVENTS kill-switch is on.
 export function filterNonstandardCodexSse(response: Response): Response {
   const contentType = response.headers.get("content-type") || "";
   if (!response.body || !contentType.includes("text/event-stream")) {
@@ -802,7 +802,7 @@ export function encodeResponseSseEvent(raw: string): { sse: string; terminal: bo
   // check below never caught codex.rate_limits — over WS the frame carries a
   // non-empty JSON payload (`{"type":"codex.rate_limits", ...}`), so
   // `!payload.trim()` is false. Match by event type instead. Opt-in via
-  // OMNIROUTE_CODEX_DROP_NONSTANDARD_EVENTS (the HTTP transport is handled
+  // AERA_ROUTER_CODEX_DROP_NONSTANDARD_EVENTS (the HTTP transport is handled
   // separately by filterNonstandardCodexSse, since super.execute forwards the
   // upstream stream verbatim and never runs this function).
   if (eventType.startsWith("codex.") && codexDropNonstandardEvents()) {
@@ -1477,7 +1477,7 @@ export class CodexExecutor extends BaseExecutor {
     }
 
     // Delete session_id and conversation_id from the body.
-    // These are often injected by OmniRoute's fallback logic for store=true,
+    // These are often injected by Aera Router's fallback logic for store=true,
     // but the upstream Codex API strictly rejects them as unsupported parameters.
     delete body.session_id;
     delete body.conversation_id;
@@ -1513,8 +1513,8 @@ export class CodexExecutor extends BaseExecutor {
       "client_metadata",
       // GPT-5 output verbosity ({ verbosity } — normalized above by normalizeCodexVerbosity).
       "text",
-      // Internal markers used by OmniRoute pipeline
-      "_omnirouteResponsesStore",
+      // Internal markers used by Aera Router pipeline
+      "_aeraRouterResponsesStore",
     ]);
 
     for (const key of Object.keys(body)) {

@@ -1,1 +1,1 @@
-- **feat(dashboard):** add a "Reorder" button to provider connections that sorts them by availability (using OmniRoute's connection-cooldown/testStatus model), persisting the new priority order. (thanks @fzrilsh)
+- **feat(dashboard):** add a "Reorder" button to provider connections that sorts them by availability (using Aera Router's connection-cooldown/testStatus model), persisting the new priority order. (thanks @fzrilsh)

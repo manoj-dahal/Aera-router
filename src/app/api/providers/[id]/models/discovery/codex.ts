@@ -1,7 +1,7 @@
 import {
   getCodexClientVersion,
   getCodexDefaultHeaders,
-} from "@omniroute/open-sse/config/codexClient.ts";
+} from "@aera-router/open-sse/config/codexClient.ts";
 import { isCodexDiscoveryModelExcluded } from "@/shared/services/codexDiscoveryPolicy";
 
 export {

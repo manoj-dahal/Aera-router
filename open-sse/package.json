@@ -1,7 +1,7 @@
 {
-  "name": "@omniroute/open-sse",
+  "name": "@aera-router/open-sse",
   "version": "3.8.49",
-  "description": "Express SSE sidecar for OmniRoute — handles streaming, protocol translation, and provider orchestration",
+  "description": "Express SSE sidecar for Aera Router — handles streaming, protocol translation, and provider orchestration",
   "type": "module",
   "main": "index.js",
   "types": "types.d.ts",

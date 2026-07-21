@@ -18,7 +18,7 @@ import os from "node:os";
 import path from "node:path";
 
 const TEST_DATA_DIR = fs.mkdtempSync(
-  path.join(os.tmpdir(), "omniroute-startup-cooldown-recovery-")
+  path.join(os.tmpdir(), "aera-router-startup-cooldown-recovery-")
 );
 process.env.DATA_DIR = TEST_DATA_DIR;
 
@@ -270,8 +270,5 @@ test("clearStaleCrashCooldowns handles mixed transient + terminal connections co
 
   const updatedTerminal = await providersDb.getProviderConnectionById(terminal.id);
   assert.equal(updatedTerminal?.testStatus, "banned", "terminal connection untouched");
-  assert.ok(
-    updatedTerminal?.rateLimitedUntil,
-    "terminal rate_limited_until preserved"
-  );
+  assert.ok(updatedTerminal?.rateLimitedUntil, "terminal rate_limited_until preserved");
 });

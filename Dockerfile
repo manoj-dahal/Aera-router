@@ -91,14 +91,14 @@ RUN --mount=type=cache,id=npm-cache,target=/root/.npm \
 # 2026-07-05 with clean amd64 (12min14s, image smoke-tested: /api/monitoring/health
 # 200) and arm64 (qemu, exit 0, zero panic strings) builds. Turbopack cut the bare
 # build from 17min to 9min on the same 32-core box. Webpack stays available as the
-# escape hatch: `--build-arg`/-e OMNIROUTE_USE_TURBOPACK=0.
+# escape hatch: `--build-arg`/-e AERA_ROUTER_USE_TURBOPACK=0.
 # See docs/ops/QUALITY_GATE_PLAYBOOK.md Parte 6.
-ENV OMNIROUTE_USE_TURBOPACK=1
+ENV AERA_ROUTER_USE_TURBOPACK=1
 
 # Docker containers cannot run the MITM/Agent-Bridge stack (no host DNS/cert
 # access), so keep @/mitm/manager on the graceful stub (#3390). This flag is
 # Docker-only: npm/Electron/VPS builds must bundle the REAL manager (#6344).
-ENV OMNIROUTE_MITM_STUB=1
+ENV AERA_ROUTER_MITM_STUB=1
 
 # Raise the V8 heap ceiling for the build. The webpack production optimization
 # pass needs more than V8's default ceiling (~2 GB) for a codebase this size; a
@@ -108,9 +108,9 @@ ENV OMNIROUTE_MITM_STUB=1
 # on V8, so keep the ceiling. NODE_OPTIONS propagates to the spawned `next build`
 # child (build-next-isolated.mjs → resolveNextBuildEnv spreads process.env).
 # Build-only; the runtime heap is set separately on the runner stage
-# (OMNIROUTE_MEMORY_MB). Override: `--build-arg OMNIROUTE_BUILD_MEMORY_MB=6144`.
-ARG OMNIROUTE_BUILD_MEMORY_MB=4096
-ENV NODE_OPTIONS="--max-old-space-size=${OMNIROUTE_BUILD_MEMORY_MB}"
+# (AERA_ROUTER_MEMORY_MB). Override: `--build-arg AERA_ROUTER_BUILD_MEMORY_MB=6144`.
+ARG AERA_ROUTER_BUILD_MEMORY_MB=4096
+ENV NODE_OPTIONS="--max-old-space-size=${AERA_ROUTER_BUILD_MEMORY_MB}"
 
 COPY . ./
 RUN --mount=type=cache,id=next-cache,target=/app/.build/next/cache \
@@ -119,10 +119,10 @@ RUN --mount=type=cache,id=next-cache,target=/app/.build/next/cache \
 # ── Runner base ────────────────────────────────────────────────────────────
 FROM base AS runner-base
 
-LABEL org.opencontainers.image.title="omniroute" \
+LABEL org.opencontainers.image.title="aera-router" \
   org.opencontainers.image.description="Unified AI proxy — route any LLM through one endpoint" \
-  org.opencontainers.image.url="https://omniroute.online" \
-  org.opencontainers.image.source="https://github.com/diegosouzapw/OmniRoute" \
+  org.opencontainers.image.url="https://aera-router.online" \
+  org.opencontainers.image.source="https://github.com/manoj-dahal/Aera-router" \
   org.opencontainers.image.licenses="MIT"
 
 ENV NODE_ENV=production
@@ -132,10 +132,10 @@ ENV HOSTNAME=0.0.0.0
 # for large fusion-combo panels (many models fanned out in parallel, each
 # response buffered in full — see open-sse/services/fusion.ts::FUSION_DEFAULTS
 # .maxPanel, issue #1905). Override at `docker run` time with
-# `-e OMNIROUTE_MEMORY_MB=2048` (or higher) if you raise fusionTuning.maxPanel
+# `-e AERA_ROUTER_MEMORY_MB=2048` (or higher) if you raise fusionTuning.maxPanel
 # above the default cap.
-ENV OMNIROUTE_MEMORY_MB=1024
-ENV NODE_OPTIONS="--max-old-space-size=${OMNIROUTE_MEMORY_MB}"
+ENV AERA_ROUTER_MEMORY_MB=1024
+ENV NODE_OPTIONS="--max-old-space-size=${AERA_ROUTER_MEMORY_MB}"
 
 # Data directory inside Docker — must match the volume mount in docker-compose.yml
 ENV DATA_DIR=/app/data
@@ -156,7 +156,7 @@ COPY --from=builder /app/.build/next/standalone ./
 # starts, so guarantee the complete package independent of trace behaviour.
 COPY --from=builder /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
 # migrations land at <standalone>/migrations via assembleStandalone; point the runtime at them.
-ENV OMNIROUTE_MIGRATIONS_DIR=/app/migrations
+ENV AERA_ROUTER_MIGRATIONS_DIR=/app/migrations
 
 # Docker healthcheck script — not traced by Next.js standalone output, so copy
 # it explicitly. The HEALTHCHECK CMD references it as `node healthcheck.mjs`.
@@ -185,14 +185,14 @@ CMD ["node", "dev/run-standalone.mjs"]
 # ── Runner Web (web-cookie providers: Gemini Web, Claude Turnstile) ───────────
 #
 #  Two image flavors:
-#    runner-base  →  omniroute:VERSION        Lean base (~500 MB). No browsers.
-#    runner-web   →  omniroute:VERSION-web    +Chromium/Playwright (~800 MB).
+#    runner-base  →  aera-router:VERSION        Lean base (~500 MB). No browsers.
+#    runner-web   →  aera-router:VERSION-web    +Chromium/Playwright (~800 MB).
 #
 #  Use runner-web when you need web-cookie providers (gemini-web, claude-web,
 #  claude-turnstile). For all other providers runner-base is sufficient.
 #
 #  Build:
-#    docker build --target runner-web -t omniroute:web .
+#    docker build --target runner-web -t aera-router:web .
 #  Compose:
 #    build:
 #      context: .

@@ -14,17 +14,19 @@ const proxiesByPort = new Map();
 const { wrapRequestListenerWithMethodGuard } = methodGuard;
 const { wrapRequestListenerWithHeadResponseGuard } = headResponseGuard;
 
-// Opt-in native HTTPS (#5242). Resolved once at boot: when both OMNIROUTE_TLS_CERT
-// and OMNIROUTE_TLS_KEY point at readable files we terminate TLS on the same
+// Opt-in native HTTPS (#5242). Resolved once at boot: when both AERA_ROUTER_TLS_CERT
+// and AERA_ROUTER_TLS_KEY point at readable files we terminate TLS on the same
 // listener Next binds to (so WS `upgrade` / request wrappers keep working over
 // TLS). Absent or misconfigured → null → identical plain-HTTP behavior as before.
 const tlsOptions = resolveTlsOptions(process.env);
-process.env.OMNIROUTE_INTERNAL_SCHEME = tlsOptions ? "https" : "http";
+process.env.AERA_ROUTER_INTERNAL_SCHEME = tlsOptions ? "https" : "http";
 if (tlsOptions) {
-  console.log(`[omniroute][tls] HTTPS enabled — terminating TLS with cert=${tlsOptions.certPath}`);
+  console.log(
+    `[aera-router][tls] HTTPS enabled — terminating TLS with cert=${tlsOptions.certPath}`
+  );
 }
 
-process.env.OMNIROUTE_WS_BRIDGE_SECRET ||= randomUUID();
+process.env.AERA_ROUTER_WS_BRIDGE_SECRET ||= randomUUID();
 // Per-process secret proving the trusted peer-IP stamp came from this server.
 ensurePeerStampToken();
 
@@ -45,7 +47,7 @@ function getProxy(server) {
 
   const proxy = createResponsesWsProxy({
     baseUrl: `http://127.0.0.1:${port}`,
-    bridgeSecret: process.env.OMNIROUTE_WS_BRIDGE_SECRET,
+    bridgeSecret: process.env.AERA_ROUTER_WS_BRIDGE_SECRET,
   });
   proxiesByPort.set(port, proxy);
   return proxy;
@@ -156,7 +158,7 @@ http.createServer = function createServerWithResponsesWs(...args) {
   // keep-alive HTTP clients that idle longer than that between requests (e.g.
   // the JVM java.net.http.HttpClient used by JetBrains AI Assistant), which
   // reuse a socket the server already tore down and get 0 response bytes back
-  // (#7003). This wrapper is what `omniroute serve` / Docker / Electron actually
+  // (#7003). This wrapper is what `aera-router serve` / Docker / Electron actually
   // spawn in production (run-standalone.mjs prefers server-ws.mjs over the bare
   // Next server.js), so it needs the same fix already wired into run-next.mjs
   // (the dev-only entry point) — otherwise real installs never got it. Raise

@@ -24,7 +24,7 @@ const contentSecurityPolicy = [
   "media-src 'self' data: blob:",
   // `ws:` is permitted scheme-wide (mirroring the bare `wss:` already allowed) so the
   // dashboard can open `ws://<lan-or-tailscale-host>:*` to its own Live WS server when
-  // OmniRoute is reached from a non-loopback host. Same-origin HTTP fetches stay covered
+  // Aera Router is reached from a non-loopback host. Same-origin HTTP fetches stay covered
   // by `'self'`; the loopback origins remain listed explicitly for clarity. (#5083)
   "connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* https: ws: wss:",
   "worker-src 'self' blob:",
@@ -67,12 +67,12 @@ function isNextIntlExtractorDynamicImportWarning(warning) {
   );
 }
 
-// OMNIROUTE_BUILD_PROFILE=minimal physically removes four optional privileged
+// AERA_ROUTER_BUILD_PROFILE=minimal physically removes four optional privileged
 // modules (MITM cert install, Zed keychain import, Cloud Sync, 9router
 // installer) from the built bundle by aliasing them to feature-disabled stubs.
-// The resulting artifact is intended to be published as `omniroute-secure`
+// The resulting artifact is intended to be published as `aera-router-secure`
 // for security-sensitive environments. See docs/security/SOCKET_DEV_FINDINGS.md.
-const isMinimalBuild = process.env.OMNIROUTE_BUILD_PROFILE === "minimal";
+const isMinimalBuild = process.env.AERA_ROUTER_BUILD_PROFILE === "minimal";
 
 const minimalBuildAliases = isMinimalBuild
   ? {
@@ -96,19 +96,19 @@ function readTimeoutMs(...values) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Opt-in subpath deployment behind a reverse proxy (e.g. nginx/Caddy serving
-  // OmniRoute under https://host/omniroute/). Empty by default so root-path
+  // Aera Router under https://host/aera-router/). Empty by default so root-path
   // deployments are unaffected. Next.js strips this prefix from `pathname`
   // before route matching, so authz classification (classifyRoute/isLocalOnlyPath)
   // keeps operating on un-prefixed paths — see src/server/authz/pipeline.ts for
   // the two redirect call sites that re-add it via `request.nextUrl.basePath`.
-  basePath: process.env.OMNIROUTE_BASE_PATH || "",
+  basePath: process.env.AERA_ROUTER_BASE_PATH || "",
   distDir,
   // Turbopack config: redirect native modules to stubs at build time
   turbopack: {
     root: projectRoot,
     resolveAlias: {
       // @/mitm/manager → stub ONLY where the runtime can't run the MITM stack
-      // (Docker sets OMNIROUTE_MITM_STUB=1 — #3390 graceful degradation). The
+      // (Docker sets AERA_ROUTER_MITM_STUB=1 — #3390 graceful degradation). The
       // alias used to be unconditional, which was fine while Docker was the
       // only Turbopack consumer — but the v3.8.45 bundler-default flip shipped
       // the stub to every npm/Electron/VPS artifact and broke Agent Bridge
@@ -152,7 +152,7 @@ const nextConfig = {
   output: "standalone",
   compress: true,
   productionBrowserSourceMaps: false,
-  // OmniRoute is a proxy for AI APIs — request bodies routinely include
+  // Aera Router is a proxy for AI APIs — request bodies routinely include
   // multi-MB payloads (vision models, image edits, base64-encoded files,
   // long chat histories with embedded images). Next.js's Server Action
   // handler intercepts POSTs with multipart/form-data or
@@ -163,22 +163,22 @@ const nextConfig = {
   // more.
   experimental: {
     serverActions: {
-      bodySizeLimit: process.env.OMNIROUTE_SERVER_ACTIONS_BODY_LIMIT || "50mb",
+      bodySizeLimit: process.env.AERA_ROUTER_SERVER_ACTIONS_BODY_LIMIT || "50mb",
     },
     // Next.js proxy (middleware) has a default 10MB body clone limit. File
     // uploads (OpenAI-compatible /v1/files) routinely exceed this. Match the
     // 512 MB server-side cap; tune via env if needed.
     proxyClientMaxBodySize: process.env.NEXT_PROXY_BODY_LIMIT || "512mb",
-    // Next's internal router proxy defaults to 30s when this is unset. OmniRoute
+    // Next's internal router proxy defaults to 30s when this is unset. Aera Router
     // can legitimately hold non-streaming chat requests open for minutes while an
     // upstream provider finishes, so reuse the existing request-timeout knobs.
     proxyTimeout: readTimeoutMs(process.env.REQUEST_TIMEOUT_MS, process.env.FETCH_TIMEOUT_MS),
-    // PR-2 of diegosouzapw/OmniRoute#3932: tree-shake barrel re-exports so
+    // PR-2 of manoj-dahal/Aera-router#3932: tree-shake barrel re-exports so
     // route bundles don't pull in 14 locale files, every lucide-react icon,
     // or the full date-fns surface when only one helper is used.
     //
     // NOTE: this list must only contain EXTERNAL barrel libraries. Do NOT add
-    // the internal `@omniroute/open-sse` workspace here: optimizePackageImports
+    // the internal `@aera-router/open-sse` workspace here: optimizePackageImports
     // makes Next.js resolve every export of the package's barrel at build time,
     // and open-sse's `index.ts` re-exports the entire streaming engine
     // (executors/translators/services/handlers/mcp-server — thousands of
@@ -273,7 +273,7 @@ const nextConfig = {
     "util",
     "process",
   ],
-  transpilePackages: ["@omniroute/open-sse", "@lobehub/icons", "fumadocs-ui", "fumadocs-core"],
+  transpilePackages: ["@aera-router/open-sse", "@lobehub/icons", "fumadocs-ui", "fumadocs-core"],
   allowedDevOrigins: ["localhost", "127.0.0.1", "192.168.0.250"],
   typescript: {
     // TODO: Re-enable after fixing all sub-component useTranslations scope issues
@@ -319,7 +319,7 @@ const nextConfig = {
           chunks: "all",
           priority: 20,
         },
-        // PR-2 of diegosouzapw/OmniRoute#3932: isolate the heavy long-tail
+        // PR-2 of manoj-dahal/Aera-router#3932: isolate the heavy long-tail
         // vendor chunks that only some routes actually need, so dashboard
         // pages don't pay for the docs bundle (or vice versa).
         nextIntl: {
@@ -378,7 +378,7 @@ const nextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
-      // G-10: allow OmniRoute's own dashboard to embed the 9Router UI via our reverse proxy.
+      // G-10: allow Aera Router's own dashboard to embed the 9Router UI via our reverse proxy.
       // `frame-ancestors 'self'` overrides the global `frame-ancestors 'none'` only for this
       // path. The route is already LOCAL_ONLY (routeGuard.ts) so remote origins cannot reach it.
       {
@@ -622,7 +622,7 @@ const nextConfig = {
       },
       // Issue #6405 follow-up: unknown root-level paths must return JSON 404,
       // not the dashboard HTML shell. Rewrite the missing prefixes under /api/*
-      // so they hit the /api/[...omnirouteApiCatchAll] route (#6424) — which
+      // so they hit the /api/[...aeraRouterApiCatchAll] route (#6424) — which
       // returns application/json with error.type === "not_found". Real /api/*
       // routes take precedence over the catch-all, so any future
       // /api/anthropic/*, /api/openai/*, /api/metrics, /api/debug endpoints

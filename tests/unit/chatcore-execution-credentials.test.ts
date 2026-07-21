@@ -41,7 +41,7 @@ test("azure-ai + responses target forces apiType=responses and the upstream mark
   }) as Record<string, unknown>;
   const psd = out.providerSpecificData as Record<string, unknown>;
   assert.equal(psd.apiType, "responses");
-  assert.equal(psd._omnirouteForceResponsesUpstream, true);
+  assert.equal(psd._aeraRouterForceResponsesUpstream, true);
 });
 
 test("a non-responses apiType is forced to responses under the responses target", () => {
@@ -53,7 +53,7 @@ test("a non-responses apiType is forced to responses under the responses target"
   }) as Record<string, unknown>;
   const psd = out.providerSpecificData as Record<string, unknown>;
   assert.equal(psd.apiType, "responses");
-  assert.equal(psd._omnirouteForceResponsesUpstream, true);
+  assert.equal(psd._aeraRouterForceResponsesUpstream, true);
 });
 
 test("an explicit apiType=responses is preserved (guard short-circuits the reassignment)", () => {
@@ -65,7 +65,7 @@ test("an explicit apiType=responses is preserved (guard short-circuits the reass
   }) as Record<string, unknown>;
   const psd = out.providerSpecificData as Record<string, unknown>;
   assert.equal(psd.apiType, "responses");
-  assert.equal(psd._omnirouteForceResponsesUpstream, true);
+  assert.equal(psd._aeraRouterForceResponsesUpstream, true);
 });
 
 test("non azure/oci providers never get apiType forcing", () => {
@@ -76,7 +76,7 @@ test("non azure/oci providers never get apiType forcing", () => {
   }) as Record<string, unknown>;
   const psd = out.providerSpecificData as Record<string, unknown>;
   assert.equal(psd.apiType, undefined);
-  assert.equal(psd._omnirouteForceResponsesUpstream, undefined);
+  assert.equal(psd._aeraRouterForceResponsesUpstream, undefined);
 });
 
 test("ccSessionId is threaded into providerSpecificData when present", () => {
@@ -110,8 +110,8 @@ test("Kimi execution credentials carry the discovered protocol and thinking poli
     },
   }) as Record<string, unknown>;
   const psd = out.providerSpecificData as Record<string, unknown>;
-  assert.equal(psd._omnirouteKimiTargetFormat, "claude");
-  assert.deepEqual(psd._omnirouteKimiThinking, {
+  assert.equal(psd._aeraRouterKimiTargetFormat, "claude");
+  assert.deepEqual(psd._aeraRouterKimiThinking, {
     supportsThinking: true,
     alwaysThinking: true,
     supportedThinkingEfforts: ["low", "medium", "high"],
@@ -127,7 +127,7 @@ test("Kimi Code k3 exposes its documented efforts from the offline policy before
     modelInfo: { model: "k3" },
   }) as Record<string, unknown>;
   const psd = out.providerSpecificData as Record<string, unknown>;
-  assert.deepEqual(psd._omnirouteKimiThinking, {
+  assert.deepEqual(psd._aeraRouterKimiThinking, {
     supportsThinking: true,
     supportedThinkingEfforts: ["low", "high", "max"],
     defaultThinkingEffort: "max",

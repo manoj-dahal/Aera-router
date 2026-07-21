@@ -5,7 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-chatcore-translation-"));
+const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-chatcore-translation-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 
 const core = await import("../../src/lib/db/core.ts");
@@ -718,7 +718,7 @@ test("chatCore normalizes native Claude Code messages for native Claude OAuth pa
     endpoint: "/v1/messages",
     credentials: { apiKey: "claude-key", providerSpecificData: {} },
     body: {
-      model: "omniroute/alias-that-should-resolve",
+      model: "aera-router/alias-that-should-resolve",
       max_tokens: 64,
       system: [{ type: "text", text: "top-level-system" }],
       messages: clientMessages,
@@ -1549,7 +1549,7 @@ test("chatCore serves a cached idempotent response without hitting the provider 
   assert.equal(first.calls.length, 1);
   assert.equal(second.calls.length, 0);
   assert.equal(second.result.success, true);
-  assert.equal(second.result.response.headers.get("X-OmniRoute-Idempotent"), "true");
+  assert.equal(second.result.response.headers.get("X-Aera-Router-Idempotent"), "true");
 
   const payload = (await second.result.response.json()) as any;
   assert.equal(payload.choices[0].message.content, "ok");
@@ -1587,9 +1587,9 @@ test("chatCore returns a semantic cache HIT for repeated deterministic requests"
   });
 
   assert.equal(first.calls.length, 1);
-  assert.equal(first.result.response.headers.get("X-OmniRoute-Cache"), "MISS");
+  assert.equal(first.result.response.headers.get("X-Aera-Router-Cache"), "MISS");
   assert.equal(second.calls.length, 0);
-  assert.equal(second.result.response.headers.get("X-OmniRoute-Cache"), "HIT");
+  assert.equal(second.result.response.headers.get("X-Aera-Router-Cache"), "HIT");
   assert.equal(upstreamHits, 1);
 
   const payload = (await second.result.response.json()) as any;
@@ -1644,14 +1644,14 @@ test("chatCore skips semantic cache when disabled in settings", async () => {
   assert.equal(first.calls.length, 1);
   assert.equal(second.calls.length, 1);
   assert.equal(upstreamHits, 2);
-  assert.equal(first.result.response.headers.get("X-OmniRoute-Cache"), "MISS");
-  assert.equal(second.result.response.headers.get("X-OmniRoute-Cache"), "MISS");
+  assert.equal(first.result.response.headers.get("X-Aera-Router-Cache"), "MISS");
+  assert.equal(second.result.response.headers.get("X-Aera-Router-Cache"), "MISS");
 
   const payload = (await second.result.response.json()) as any;
   assert.equal(payload.choices[0].message.content, "fresh-2");
 });
 
-test("chatCore attaches OmniRoute response metadata headers to non-stream responses", async () => {
+test("chatCore attaches Aera Router response metadata headers to non-stream responses", async () => {
   const { result } = await invokeChatCore({
     provider: "claude",
     model: "claude-sonnet-4-6",
@@ -1664,13 +1664,13 @@ test("chatCore attaches OmniRoute response metadata headers to non-stream respon
   });
 
   assert.equal(result.success, true);
-  assert.equal(result.response.headers.get("X-OmniRoute-Provider"), "cc");
-  assert.equal(result.response.headers.get("X-OmniRoute-Model"), "claude-sonnet-4-6");
-  assert.equal(result.response.headers.get("X-OmniRoute-Cache-Hit"), "false");
-  assert.equal(result.response.headers.get("X-OmniRoute-Tokens-In"), "12");
-  assert.equal(result.response.headers.get("X-OmniRoute-Tokens-Out"), "3");
-  assert.ok(Number(result.response.headers.get("X-OmniRoute-Latency-Ms")) >= 0);
-  assert.match(String(result.response.headers.get("X-OmniRoute-Response-Cost")), /^\d+\.\d{10}$/);
+  assert.equal(result.response.headers.get("X-Aera-Router-Provider"), "cc");
+  assert.equal(result.response.headers.get("X-Aera-Router-Model"), "claude-sonnet-4-6");
+  assert.equal(result.response.headers.get("X-Aera-Router-Cache-Hit"), "false");
+  assert.equal(result.response.headers.get("X-Aera-Router-Tokens-In"), "12");
+  assert.equal(result.response.headers.get("X-Aera-Router-Tokens-Out"), "3");
+  assert.ok(Number(result.response.headers.get("X-Aera-Router-Latency-Ms")) >= 0);
+  assert.match(String(result.response.headers.get("X-Aera-Router-Response-Cost")), /^\d+\.\d{10}$/);
 });
 
 test("chatCore does not expose provider request credentials in non-stream response headers", async () => {
@@ -1689,7 +1689,7 @@ test("chatCore does not expose provider request credentials in non-stream respon
   assert.equal(result.response.headers.get("authorization"), null);
   assert.equal(result.response.headers.get("x-api-key"), null);
   assert.equal(result.response.headers.get("Content-Type"), "application/json");
-  assert.equal(result.response.headers.get("X-OmniRoute-Cache"), "MISS");
+  assert.equal(result.response.headers.get("X-Aera-Router-Cache"), "MISS");
 });
 
 test("chatCore normalizes tool finish reasons and estimates usage when upstream omits it", async () => {
@@ -2179,14 +2179,14 @@ test("chatCore records Claude prompt cache and cache usage metadata in call logs
 
   assert.equal(result.success, true);
   assert.ok(detail);
-  assert.equal(detail.requestBody._omniroute.claudePromptCache.applied, true);
+  assert.equal(detail.requestBody._aera_router.claudePromptCache.applied, true);
   // Breakpoints: system[2] (1), message content (1), assistant response (1). Tools cache_control is stripped by base.ts.
-  assert.equal(detail.requestBody._omniroute.claudePromptCache.totalBreakpoints, 3);
-  assert.equal(detail.responseBody._omniroute.claudePromptCache.applied, true);
-  assert.equal(detail.responseBody._omniroute.claudePromptCache.totalBreakpoints, 3);
-  assert.equal(typeof detail.responseBody._omniroute.claudePromptCache.anthropicBeta, "string");
-  assert.match(detail.responseBody._omniroute.claudePromptCache.anthropicBeta, /prompt-caching/i);
-  assert.deepEqual(detail.responseBody._omniroute.claudePromptCacheUsage, {
+  assert.equal(detail.requestBody._aera_router.claudePromptCache.totalBreakpoints, 3);
+  assert.equal(detail.responseBody._aera_router.claudePromptCache.applied, true);
+  assert.equal(detail.responseBody._aera_router.claudePromptCache.totalBreakpoints, 3);
+  assert.equal(typeof detail.responseBody._aera_router.claudePromptCache.anthropicBeta, "string");
+  assert.match(detail.responseBody._aera_router.claudePromptCache.anthropicBeta, /prompt-caching/i);
+  assert.deepEqual(detail.responseBody._aera_router.claudePromptCacheUsage, {
     cacheReadTokens: 4,
     cacheCreationTokens: 2,
   });
@@ -2237,7 +2237,7 @@ test("chatCore injects progress events into streaming responses when requested",
     provider: "openai",
     model: "gpt-4o-mini",
     accept: "text/event-stream",
-    requestHeaders: { "x-omniroute-progress": "true" },
+    requestHeaders: { "x-aera-router-progress": "true" },
     body: {
       model: "gpt-4o-mini",
       stream: true,
@@ -2250,7 +2250,7 @@ test("chatCore injects progress events into streaming responses when requested",
 
   const streamText = await result.response.text();
   assert.equal(result.success, true);
-  assert.equal(result.response.headers.get("X-OmniRoute-Progress"), "enabled");
+  assert.equal(result.response.headers.get("X-Aera-Router-Progress"), "enabled");
   assert.match(streamText, /event: progress/);
 });
 
@@ -2272,13 +2272,13 @@ test("chatCore emits final SSE metadata comments before [DONE] on streaming resp
   const streamText = await result.response.text();
 
   assert.equal(result.success, true);
-  assert.equal(result.response.headers.get("X-OmniRoute-Provider"), "openai");
-  assert.equal(result.response.headers.get("X-OmniRoute-Model"), "gpt-4o-mini");
-  assert.match(streamText, /: x-omniroute-response-cost=\d+\.\d{10}/);
-  assert.match(streamText, /: x-omniroute-tokens-in=\d+/);
-  assert.match(streamText, /: x-omniroute-tokens-out=\d+/);
+  assert.equal(result.response.headers.get("X-Aera-Router-Provider"), "openai");
+  assert.equal(result.response.headers.get("X-Aera-Router-Model"), "gpt-4o-mini");
+  assert.match(streamText, /: x-aera-router-response-cost=\d+\.\d{10}/);
+  assert.match(streamText, /: x-aera-router-tokens-in=\d+/);
+  assert.match(streamText, /: x-aera-router-tokens-out=\d+/);
   assert.ok(
-    streamText.indexOf(": x-omniroute-response-cost=") < streamText.indexOf("data: [DONE]")
+    streamText.indexOf(": x-aera-router-response-cost=") < streamText.indexOf("data: [DONE]")
   );
 });
 
@@ -2308,7 +2308,7 @@ test("buildStreamingResponseHeaders drops upstream compression and framing heade
   assert.equal(headers.get("Content-Length"), null);
   assert.equal(headers.get("Transfer-Encoding"), null);
   assert.equal(headers.get("X-Upstream-Trace"), "trace-1");
-  assert.equal(headers.get("X-OmniRoute-Cache"), "MISS");
+  assert.equal(headers.get("X-Aera-Router-Cache"), "MISS");
 });
 
 test("chatCore strips upstream compression and length headers from streaming responses", async () => {
@@ -2342,7 +2342,7 @@ test("chatCore strips upstream compression and length headers from streaming res
   assert.equal(result.response.headers.get("Content-Type"), "text/event-stream");
   assert.equal(result.response.headers.get("Content-Length"), null);
   assert.equal(result.response.headers.get("X-Upstream-Trace"), "trace-1");
-  assert.equal(result.response.headers.get("X-OmniRoute-Cache"), "MISS");
+  assert.equal(result.response.headers.get("X-Aera-Router-Cache"), "MISS");
   await result.response.text();
 });
 
@@ -2556,7 +2556,7 @@ test("chatCore caches streaming response and serves cache HIT on repeat", async 
 
   assert.equal(upstreamHits, 1, "upstream should be called only once");
   assert.equal(second.calls.length, 0, "second request should not reach upstream");
-  assert.equal(second.result.response.headers.get("X-OmniRoute-Cache"), "HIT");
+  assert.equal(second.result.response.headers.get("X-Aera-Router-Cache"), "HIT");
 
   // #2952 — a streaming client receives the cache HIT as an SSE stream (not a
   // raw JSON body), so content + reasoning_content arrive in the streaming shape.
@@ -2611,7 +2611,7 @@ test("chatCore does not cache streaming response when temperature > 0", async ()
   assert.equal(second.calls.length, 1, "second request should reach upstream");
 });
 
-test("chatCore skips streaming cache when X-OmniRoute-No-Cache header is set", async () => {
+test("chatCore skips streaming cache when X-Aera-Router-No-Cache header is set", async () => {
   let upstreamHits = 0;
   const sharedBody = {
     model: "gpt-4o-mini",
@@ -2624,7 +2624,7 @@ test("chatCore skips streaming cache when X-OmniRoute-No-Cache header is set", a
     provider: "openai",
     model: "gpt-4o-mini",
     accept: "text/event-stream",
-    requestHeaders: { "x-omniroute-no-cache": "true" },
+    requestHeaders: { "x-aera-router-no-cache": "true" },
     body: sharedBody,
     responseFormat: "openai",
     responseFactory() {
@@ -2645,7 +2645,7 @@ test("chatCore skips streaming cache when X-OmniRoute-No-Cache header is set", a
     provider: "openai",
     model: "gpt-4o-mini",
     accept: "text/event-stream",
-    requestHeaders: { "x-omniroute-no-cache": "true" },
+    requestHeaders: { "x-aera-router-no-cache": "true" },
     body: sharedBody,
     responseFormat: "openai",
     responseFactory() {
@@ -2690,7 +2690,7 @@ test("chatCore returns cache HIT as SSE when the client requests streaming", asy
   });
 
   assert.equal(second.calls.length, 0, "cached response should prevent upstream call");
-  assert.equal(second.result.response.headers.get("X-OmniRoute-Cache"), "HIT");
+  assert.equal(second.result.response.headers.get("X-Aera-Router-Cache"), "HIT");
   // #2952 — even though the cache was populated by a non-streaming request, a
   // later streaming request gets the cached completion SSE-wrapped, so streaming
   // clients keep their streaming shape (and reasoning_content) on cache hits.

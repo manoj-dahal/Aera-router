@@ -1,14 +1,14 @@
 {
-  "name": "omniroute-desktop",
+  "name": "aera-router-desktop",
   "version": "3.8.49",
-  "description": "OmniRoute Desktop Application",
+  "description": "Aera Router Desktop Application",
   "main": "main.js",
   "author": {
-    "name": "OmniRoute Team",
-    "email": "support@omniroute.online"
+    "name": "Aera Router Team",
+    "email": "support@aera-router.online"
   },
   "license": "MIT",
-  "homepage": "https://omniroute.online",
+  "homepage": "https://aera-router.online",
   "engines": {
     "node": ">=22.22.2 <23 || >=24.0.0 <27"
   },
@@ -39,9 +39,9 @@
     "undici": "^7.28.0"
   },
   "build": {
-    "appId": "online.omniroute.desktop",
-    "productName": "OmniRoute",
-    "copyright": "Copyright © 2025 OmniRoute",
+    "appId": "online.aera-router.desktop",
+    "productName": "Aera Router",
+    "copyright": "Copyright © 2025 Aera Router",
     "buildDependenciesFromSource": true,
     "directories": {
       "output": "dist-electron",
@@ -50,7 +50,7 @@
     "publish": {
       "provider": "github",
       "owner": "diegosouzapw",
-      "repo": "OmniRoute"
+      "repo": "Aera Router"
     },
     "files": [
       "main.js",

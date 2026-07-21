@@ -130,7 +130,7 @@ async function getClient(): Promise<{
         const TLSClient = (mod as { TLSClient: new (opts?: Record<string, unknown>) => unknown })
           .TLSClient;
         // Native mode loads the shared library directly via koffi, avoiding the
-        // managed sidecar's localhost HTTP calls that OmniRoute's global fetch
+        // managed sidecar's localhost HTTP calls that Aera Router's global fetch
         // proxy patch interferes with.
         const client = new TLSClient({ runtimeMode: "native" }) as {
           start: () => Promise<void>;
@@ -193,7 +193,7 @@ export interface TlsFetchOptions {
    *
    * Resolution order:
    *   1. `options.proxyUrl` (per-call override from caller)
-   *   2. `process.env.OMNIROUTE_TLS_PROXY_URL` (single-flag opt-in)
+   *   2. `process.env.AERA_ROUTER_TLS_PROXY_URL` (single-flag opt-in)
    *   3. `process.env.HTTPS_PROXY` / `HTTP_PROXY` / `ALL_PROXY` (POSIX-standard fallback)
    *
    * The native `tls-client-node` binding does **not** consult Go's

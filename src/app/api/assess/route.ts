@@ -9,7 +9,7 @@ import {
   type ModelCategory,
 } from "@/domain/assessment/types";
 import { validateBody } from "@/shared/validation/helpers";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@aera-router/open-sse/utils/error";
 
 const assessor = new Assessor(
   process.env.OMNIROUTe_API_KEY ?? process.env.API_KEY ?? "",

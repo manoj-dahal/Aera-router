@@ -8,7 +8,7 @@
     "keytar",
     "koffi",
     "libxmljs2",
-    "omniroute",
+    "aera-router",
     "onnxruntime-node",
     "protobufjs",
     "sharp",

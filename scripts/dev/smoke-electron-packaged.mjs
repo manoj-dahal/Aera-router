@@ -14,7 +14,7 @@ const ROOT = join(__dirname, "..", "..");
 const DEFAULT_TIMEOUT_MS = 45_000;
 const DEFAULT_SETTLE_MS = 2_000;
 const DEFAULT_URL = "http://127.0.0.1:20128/login";
-export const LINUX_EXECUTABLE_NAMES = ["omniroute-desktop", "omniroute", "OmniRoute"];
+export const LINUX_EXECUTABLE_NAMES = ["aera-router-desktop", "aera-router", "Aera Router"];
 export const FATAL_LOG_PATTERNS = [
   /Cannot find module/i,
   /MODULE_NOT_FOUND/,
@@ -44,13 +44,13 @@ function discoverMacExecutable() {
     join(
       distDir,
       arch() === "arm64" ? "mac-arm64" : "mac",
-      "OmniRoute.app",
+      "Aera Router.app",
       "Contents",
       "MacOS",
-      "OmniRoute"
+      "Aera Router"
     ),
-    join(distDir, "mac", "OmniRoute.app", "Contents", "MacOS", "OmniRoute"),
-    join(distDir, "mac-arm64", "OmniRoute.app", "Contents", "MacOS", "OmniRoute"),
+    join(distDir, "mac", "Aera Router.app", "Contents", "MacOS", "Aera Router"),
+    join(distDir, "mac-arm64", "Aera Router.app", "Contents", "MacOS", "Aera Router"),
   ];
 
   return candidates.find((candidate) => existsSync(candidate)) || candidates[0];
@@ -85,14 +85,14 @@ function findExecutableByName(rootDir, names) {
 function discoverWindowsExecutable() {
   const distDir = join(ROOT, "electron", "dist-electron");
   const candidates = [
-    join(distDir, "win-unpacked", "OmniRoute.exe"),
-    join(distDir, "win-x64-unpacked", "OmniRoute.exe"),
-    join(distDir, "win-arm64-unpacked", "OmniRoute.exe"),
+    join(distDir, "win-unpacked", "Aera Router.exe"),
+    join(distDir, "win-x64-unpacked", "Aera Router.exe"),
+    join(distDir, "win-arm64-unpacked", "Aera Router.exe"),
   ];
 
   return (
     candidates.find((candidate) => existsSync(candidate)) ||
-    findExecutableByName(distDir, ["OmniRoute.exe"]) ||
+    findExecutableByName(distDir, ["Aera Router.exe"]) ||
     candidates[0]
   );
 }
@@ -142,7 +142,7 @@ async function assertPortIsFree(url) {
   try {
     const response = await fetchWithTimeout(url, 1_000);
     throw new Error(
-      `Smoke URL already responded with HTTP ${response.status}: ${url}. Stop the existing OmniRoute process before running this check.`
+      `Smoke URL already responded with HTTP ${response.status}: ${url}. Stop the existing Aera Router process before running this check.`
     );
   } catch (error) {
     if (error instanceof Error && error.message.startsWith("Smoke URL already responded")) {
@@ -371,7 +371,7 @@ async function ensureSmokeEnvDirs(smokeEnv, dataDir) {
   // requestSingleInstanceLock() runs synchronously at module load and
   // fails silently if the directory doesn't exist yet — causing exit(0).
   if (platform() === "win32" && smokeEnv.APPDATA) {
-    for (const subdir of ["omniroute-desktop", "OmniRoute", "omniroute"]) {
+    for (const subdir of ["aera-router-desktop", "Aera Router", "aera-router"]) {
       dirs.push(join(smokeEnv.APPDATA, subdir));
     }
   }
@@ -400,7 +400,7 @@ async function main() {
   const appExecutable = discoverPackagedExecutable();
   if (!existsSync(appExecutable)) {
     throw new Error(
-      `Packaged OmniRoute executable not found at ${appExecutable}. Build it first with \`npm run build:<target> --prefix electron\` or set ELECTRON_SMOKE_APP_EXECUTABLE.`
+      `Packaged Aera Router executable not found at ${appExecutable}. Build it first with \`npm run build:<target> --prefix electron\` or set ELECTRON_SMOKE_APP_EXECUTABLE.`
     );
   }
 
@@ -409,7 +409,7 @@ async function main() {
   const settleMs = parsePositiveInteger(process.env.ELECTRON_SMOKE_SETTLE_MS, DEFAULT_SETTLE_MS);
   const dataDir =
     process.env.ELECTRON_SMOKE_DATA_DIR ||
-    (await mkdtemp(join(tmpdir(), "omniroute-electron-smoke-")));
+    (await mkdtemp(join(tmpdir(), "aera-router-electron-smoke-")));
   const removeDataDir =
     !process.env.ELECTRON_SMOKE_DATA_DIR && process.env.ELECTRON_SMOKE_KEEP_DATA !== "1";
   const smokeEnv = buildSmokeEnv({ dataDir });

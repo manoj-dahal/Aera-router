@@ -1,5 +1,5 @@
 # ──────────────────────────────────────────────────────────────────────
-#  OmniRoute — Docker Compose
+#  Aera Router — Docker Compose
 # ──────────────────────────────────────────────────────────────────────
 #
 #  Profiles:
@@ -54,7 +54,7 @@ services:
   # ── Redis (Rate Limiter Backend) ──────────────────────────────────
   redis:
     image: docker.io/library/redis:7-alpine
-    container_name: omniroute-redis
+    container_name: aera-router-redis
     restart: unless-stopped
     ports:
       - "${REDIS_PORT:-6379}:6379"
@@ -68,13 +68,13 @@ services:
       retries: 3
 
   # ── Profile: base (minimal, no CLI tools) ──────────────────────────
-  omniroute-base:
+  aera-router-base:
     <<: *common
-    container_name: omniroute
+    container_name: aera-router
     build:
       context: .
       target: runner-base
-    image: omniroute:base
+    image: aera-router:base
     ports:
       - "${DASHBOARD_PORT:-20128}:${DASHBOARD_PORT:-20128}"
       - "${API_PORT:-20129}:${API_PORT:-20129}"
@@ -86,13 +86,13 @@ services:
   # Required for web-cookie providers (gemini-web, claude-web, claude-turnstile).
   # The default `base` image ships without Chromium, so those providers fail
   # with "Executable doesn't exist at .../ms-playwright/chromium..." (#2832).
-  omniroute-web:
+  aera-router-web:
     <<: *common
-    container_name: omniroute
+    container_name: aera-router
     build:
       context: .
       target: runner-web
-    image: omniroute:web
+    image: aera-router:web
     ports:
       - "${DASHBOARD_PORT:-20128}:${DASHBOARD_PORT:-20128}"
       - "${API_PORT:-20129}:${API_PORT:-20129}"
@@ -101,13 +101,13 @@ services:
       - web
 
   # ── Profile: cli (CLIs installed inside container) ─────────────────
-  omniroute-cli:
+  aera-router-cli:
     <<: *common
-    container_name: omniroute
+    container_name: aera-router
     build:
       context: .
       target: runner-cli
-    image: omniroute:cli
+    image: aera-router:cli
     ports:
       - "${DASHBOARD_PORT:-20128}:${DASHBOARD_PORT:-20128}"
       - "${API_PORT:-20129}:${API_PORT:-20129}"
@@ -116,18 +116,18 @@ services:
       - ./data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/libexec/docker/cli-plugins:/usr/libexec/docker/cli-plugins:ro
-      - ${AUTO_UPDATE_HOST_REPO_DIR:-.}:/workspace/omniroute:rw
+      - ${AUTO_UPDATE_HOST_REPO_DIR:-.}:/workspace/aera-router:rw
     profiles:
       - cli
 
   # ── Profile: host (host-mounted CLI binaries, Linux-first) ────────
-  omniroute-host:
+  aera-router-host:
     <<: *common
-    container_name: omniroute
+    container_name: aera-router
     build:
       context: .
       target: runner-base
-    image: omniroute:base
+    image: aera-router:base
     ports:
       - "${DASHBOARD_PORT:-20128}:${DASHBOARD_PORT:-20128}"
       - "${API_PORT:-20129}:${API_PORT:-20129}"
@@ -175,7 +175,7 @@ services:
   # for the workload analysis behind this profile.
   qdrant:
     image: docker.io/qdrant/qdrant:v1.12.4
-    container_name: omniroute-qdrant
+    container_name: aera-router-qdrant
     restart: unless-stopped
     ports:
       - "${QDRANT_PORT:-6333}:6333"
@@ -196,14 +196,14 @@ services:
   # ── Profile: bifrost (Bifrost Go LLM-router sidecar) ─────────────
   # Off by default. Bifrost is the Tier-1 LLM router (per ADR-031 and
   # open-sse/executors/bifrost.ts). When BIFROST_ENABLED=true is set in
-  # .env, OmniRoute delegates /v1/chat/completions, /v1/responses, and
+  # .env, Aera Router delegates /v1/chat/completions, /v1/responses, and
   # /v1/embeddings to this sidecar instead of handling them in chatCore.
   # The kill switch is the BIFROST_ENABLED env var — flip to false to
   # fall back to the chatCore path with zero code changes. See
   # docs/architecture/cluster-decisions.md for the activation plan.
   bifrost:
     image: ghcr.io/maximhq/bifrost:1.5.21
-    container_name: omniroute-bifrost
+    container_name: aera-router-bifrost
     restart: unless-stopped
     ports:
       - "${BIFROST_PORT:-8080}:8080"
@@ -246,8 +246,8 @@ volumes:
   cliproxyapi-data:
     name: cliproxyapi-data
   redis-data:
-    name: omniroute-redis-data
+    name: aera-router-redis-data
   qdrant-data:
-    name: omniroute-qdrant-data
+    name: aera-router-qdrant-data
   bifrost-data:
-    name: omniroute-bifrost-data
+    name: aera-router-bifrost-data

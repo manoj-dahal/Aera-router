@@ -1,12 +1,16 @@
 <div align="center">
 
-<img src="./docs/screenshots/MainOmniRoute.png" alt="OmniRoute Dashboard" width="820"/>
+<img src="./docs/screenshots/MainAeraRouter.png" alt="Aera Router Dashboard" width="820"/>
 
 <br/>
 
-# 🚀 OmniRoute — The Free AI Gateway
+# 🚀 Aera Router — The Free AI Gateway
 
-<img src="./docs/diagrams/readme-hero.svg" width="100%" alt="OmniRoute — Never stop coding. Every AI tool → 271 providers — 90+ free — through one endpoint. Claude Code, Codex, Cursor, Cline, Copilot & Antigravity into FREE Claude / GPT / Gemini with auto-fallback. RTK + Caveman stacked compression saves 15–95% tokens (~89% avg) — never hit limits. 271 AI providers · 90+ free tiers · ~1.4B free tokens/mo · 18 routing strategies · $0 to start."/>
+![Made by AERA-R0UTER](https://img.shields.io/badge/Made%20by-AERA--R0UTER-blueviolet?style=for-the-badge)
+
+### ✨ Made by **AERA-R0UTER** ✨
+
+<img src="./docs/diagrams/readme-hero.svg" width="100%" alt="Aera Router — Never stop coding. Every AI tool → 271 providers — 90+ free — through one endpoint. Claude Code, Codex, Cursor, Cline, Copilot & Antigravity into FREE Claude / GPT / Gemini with auto-fallback. RTK + Caveman stacked compression saves 15–95% tokens (~89% avg) — never hit limits. 271 AI providers · 90+ free tiers · ~1.4B free tokens/mo · 18 routing strategies · $0 to start."/>
 
 </div>
 
@@ -16,9 +20,9 @@
 
 </div>
 
-> Stacking free tiers by hand is painful — dozens of SDKs, dozens of rate limits, and no idea how much you actually have. OmniRoute aggregates the **documented** free tiers of **39 provider pools / 460+ models** into one honest number and shows it live on the dashboard (`/dashboard/free-tiers`).
+> Stacking free tiers by hand is painful — dozens of SDKs, dozens of rate limits, and no idea how much you actually have. Aera Router aggregates the **documented** free tiers of **39 provider pools / 460+ models** into one honest number and shows it live on the dashboard (`/dashboard/free-tiers`).
 
-<img src="./docs/diagrams/free-tier-budget.svg" width="100%" alt="OmniRoute free-tier budget card: ~1.4B free tokens per month steady, up to ~2.0B in the first month with signup credits, from the documented free tiers of 39 provider pools / 460+ models behind one endpoint. Honest pool-deduped math — each shared pool counted once (counting every rate limit 24/7 would read ~10B; not published), 15 providers ToS-flagged so you decide. Budget bar of the 19 countable free pools with per-model grid (Mistral Large 3 1B, GPT-4o mini 150M, Gemini 2.5 Flash 60M … Claude Sonnet 4.5 25K), ~626M one-time first-month signup credits (vertex 300M, agentrouter 200M, predibase 25M, together 25M, glm-cn 20M, doubao 15M, ai21 10M, longcat 10M, deepseek 5M, hyperbolic 5M, nscale 5M), plus permanently-free no-token-cap providers (SiliconFlow, Z.AI GLM-Flash, Kilo, OpenCode Zen, baidu …) and a $10 OpenRouter top-up unlocking +24M/mo — surfaced separately so they never inflate the headline. Live used/remaining on /dashboard/free-tiers."/>
+<img src="./docs/diagrams/free-tier-budget.svg" width="100%" alt="Aera Router free-tier budget card: ~1.4B free tokens per month steady, up to ~2.0B in the first month with signup credits, from the documented free tiers of 39 provider pools / 460+ models behind one endpoint. Honest pool-deduped math — each shared pool counted once (counting every rate limit 24/7 would read ~10B; not published), 15 providers ToS-flagged so you decide. Budget bar of the 19 countable free pools with per-model grid (Mistral Large 3 1B, GPT-4o mini 150M, Gemini 2.5 Flash 60M … Claude Sonnet 4.5 25K), ~626M one-time first-month signup credits (vertex 300M, agentrouter 200M, predibase 25M, together 25M, glm-cn 20M, doubao 15M, ai21 10M, longcat 10M, deepseek 5M, hyperbolic 5M, nscale 5M), plus permanently-free no-token-cap providers (SiliconFlow, Z.AI GLM-Flash, Kilo, OpenCode Zen, baidu …) and a $10 OpenRouter top-up unlocking +24M/mo — surfaced separately so they never inflate the headline. Live used/remaining on /dashboard/free-tiers."/>
 
 > Animated summary of the live `/dashboard/free-tiers` page. Full methodology (pool dedupe, credit tiers, provider terms): **[docs/reference/FREE_TIERS.md](docs/reference/FREE_TIERS.md)**.
 >
@@ -28,40 +32,40 @@
 
 <h3>
 
-⭐ Star the repo if OMNIROUTE helped you save money and make your work easier.
+⭐ Star the repo if AERA_ROUTER helped you save money and make your work easier.
 
 </h3>
 
-[![Stars](https://img.shields.io/github/stars/diegosouzapw/OmniRoute?style=social)](https://github.com/diegosouzapw/OmniRoute)
-<a href="https://trendshift.io/repositories/23589" target="_blank"><img src="https://trendshift.io/api/badge/repositories/23589" alt="diegosouzapw%2FOmniRoute | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-[![Star History Rank](https://api.star-history.com/badge?repo=diegosouzapw/OmniRoute&theme=dark)](https://www.star-history.com/diegosouzapw/omniroute)
+[![Stars](https://img.shields.io/github/stars/manoj-dahal/Aera-router?style=social)](https://github.com/manoj-dahal/Aera-router)
+<a href="https://trendshift.io/repositories/23589" target="_blank"><img src="https://trendshift.io/api/badge/repositories/23589" alt="diegosouzapw%2FAeraRouter | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+[![Star History Rank](https://api.star-history.com/badge?repo=manoj-dahal/Aera-router&theme=dark)](https://www.star-history.com/diegosouzapw/aera-router)
 
 <br/>
 
 ### 💬 Join the community
 
 [![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/U47eFqAXCn)
-[![Telegram](https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/omnirouteOficial)
+[![Telegram](https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/aeraRouterOficial)
 [![WhatsApp Global](https://img.shields.io/badge/WhatsApp_Global-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/JI7cDQ1GyaiDHhVBpLxf8b?mode=gi_t)
 [![WhatsApp Brasil](https://img.shields.io/badge/WhatsApp_Brasil-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/LTSpdFhXTxjH4R6CCNiKWz)
-[![Website](https://img.shields.io/badge/Website-omniroute.online-blue?logo=google-chrome&logoColor=white)](https://omniroute.online)
+[![Website](https://img.shields.io/badge/Website-aera-router.online-blue?logo=google-chrome&logoColor=white)](https://aera-router.online)
 
-**Questions, provider tips, roadmap & support → [Discord](https://discord.gg/U47eFqAXCn) · [Telegram](https://t.me/omnirouteOficial) · WhatsApp [🌍 Global](https://chat.whatsapp.com/JI7cDQ1GyaiDHhVBpLxf8b?mode=gi_t) / [🇧🇷 Brasil](https://chat.whatsapp.com/LTSpdFhXTxjH4R6CCNiKWz)**
+**Questions, provider tips, roadmap & support → [Discord](https://discord.gg/U47eFqAXCn) · [Telegram](https://t.me/aeraRouterOficial) · WhatsApp [🌍 Global](https://chat.whatsapp.com/JI7cDQ1GyaiDHhVBpLxf8b?mode=gi_t) / [🇧🇷 Brasil](https://chat.whatsapp.com/LTSpdFhXTxjH4R6CCNiKWz)**
 
 <br/>
 
 ### 🧩 Available
 
-[![npm version](https://img.shields.io/npm/v/omniroute?color=cb3837&logo=npm)](https://www.npmjs.com/package/omniroute)
-![NPM Monthly](https://img.shields.io/npm/dm/omniroute?label=npm/month&color=cb3837&logo=npm)
-[![Docker Hub](https://img.shields.io/docker/v/diegosouzapw/omniroute?label=Docker%20Hub&logo=docker&color=2496ED)](https://hub.docker.com/r/diegosouzapw/omniroute)
+[![npm version](https://img.shields.io/npm/v/aera-router?color=cb3837&logo=npm)](https://www.npmjs.com/package/aera-router)
+![NPM Monthly](https://img.shields.io/npm/dm/aera-router?label=npm/month&color=cb3837&logo=npm)
+[![Docker Hub](https://img.shields.io/docker/v/diegosouzapw/aera-router?label=Docker%20Hub&logo=docker&color=2496ED)](https://hub.docker.com/r/diegosouzapw/aera-router)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
-![Docker Pulls](https://img.shields.io/docker/pulls/diegosouzapw/omniroute?label=docker%20pulls&logo=docker&color=2496ED)
-![Electron Downloads](https://img.shields.io/github/downloads/diegosouzapw/omniroute/total?style=flat&label=electron%20downloads&logo=electron&color=47848F)
+![Docker Pulls](https://img.shields.io/docker/pulls/diegosouzapw/aera-router?label=docker%20pulls&logo=docker&color=2496ED)
+![Electron Downloads](https://img.shields.io/github/downloads/diegosouzapw/aera-router/total?style=flat&label=electron%20downloads&logo=electron&color=47848F)
 
-[**🚀 Quick Start**](#-quick-start) • [**🎯 Combos**](#-combos--the-flagship) • [**🌐 Providers**](#-271-ai-providers--90-free) • [**🔌 CLI & MCP**](#-full-cli--a2a--mcp) • [**🗜️ Compression**](#%EF%B8%8F-save-1595-tokens--automatically) • [**🌍 Website**](https://omniroute.online)
+[**🚀 Quick Start**](#-quick-start) • [**🎯 Combos**](#-combos--the-flagship) • [**🌐 Providers**](#-271-ai-providers--90-free) • [**🔌 CLI & MCP**](#-full-cli--a2a--mcp) • [**🗜️ Compression**](#%EF%B8%8F-save-1595-tokens--automatically) • [**🌍 Website**](https://aera-router.online)
 
-[💥 The Promise](#-the-promise) • [🤔 Why](#-why-omniroute) • [🏆 What Sets Apart](#-what-sets-omniroute-apart) • [🤖 Compatible CLIs](#-compatible-clis--coding-agents) • [🖥️ Where It Runs](#%EF%B8%8F-where-omniroute-runs--anywhere) • [🔒 Private](#-private--local-first) • [🎬 In Action](#-omniroute-in-action) • [📸 Screenshots](#-dashboard-screenshots) • [📧 Support](#-support--community)
+[💥 The Promise](#-the-promise) • [🤔 Why](#-why-aera-router) • [🏆 What Sets Apart](#-what-sets-aera-router-apart) • [🤖 Compatible CLIs](#-compatible-clis--coding-agents) • [🖥️ Where It Runs](#%EF%B8%8F-where-aera-router-runs--anywhere) • [🔒 Private](#-private--local-first) • [🎬 In Action](#-aera-router-in-action) • [📸 Screenshots](#-dashboard-screenshots) • [📧 Support](#-support--community)
 
 </div>
 
@@ -126,22 +130,22 @@
 
 </div>
 
-<img src="./docs/diagrams/promise-pillars.svg" width="100%" alt="The Promise — One endpoint. 271 providers. Never stop building — OmniRoute picks the cheapest one that works. Six pillars: Never hit limits (auto-fallback across 271 providers in milliseconds, zero downtime) · Save up to 95% tokens (RTK + Caveman stacked compression cuts 15–95%, ~89% avg on tool-heavy sessions) · $0 to start (90+ free tiers, 40+ free forever — no card needed) · Every tool works (26 coding agents through one config) · One endpoint (OpenAI ↔ Claude ↔ Gemini ↔ Responses API at /v1) · Production-grade (circuit breakers, TLS stealth, MCP 104 tools, A2A, memory, guardrails, evals — 25,000+ tests)."/>
+<img src="./docs/diagrams/promise-pillars.svg" width="100%" alt="The Promise — One endpoint. 271 providers. Never stop building — Aera Router picks the cheapest one that works. Six pillars: Never hit limits (auto-fallback across 271 providers in milliseconds, zero downtime) · Save up to 95% tokens (RTK + Caveman stacked compression cuts 15–95%, ~89% avg on tool-heavy sessions) · $0 to start (90+ free tiers, 40+ free forever — no card needed) · Every tool works (26 coding agents through one config) · One endpoint (OpenAI ↔ Claude ↔ Gemini ↔ Responses API at /v1) · Production-grade (circuit breakers, TLS stealth, MCP 104 tools, A2A, memory, guardrails, evals — 25,000+ tests)."/>
 
 <br/>
 <br/>
 
 <div align="center">
 
-# 🤔 Why OmniRoute?
+# 🤔 Why Aera Router?
 
 </div>
 
-<img src="./docs/diagrams/why-pain-fix.svg" width="100%" alt="Why OmniRoute — stop juggling 10 dashboards, dead API keys and surprise bills. Ten daily pains vs fixes: quota expiring unused → maximize subscriptions; rate limits mid-coding → 4-tier auto-fallback (Subscription → API → Cheap → Free); tool outputs burning tokens → RTK + Caveman compression (15–95%); expensive APIs → cost-optimized routing; every tool its own setup → one endpoint, one dashboard; AI blocked → 3-level proxy + TLS stealth; dead keys → 3-layer resilience (circuit breakers, key cooldown, model lockout); team sharing one subscription → key pools with fair-share quotas; prompts through someone's cloud → local-first with AES-256-GCM encrypted keys; no spend visibility → live analytics (usage, quota, savings, p95 latency)."/>
+<img src="./docs/diagrams/why-pain-fix.svg" width="100%" alt="Why Aera Router — stop juggling 10 dashboards, dead API keys and surprise bills. Ten daily pains vs fixes: quota expiring unused → maximize subscriptions; rate limits mid-coding → 4-tier auto-fallback (Subscription → API → Cheap → Free); tool outputs burning tokens → RTK + Caveman compression (15–95%); expensive APIs → cost-optimized routing; every tool its own setup → one endpoint, one dashboard; AI blocked → 3-level proxy + TLS stealth; dead keys → 3-layer resilience (circuit breakers, key cooldown, model lockout); team sharing one subscription → key pools with fair-share quotas; prompts through someone's cloud → local-first with AES-256-GCM encrypted keys; no spend visibility → live analytics (usage, quota, savings, p95 latency)."/>
 
 <div align="center">
 
-<img src="./docs/diagrams/tier-cascade.svg" width="100%" alt="OmniRoute request flow: your IDE or CLI (Claude Code, Cursor, Cline…) calls one local endpoint (http://localhost:20128/v1); the OmniRoute Smart Router (RTK + Caveman compression, 18 routing strategies, circuit breakers, TLS stealth, MCP, A2A, guardrails) auto-falls back across 4 provider tiers — Tier 1 Subscription (Claude Code, Codex, Copilot), quota out? Tier 2 API Key (DeepSeek, Groq, xAI), budget hit? Tier 3 Cheap (GLM $0.5, MiniMax $0.2), budget hit? Tier 4 Free (Kiro, Qoder, Pollinations) — always on."/>
+<img src="./docs/diagrams/tier-cascade.svg" width="100%" alt="Aera Router request flow: your IDE or CLI (Claude Code, Cursor, Cline…) calls one local endpoint (http://localhost:20128/v1); the Aera Router Smart Router (RTK + Caveman compression, 18 routing strategies, circuit breakers, TLS stealth, MCP, A2A, guardrails) auto-falls back across 4 provider tiers — Tier 1 Subscription (Claude Code, Codex, Copilot), quota out? Tier 2 API Key (DeepSeek, Groq, xAI), budget hit? Tier 3 Cheap (GLM $0.5, MiniMax $0.2), budget hit? Tier 4 Free (Kiro, Qoder, Pollinations) — always on."/>
 
 </div>
 
@@ -153,11 +157,11 @@
 
 </div>
 
-> A **combo** is a chain of models OmniRoute routes across **automatically**. Quota runs out, a provider fails, or costs spike — the combo silently slides to the next model. **This is what makes OmniRoute unbreakable.** 🛡️
+> A **combo** is a chain of models Aera Router routes across **automatically**. Quota runs out, a provider fails, or costs spike — the combo silently slides to the next model. **This is what makes Aera Router unbreakable.** 🛡️
 
 ### ⚡ Zero-config — just use `auto`
 
-No combo to create. Set your model to `auto` (or a variant) and OmniRoute builds a virtual combo from your connected providers, scored live:
+No combo to create. Set your model to `auto` (or a variant) and Aera Router builds a virtual combo from your connected providers, scored live:
 
 | Model ID       | What it optimizes for                                                                                                                                                                  |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -212,15 +216,15 @@ All **18** strategies — mix & match per combo step:
 | 🚦 **Policy**            | `hard` (block over share) · `soft` (deprioritize) · `burst` (use idle headroom)                                                                                               |
 | 🧱 **Cap**               | absolute ceiling per key, independent of mode                                                                                                                                 |
 
-<img src="./docs/diagrams/pool-fair-share.svg" width="100%" alt="OmniRoute key pool 'team-codex': one Codex Pro account shared by 3 keys over a 5-hour window. alice weight 50 (up to 50% of the shared 5h quota), bob weight 30, ci-bot weight 20. In generous mode (under 50% pool used) idle shares are lent out; once the pool crosses 50% strict mode holds each key to its fair share."/>
+<img src="./docs/diagrams/pool-fair-share.svg" width="100%" alt="Aera Router key pool 'team-codex': one Codex Pro account shared by 3 keys over a 5-hour window. alice weight 50 (up to 50% of the shared 5h quota), bob weight 30, ci-bot weight 20. In generous mode (under 50% pool used) idle shares are lent out; once the pool crosses 50% strict mode holds each key to its fair share."/>
 
-<sub>Enforced in the hot path **before** the request leaves OmniRoute, with per-(key, model) caps + session stickiness for prompt-cache integrity (now with a per-combo / global disable toggle). 📖 [Quota Sharing Engine](docs/routing/QUOTA_SHARE.md)</sub>
+<sub>Enforced in the hot path **before** the request leaves Aera Router, with per-(key, model) caps + session stickiness for prompt-cache integrity (now with a per-combo / global disable toggle). 📖 [Quota Sharing Engine](docs/routing/QUOTA_SHARE.md)</sub>
 
 ##
 
 ### 🧱 Resilience is built in (3 independent layers)
 
-<img src="./docs/diagrams/resilience-layers.svg" width="100%" alt="OmniRoute resilience — 3 independent self-healing layers, the right layer for the right failure. Layer 1 provider circuit breaker (whole provider): trips only on 408/5xx, thresholds OAuth 3× / API-key 5× / local 2×, resets 60s/30s/15s into a HALF-OPEN probe, lazy recovery; while OPEN the combo reroutes to the next provider. Layer 2 connection cooldown (one key/account): base 5s OAuth / 3s API-key, exponential ×2 backoff with anti-thundering-herd guard, 429 honors Retry-After, success clears all error state; one cooling key is skipped while sibling keys keep serving. Layer 3 model lockout (one model): per-model 429, local 404 or mode denials lock just that model — never the whole connection. Terminal states (banned, expired, credits exhausted) are for the operator, not cooldowns."/>
+<img src="./docs/diagrams/resilience-layers.svg" width="100%" alt="Aera Router resilience — 3 independent self-healing layers, the right layer for the right failure. Layer 1 provider circuit breaker (whole provider): trips only on 408/5xx, thresholds OAuth 3× / API-key 5× / local 2×, resets 60s/30s/15s into a HALF-OPEN probe, lazy recovery; while OPEN the combo reroutes to the next provider. Layer 2 connection cooldown (one key/account): base 5s OAuth / 3s API-key, exponential ×2 backoff with anti-thundering-herd guard, 429 honors Retry-After, success clears all error state; one cooling key is skipped while sibling keys keep serving. Layer 3 model lockout (one model): per-model 429, local 404 or mode denials lock just that model — never the whole connection. Terminal states (banned, expired, credits exhausted) are for the operator, not cooldowns."/>
 
 <sub>📖 [Auto-Combo Engine](docs/routing/AUTO-COMBO.md) · [Resilience Guide](docs/architecture/RESILIENCE_GUIDE.md)</sub>
 
@@ -228,11 +232,11 @@ All **18** strategies — mix & match per combo step:
 
 <div align="center">
 
-# 🏆 What Sets OmniRoute Apart
+# 🏆 What Sets Aera Router Apart
 
 </div>
 
-| Feature                                | OmniRoute                                                           | Other routers |
+| Feature                                | Aera Router                                                         | Other routers |
 | -------------------------------------- | ------------------------------------------------------------------- | ------------- |
 | 🌐 Providers                           | **271**                                                             | 20–100        |
 | 🆓 Free providers                      | **90+ (40+ free forever)**                                          | 1–5           |
@@ -247,7 +251,7 @@ All **18** strategies — mix & match per combo step:
 | 🖥️ Multi-platform                      | **Web · Desktop · Termux · PWA**                                    | Web only      |
 | 🌍 i18n                                | **43 locales**                                                      | 0–4           |
 
-<sub>📊 Detailed comparison vs LiteLLM, OpenRouter & Portkey → [`docs/comparison/OMNIROUTE_VS_ALTERNATIVES.md`](docs/comparison/OMNIROUTE_VS_ALTERNATIVES.md)</sub>
+<sub>📊 Detailed comparison vs LiteLLM, OpenRouter & Portkey → [`docs/comparison/AERA_ROUTER_VS_ALTERNATIVES.md`](docs/comparison/AERA_ROUTER_VS_ALTERNATIVES.md)</sub>
 
 <br/>
 
@@ -262,13 +266,13 @@ All **18** strategies — mix & match per combo step:
 - **🗜️ Compression hardening** — default-on inflation guard, Caveman packs for DE / FR / JA + Chinese (wényán), RTK filters for Gradle & .NET. → [Compression](docs/compression/COMPRESSION_ENGINES.md)
 - **💸 Honest flat-rate cost** — subscription / coding-plan providers read **$0** in cost analytics; budget, quota & routing keep estimating. → [API Reference](docs/reference/API_REFERENCE.md)
 - **⚖️ Quota-Share routing** — split load across accounts by _available quota_: DRR scheduling, per-connection concurrency, multi-window buckets, session stickiness. → [Resilience Guide](docs/architecture/RESILIENCE_GUIDE.md)
-- **🤖 One-command CLI/agent setup** — `setup-*` configures 12+ coding tools; `omniroute launch` / `launch-codex` are zero-config. → [CLI Integrations](docs/guides/CLI-INTEGRATIONS.md)
-- **🛰️ Remote mode** — drive a remote OmniRoute with scoped tokens (`connect` / `contexts` / `tokens`) + an `antigravity` OAuth helper for VPS installs. → [Remote Mode](docs/guides/REMOTE-MODE.md)
+- **🤖 One-command CLI/agent setup** — `setup-*` configures 12+ coding tools; `aera-router launch` / `launch-codex` are zero-config. → [CLI Integrations](docs/guides/CLI-INTEGRATIONS.md)
+- **🛰️ Remote mode** — drive a remote Aera Router with scoped tokens (`connect` / `contexts` / `tokens`) + an `antigravity` OAuth helper for VPS installs. → [Remote Mode](docs/guides/REMOTE-MODE.md)
 - **🧭 Smarter auto-routing** — `auto/<category>:<tier>` combos, **Fusion** (model panel + judge), task-aware routing, per-request model / mode / USD-budget overrides. → [Auto-Combo](docs/routing/AUTO-COMBO.md)
 - **🗜️ Pluggable compression** — 11 composable engines + Compression Studios: LLMLingua-2, two-tier Ultra, omniglyph, per-step fidelity gate, GCF v3.2, drag-reorder editor. → [Compression](docs/compression/COMPRESSION_ENGINES.md)
 - **🕵️ Transparent MITM decrypt (TPROXY)** — capture CLIs that ignore proxy env vars, with a per-SNI CA + trust-store installer. → [MITM/TPROXY](docs/security/MITM-TPROXY-DECRYPT.md)
-- **💸 Cost telemetry everywhere** — `X-OmniRoute-*` cost/usage headers on every endpoint, cache-HIT savings header, per-key USD spend quotas. → [API Reference](docs/reference/API_REFERENCE.md)
-- **🧠 Memory you control** — off by default, opt-in int8 vector quantization + typed decay, per-request `x-omniroute-no-memory`. → [Memory](docs/frameworks/MEMORY.md)
+- **💸 Cost telemetry everywhere** — `X-Aera-Router-*` cost/usage headers on every endpoint, cache-HIT savings header, per-key USD spend quotas. → [API Reference](docs/reference/API_REFERENCE.md)
+- **🧠 Memory you control** — off by default, opt-in int8 vector quantization + typed decay, per-request `x-aera-router-no-memory`. → [Memory](docs/frameworks/MEMORY.md)
 - **🛡️ Security** — prompt-injection guard on every LLM route (red-team suite) + free DuckDuckGo last-resort web search. → [Guardrails](docs/security/GUARDRAILS.md)
 - **🖼️ New endpoints** — `/v1/ocr` (Mistral OCR) and `/v1/audio/translations` (Whisper-style) round out the media surface. → [API Reference](docs/reference/API_REFERENCE.md)
 - **🌍 Deployment & ops** — reverse-proxy `basePath`, browser-language auto-detect, per-key device tracking, root-less MITM trust, zh-TW localization. → [Environment](docs/reference/ENVIRONMENT.md)
@@ -322,7 +326,7 @@ All **18** strategies — mix & match per combo step:
 <b>＋ also works with</b> · Kiro · Command Code · Antigravity · Windsurf · AMP · <b>any OpenAI-compatible tool</b>
 </div>
 
-<sub>📖 Per-tool setup for all 33 tools (25 CLI Code's + 8 CLI Agents) → [`docs/reference/CLI-TOOLS.md`](docs/reference/CLI-TOOLS.md) · 🧩 OpenCode plugin → [`@omniroute/opencode-provider`](https://www.npmjs.com/package/@omniroute/opencode-provider)</sub>
+<sub>📖 Per-tool setup for all 33 tools (25 CLI Code's + 8 CLI Agents) → [`docs/reference/CLI-TOOLS.md`](docs/reference/CLI-TOOLS.md) · 🧩 OpenCode plugin → [`@aera-router/opencode-provider`](https://www.npmjs.com/package/@aera-router/opencode-provider)</sub>
 
 </div>
 
@@ -390,22 +394,22 @@ All **18** strategies — mix & match per combo step:
 
 <div align="center">
 
-# 🖥️ Where OmniRoute Runs — Anywhere
+# 🖥️ Where Aera Router Runs — Anywhere
 
 </div>
 
 > Same app, your machine, your rules. From a global npm install to **your phone** via Termux.
 
-| Platform                  | Install                                  | Highlights                                                |
-| ------------------------- | ---------------------------------------- | --------------------------------------------------------- |
-| 📦 **npm (global)**       | `npm install -g omniroute`               | One command, any OS                                       |
-| 🐳 **Docker**             | `docker run … diegosouzapw/omniroute`    | Multi-arch **AMD64 + ARM64**                              |
-| 🖥️ **Desktop (Electron)** | `npm run electron:build`                 | Native window + system tray — **Windows / macOS / Linux** |
-| 💪 **ARM**                | native `arm64`                           | Raspberry Pi, ARM servers, Apple Silicon                  |
-| 📱 **Android (Termux)**   | `pkg install nodejs && npx -y omniroute` | Runs **on your phone**, 24/7, no root                     |
-| 📲 **PWA**                | "Add to Home Screen"                     | Fullscreen, offline, installable from browser             |
-| 🧩 **OpenCode plugin**    | `@omniroute/opencode-provider`           | Native OpenCode integration                               |
-| 🛠️ **From source**        | `npm install && npm run dev`             | Hack on it, contribute                                    |
+| Platform                  | Install                                    | Highlights                                                |
+| ------------------------- | ------------------------------------------ | --------------------------------------------------------- |
+| 📦 **npm (global)**       | `npm install -g aera-router`               | One command, any OS                                       |
+| 🐳 **Docker**             | `docker run … diegosouzapw/aera-router`    | Multi-arch **AMD64 + ARM64**                              |
+| 🖥️ **Desktop (Electron)** | `npm run electron:build`                   | Native window + system tray — **Windows / macOS / Linux** |
+| 💪 **ARM**                | native `arm64`                             | Raspberry Pi, ARM servers, Apple Silicon                  |
+| 📱 **Android (Termux)**   | `pkg install nodejs && npx -y aera-router` | Runs **on your phone**, 24/7, no root                     |
+| 📲 **PWA**                | "Add to Home Screen"                       | Fullscreen, offline, installable from browser             |
+| 🧩 **OpenCode plugin**    | `@aera-router/opencode-provider`           | Native OpenCode integration                               |
+| 🛠️ **From source**        | `npm install && npm run dev`               | Hack on it, contribute                                    |
 
 <sub>📖 [Docker Guide](docs/guides/DOCKER_GUIDE.md) · [Desktop](electron/README.md) · [Termux](docs/guides/TERMUX_GUIDE.md) · [PWA](docs/guides/PWA_GUIDE.md) · [OpenCode](docs/frameworks/OPENCODE.md)</sub>
 
@@ -417,7 +421,7 @@ All **18** strategies — mix & match per combo step:
 
 </div>
 
-<img src="./docs/diagrams/privacy-local.svg" width="100%" alt="Private and local-first — your keys, your machine, your data; OmniRoute is a local proxy that never phones home. Eleven guarantees: runs 100% on your hardware (0 cloud hops), zero telemetry by default, credentials encrypted at rest (AES-256-GCM), no account or sign-up, hardened gateway (API-key scoping, IP filtering, rate limits, prompt-injection guard), loopback-only process routes, upstream header scrubbing, strictly opt-in PII redaction, sanitized errors that never leak internals, a local audit trail in your own SQLite, and MIT-licensed fully open-source code."/>
+<img src="./docs/diagrams/privacy-local.svg" width="100%" alt="Private and local-first — your keys, your machine, your data; Aera Router is a local proxy that never phones home. Eleven guarantees: runs 100% on your hardware (0 cloud hops), zero telemetry by default, credentials encrypted at rest (AES-256-GCM), no account or sign-up, hardened gateway (API-key scoping, IP filtering, rate limits, prompt-injection guard), loopback-only process routes, upstream header scrubbing, strictly opt-in PII redaction, sanitized errors that never leak internals, a local audit trail in your own SQLite, and MIT-licensed fully open-source code."/>
 
 <sub>📖 [Authorization](docs/architecture/AUTHZ_GUIDE.md) · [Guardrails](docs/security/GUARDRAILS.md) · [Compliance](docs/security/COMPLIANCE.md)</sub>
 
@@ -429,28 +433,28 @@ All **18** strategies — mix & match per combo step:
 
 </div>
 
-> OmniRoute isn't just a server — it's a **full command-line cockpit** with **80+ commands**, plus open agent protocols so an AI agent can drive OmniRoute **by itself**.
+> Aera Router isn't just a server — it's a **full command-line cockpit** with **80+ commands**, plus open agent protocols so an AI agent can drive Aera Router **by itself**.
 
 ### ⌨️ A real CLI (not just `start`)
 
 ```bash
-omniroute               # serve gateway + dashboard (port 20128)
-omniroute chat          # interactive TUI chat client (slash: /model /combo /skill /memory)
-omniroute setup         # guided first-run wizard
-omniroute doctor        # diagnose providers, ports, native deps
+aera-router               # serve gateway + dashboard (port 20128)
+aera-router chat          # interactive TUI chat client (slash: /model /combo /skill /memory)
+aera-router setup         # guided first-run wizard
+aera-router doctor        # diagnose providers, ports, native deps
 ```
 
-### 🛰️ Remote mode — run the CLI here, OmniRoute on a VPS
+### 🛰️ Remote mode — run the CLI here, Aera Router on a VPS
 
-OmniRoute on a server? Drive it from your laptop with the **same CLI**. Log in once
+Aera Router on a server? Drive it from your laptop with the **same CLI**. Log in once
 with a scoped access token; every command then targets the remote.
 
 ```bash
-omniroute connect 192.168.0.15            # password → scoped token, saved as a context
-omniroute models list                     # ← runs against the REMOTE server
-omniroute configure codex                 # ← picks a remote model, writes a local Codex profile
-omniroute tokens create --name ci --scope read   # mint narrower tokens for other machines
-omniroute contexts use default            # ← switch back to the local server
+aera-router connect 192.168.0.15            # password → scoped token, saved as a context
+aera-router models list                     # ← runs against the REMOTE server
+aera-router configure codex                 # ← picks a remote model, writes a local Codex profile
+aera-router tokens create --name ci --scope read   # mint narrower tokens for other machines
+aera-router contexts use default            # ← switch back to the local server
 ```
 
 Tokens are scoped `read` / `write` / `admin`; process-spawning routes stay loopback-only.
@@ -458,24 +462,24 @@ Tokens are scoped `read` / `write` / `admin`; process-spawning routes stay loopb
 
 <div align="center">
 
-<img src="./docs/diagrams/cli-terminal.svg" width="100%" alt="Animated terminal demoing the OmniRoute CLI — omniroute providers list, omniroute combo list, omniroute health — cycling over the 80+ command surface: providers · oauth · keys · combo · nodes · models · cache · compression · cost · usage · quota · health · resilience · telemetry · logs · audit · mcp · a2a · cloud · memory · skills · eval · tunnel · backup · sync · webhooks · policy · pricing · translator · simulate …"/>
+<img src="./docs/diagrams/cli-terminal.svg" width="100%" alt="Animated terminal demoing the Aera Router CLI — aera-router providers list, aera-router combo list, aera-router health — cycling over the 80+ command surface: providers · oauth · keys · combo · nodes · models · cache · compression · cost · usage · quota · health · resilience · telemetry · logs · audit · mcp · a2a · cloud · memory · skills · eval · tunnel · backup · sync · webhooks · policy · pricing · translator · simulate …"/>
 
 </div>
 
-### 🤝 Connect an agent — and it controls OmniRoute itself
+### 🤝 Connect an agent — and it controls Aera Router itself
 
-Expose OmniRoute over **MCP** or **A2A** and any capable agent gets the keys to the whole gateway — routing, providers, combos, cache, compression, memory — autonomously.
+Expose Aera Router over **MCP** or **A2A** and any capable agent gets the keys to the whole gateway — routing, providers, combos, cache, compression, memory — autonomously.
 
 | Protocol           | Endpoint                                        | Use it for                                              |
 | ------------------ | ----------------------------------------------- | ------------------------------------------------------- |
-| 🧰 **MCP (stdio)** | `omniroute --mcp`                               | Plug into Claude Desktop, Cursor, any MCP client        |
+| 🧰 **MCP (stdio)** | `aera-router --mcp`                             | Plug into Claude Desktop, Cursor, any MCP client        |
 | 🌊 **MCP (HTTP)**  | `http://localhost:20128/api/mcp/stream`         | Remote MCP — **104 tools**, 31 scopes, full audit trail |
 | 📡 **MCP (SSE)**   | `http://localhost:20128/api/mcp/sse`            | Streaming MCP transport                                 |
 | 🤝 **A2A**         | `http://localhost:20128/.well-known/agent.json` | Agent-to-agent, **JSON-RPC 2.0** + SSE, 6 skills        |
 
 ```bash
-# Give Claude Code the full OmniRoute toolset over MCP:
-claude mcp add-server omniroute --type http --url http://localhost:20128/api/mcp/stream
+# Give Claude Code the full Aera Router toolset over MCP:
+claude mcp add-server aera-router --type http --url http://localhost:20128/api/mcp/stream
 ```
 
 <sub>📖 [MCP Server](docs/frameworks/MCP-SERVER.md) · [A2A Server](docs/frameworks/A2A-SERVER.md) · [Agent Protocols](docs/frameworks/AGENT_PROTOCOLS_GUIDE.md)</sub>
@@ -488,7 +492,7 @@ claude mcp add-server omniroute --type http --url http://localhost:20128/api/mcp
 
 </div>
 
-> **Why use many tokens when few tokens do the trick?** Every request passes through OmniRoute's compression pipeline **transparently** — no client changes. It's now a **stack of 11 composable engines** that run in order and mix & match per routing combo — building on ideas from [RTK](https://github.com/rtk-ai/rtk), [Caveman](https://github.com/JuliusBrussee/caveman) (⭐ 90K+), [LLMLingua-2](https://github.com/microsoft/LLMLingua), and [Troglodita](https://github.com/leninejunior/troglodita) (PT-BR).
+> **Why use many tokens when few tokens do the trick?** Every request passes through Aera Router's compression pipeline **transparently** — no client changes. It's now a **stack of 11 composable engines** that run in order and mix & match per routing combo — building on ideas from [RTK](https://github.com/rtk-ai/rtk), [Caveman](https://github.com/JuliusBrussee/caveman) (⭐ 90K+), [LLMLingua-2](https://github.com/microsoft/LLMLingua), and [Troglodita](https://github.com/leninejunior/troglodita) (PT-BR).
 
 ### 🧱 The 11-engine stack
 
@@ -538,7 +542,7 @@ Code blocks, URLs and structured data are **always preserved** byte-perfect. **O
 
 ### 📖 How it works — pipeline, architecture & savings math
 
-<img src="./docs/diagrams/compression-pipeline.svg" width="100%" alt="OmniRoute compression pipeline: a client request of 10,000 tokens passes through 11 stacked engines — Session-Dedup, CCR, RTK, Headroom, Relevance, Caveman, LLMLingua-2, Omniglyph, Lite, Aggressive, Ultra — and reaches the provider at about 1,080 tokens, up to 95% saved. Code, URLs and JSON are always preserved byte-perfect."/>
+<img src="./docs/diagrams/compression-pipeline.svg" width="100%" alt="Aera Router compression pipeline: a client request of 10,000 tokens passes through 11 stacked engines — Session-Dedup, CCR, RTK, Headroom, Relevance, Caveman, LLMLingua-2, Omniglyph, Lite, Aggressive, Ultra — and reaches the provider at about 1,080 tokens, up to 95% saved. Code, URLs and JSON are always preserved byte-perfect."/>
 
 Default stacked combo runs `RTK → Caveman`. When both act on the same tool/context payload, savings compound:
 
@@ -559,7 +563,7 @@ The 10 engines above shrink what goes **in**. Three more layers shape **how**, *
   - **Less code** — "lazy senior dev" YAGNI: smallest working change, no unrequested scaffolding.
   - **Terse CJK (文言)** — classical-Chinese ultra-terse style (locale-gated to `zh`).
 - **🎯 Adaptive context-budget** _(the dial)_ — instead of one on/off token threshold, escalate the cheapest, most-lossless engines only as far as needed to **fit the model's context window**. Policy: `reserve-output` (default, model-aware) · `percentage` · `absolute`. Mode: `floor` (guarantee fit) · `replace-autotrigger` (your explicit choice wins) · `off` (legacy threshold).
-- **🎛️ Where compression is decided** _(precedence, high → low)_ — per-request `x-omniroute-compression` header › routing-combo override › active named profile › adaptive / auto-trigger › panel default › off. The applied plan echoes back in the `X-OmniRoute-Compression: <mode>; source=<source>` response header.
+- **🎛️ Where compression is decided** _(precedence, high → low)_ — per-request `x-aera-router-compression` header › routing-combo override › active named profile › adaptive / auto-trigger › panel default › off. The applied plan echoes back in the `X-Aera-Router-Compression: <mode>; source=<source>` response header.
 
 Auto-trigger by token threshold, flip on the adaptive dial, pin a named profile, set a one-off per request, or assign a pipeline per routing combo — whichever fits the workload. An opt-in offline **eval harness** (`npm run eval:compression`) scores fidelity vs. savings on a pinned corpus before you promote a change.
 
@@ -576,8 +580,8 @@ Auto-trigger by token threshold, flip on the adaptive dial, pin a named profile,
 **1) Install & run**
 
 ```bash
-npm install -g omniroute
-omniroute
+npm install -g aera-router
+aera-router
 ```
 
 Dashboard at `http://localhost:20128` · API at `http://localhost:20128/v1`.
@@ -600,9 +604,9 @@ Model:    auto            (zero-config smart routing — or any provider/model)
 curl http://localhost:20128/v1/models -H "Authorization: Bearer YOUR_KEY"
 ```
 
-You should see your connected models listed. 🎉 That's it — start coding, and OmniRoute auto-routes & falls back for you.
+You should see your connected models listed. 🎉 That's it — start coding, and Aera Router auto-routes & falls back for you.
 
-If your client cannot send custom headers, OmniRoute also exposes tokenized compatibility aliases:
+If your client cannot send custom headers, Aera Router also exposes tokenized compatibility aliases:
 
 ```txt
 OpenAI catalog:   http://localhost:20128/vscode/YOUR_KEY/
@@ -622,8 +626,8 @@ Use these only for clients that cannot attach `Authorization: Bearer ...`. Heade
 **🐳 Docker**
 
 ```bash
-docker run -d --name omniroute --restart unless-stopped --stop-timeout 40 \
-  -p 20128:20128 -v omniroute-data:/app/data diegosouzapw/omniroute:latest
+docker run -d --name aera-router --restart unless-stopped --stop-timeout 40 \
+  -p 20128:20128 -v aera-router-data:/app/data diegosouzapw/aera-router:latest
 ```
 
 **🛠️ From source**
@@ -636,13 +640,13 @@ PORT=20128 npm run dev
 **📦 pnpm**
 
 ```bash
-pnpm add -g omniroute@latest --allow-build=better-sqlite3 --allow-build=@swc/core && omniroute
+pnpm add -g aera-router@latest --allow-build=better-sqlite3 --allow-build=@swc/core && aera-router
 ```
 
 **🐧 Arch Linux (AUR)**
 
 ```bash
-yay -S omniroute-bin && systemctl --user enable --now omniroute.service
+yay -S aera-router-bin && systemctl --user enable --now aera-router.service
 ```
 
 **🔧 Nix (Flake)**
@@ -662,7 +666,7 @@ devbox run npm run dev
 
 ```bash
 # 1. Build the image
-podman build --target runner-base -t omniroute:base .
+podman build --target runner-base -t aera-router:base .
 
 # 2. Fix data directory permissions for rootless Podman
 mkdir -p data && podman unshare chown 1000:1000 ./data
@@ -684,7 +688,7 @@ your platform/Node, and otherwise falls back transparently to a pure-JS engine
 To skip the post-install native warm-up entirely (CI, headless, or slow machines):
 
 ```bash
-OMNIROUTE_SKIP_POSTINSTALL=1 npm install -g omniroute   # CI=1 also skips it
+AERA_ROUTER_SKIP_POSTINSTALL=1 npm install -g aera-router   # CI=1 also skips it
 ```
 
 For the fastest installs prefer **pnpm** (content-addressed store + hard links — see above).
@@ -696,7 +700,7 @@ same process on one port, so there is no separate CLI-only package today.
 
 <div align="center">
 
-# 🎬 OmniRoute in Action
+# 🎬 Aera Router in Action
 
 </div>
 
@@ -721,7 +725,7 @@ same process on one port, so there is no separate CLI-only package today.
 
 <div align="center">
 
-> 🎬 **Made a video about OmniRoute?** Open an [issue](https://github.com/diegosouzapw/OmniRoute/issues/new) or [discussion](https://github.com/diegosouzapw/OmniRoute/discussions) with the link — we'll feature it here.
+> 🎬 **Made a video about Aera Router?** Open an [issue](https://github.com/manoj-dahal/Aera-router/issues/new) or [discussion](https://github.com/manoj-dahal/Aera-router/discussions) with the link — we'll feature it here.
 
 <br/>
 </div>
@@ -747,9 +751,9 @@ same process on one port, so there is no separate CLI-only package today.
 
 > 💬 **Chat with the community** — Discord, Telegram & WhatsApp (🌍 / 🇧🇷) links are at the [top of this README](#-join-the-community).
 
-- 🌍 **Website**: [omniroute.online](https://omniroute.online)
-- 🐙 **GitHub**: [github.com/diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute)
-- 🐛 **Issues**: [report a bug](https://github.com/diegosouzapw/OmniRoute/issues) (attach `npm run system-info` output)
+- 🌍 **Website**: [aera-router.online](https://aera-router.online)
+- 🐙 **GitHub**: [github.com/manoj-dahal/Aera-router](https://github.com/manoj-dahal/Aera-router)
+- 🐛 **Issues**: [report a bug](https://github.com/manoj-dahal/Aera-router/issues) (attach `npm run system-info` output)
 - 🤝 **Contributing**: see [CONTRIBUTING.md](CONTRIBUTING.md) or pick a `good first issue`
 
 </div>
@@ -774,9 +778,9 @@ same process on one port, so there is no separate CLI-only package today.
 - **Testing**: Node.js test runner + Vitest (**25,000+ test cases** across 3,300+ files — unit, integration, E2E, security, ecosystem)
 - **Platforms**: Desktop (Electron), Android (Termux), PWA (any browser)
 - **CI/CD**: GitHub Actions (auto npm publish + Docker Hub on release)
-- **Website**: [omniroute.online](https://omniroute.online)
-- **Package**: [npmjs.com/package/omniroute](https://www.npmjs.com/package/omniroute)
-- **Docker**: [hub.docker.com/r/diegosouzapw/omniroute](https://hub.docker.com/r/diegosouzapw/omniroute)
+- **Website**: [aera-router.online](https://aera-router.online)
+- **Package**: [npmjs.com/package/aera-router](https://www.npmjs.com/package/aera-router)
+- **Docker**: [hub.docker.com/r/diegosouzapw/aera-router](https://hub.docker.com/r/diegosouzapw/aera-router)
 - **Resilience**: Circuit breaker, exponential backoff, anti-thundering herd, TLS spoofing, auto-combo self-healing
 
 <div align="center">
@@ -794,8 +798,8 @@ same process on one port, so there is no separate CLI-only package today.
 | [User Guide](docs/guides/USER_GUIDE.md)                        | Providers, combos, CLI integration, deployment                                                                                                                                       |
 | [Setup Guide](docs/guides/SETUP_GUIDE.md)                      | Full install methods, CLI tool configs, protocol setup, timeout tuning                                                                                                               |
 | [CLI Tools Guide](docs/reference/CLI-TOOLS.md)                 | Per-tool setup for Claude Code, Codex, Cursor, Cline, OpenClaw, Kilo, Copilot                                                                                                        |
-| [Remote Mode](docs/guides/REMOTE-MODE.md)                      | Drive a remote OmniRoute (VPS) from your laptop CLI via scoped access tokens                                                                                                         |
-| [Claude Code Config](docs/guides/CLAUDE-CODE-CONFIGURATION.md) | Point Claude Code at OmniRoute (local/remote) with `launch` + per-model profiles                                                                                                     |
+| [Remote Mode](docs/guides/REMOTE-MODE.md)                      | Drive a remote Aera Router (VPS) from your laptop CLI via scoped access tokens                                                                                                       |
+| [Claude Code Config](docs/guides/CLAUDE-CODE-CONFIGURATION.md) | Point Claude Code at Aera Router (local/remote) with `launch` + per-model profiles                                                                                                   |
 | [Quick Start](README.md#-quick-start)                          | 3-step install → connect → configure                                                                                                                                                 |
 
 ### 🔧 Operations & Deployment
@@ -806,7 +810,7 @@ same process on one port, so there is no separate CLI-only package today.
 | [Podman Guide](contrib/podman/README.md)                 | Quadlet systemd integration, podman-compose, SELinux                                                                                                                                |
 | [VM Deployment](docs/ops/VM_DEPLOYMENT_GUIDE.md)         | Complete guide: VM + nginx + Cloudflare setup                                                                                                                                       |
 | [Fly.io Deployment](docs/ops/FLY_IO_DEPLOYMENT_GUIDE.md) | Deploy to Fly.io with persistent storage                                                                                                                                            |
-| [Termux Guide](docs/guides/TERMUX_GUIDE.md)              | Run OmniRoute on Android via Termux                                                                                                                                                 |
+| [Termux Guide](docs/guides/TERMUX_GUIDE.md)              | Run Aera Router on Android via Termux                                                                                                                                               |
 | [PWA Guide](docs/guides/PWA_GUIDE.md)                    | Progressive Web App install, caching, architecture                                                                                                                                  |
 | [Uninstall Guide](docs/guides/UNINSTALL.md)              | Clean removal for all install methods                                                                                                                                               |
 | [Environment Config](docs/reference/ENVIRONMENT.md)      | Complete `.env` variables and references                                                                                                                                            |
@@ -856,7 +860,7 @@ same process on one port, so there is no separate CLI-only package today.
 
 # ⭐ Top Contributors
 
-> OmniRoute is shaped by a passionate open-source community. These individuals have made exceptional contributions that directly impact the quality, stability, and reach of the project. **Thank you.**
+> Aera Router is shaped by a passionate open-source community. These individuals have made exceptional contributions that directly impact the quality, stability, and reach of the project. **Thank you.**
 
 <table>
   <tr>
@@ -945,7 +949,7 @@ same process on one port, so there is no separate CLI-only package today.
   </tr>
 </table>
 
-> 🙏 These contributors' features, bug fixes, and infrastructure improvements are a **core part** of what makes OmniRoute reliable and feature-rich. Every pull request, every test case, and every i18n translation file matters. Open source is built by people like them.
+> 🙏 These contributors' features, bug fixes, and infrastructure improvements are a **core part** of what makes Aera Router reliable and feature-rich. Every pull request, every test case, and every i18n translation file matters. Open source is built by people like them.
 
 </div>
 
@@ -959,7 +963,7 @@ same process on one port, so there is no separate CLI-only package today.
 
 </div>
 
-[![Contributors](https://contrib.rocks/image?repo=diegosouzapw/OmniRoute&max=400&columns=20&anon=1)](https://github.com/diegosouzapw/OmniRoute/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=manoj-dahal/Aera-router&max=400&columns=20&anon=1)](https://github.com/manoj-dahal/Aera-router/graphs/contributors)
 
 ### How to Contribute
 
@@ -984,11 +988,11 @@ gh release create v3.8.2 --title "v3.8.2" --generate-notes
 
 ## 📊 Stars
 
-<a href="https://www.star-history.com/?repos=diegosouzapw%2FOmniRoute&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=diegosouzapw%2FAeraRouter&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=diegosouzapw/OmniRoute&type=date&theme=dark&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=diegosouzapw/OmniRoute&type=date&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=diegosouzapw/OmniRoute&type=date&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=manoj-dahal/Aera-router&type=date&theme=dark&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=manoj-dahal/Aera-router&type=date&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=manoj-dahal/Aera-router&type=date&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
  </picture>
 </a>
 
@@ -998,11 +1002,11 @@ gh release create v3.8.2 --title "v3.8.2" --generate-notes
 
 ## 🌍 StarMapper
 
-<a href="https://starmapper.bruniaux.com/diegosouzapw/omniroute">
+<a href="https://starmapper.bruniaux.com/diegosouzapw/aera-router">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/omniroute?theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/omniroute?theme=light" />
-    <img alt="StarMapper" src="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/omniroute" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/aera-router?theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/aera-router?theme=light" />
+    <img alt="StarMapper" src="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/aera-router" />
   </picture>
 </a>
 </div>
@@ -1015,13 +1019,13 @@ gh release create v3.8.2 --title "v3.8.2" --generate-notes
 
 </div>
 
-OmniRoute stands on the shoulders of giants. It started as a fork of **[9router](https://github.com/decolua/9router)** and a TypeScript port of the Go project **[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)** — and from there, every subsystem below was inspired by an open-source project that got there first. Each one shaped a concrete piece of OmniRoute. This is our thank-you to all of them. 🙏
+Aera Router stands on the shoulders of giants. It started as a fork of **[9router](https://github.com/decolua/9router)** and a TypeScript port of the Go project **[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)** — and from there, every subsystem below was inspired by an open-source project that got there first. Each one shaped a concrete piece of Aera Router. This is our thank-you to all of them. 🙏
 
 > ⭐ star counts as of July 2026 — go give these projects a star.
 
 ### 🧬 Lineage & gateway
 
-| Project                                                                         |    ⭐ | How it inspired OmniRoute                                                                                                             |
+| Project                                                                         |    ⭐ | How it inspired Aera Router                                                                                                           |
 | ------------------------------------------------------------------------------- | ----: | ------------------------------------------------------------------------------------------------------------------------------------- |
 | **[9router](https://github.com/decolua/9router)** · decolua                     | 22.7k | The original project this fork is built on — extended here with multi-modal APIs and a full TypeScript rewrite.                       |
 | **[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)** · router-for-me | 43.6k | The Go implementation that inspired this JavaScript / TypeScript port.                                                                |
@@ -1029,7 +1033,7 @@ OmniRoute stands on the shoulders of giants. It started as a fork of **[9router]
 
 ### 🗜️ Context & token compression — engines
 
-| Project                                                                       |    ⭐ | How it inspired OmniRoute                                                                                                                                                                                |
+| Project                                                                       |    ⭐ | How it inspired Aera Router                                                                                                                                                                              |
 | ----------------------------------------------------------------------------- | ----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[Caveman](https://github.com/JuliusBrussee/caveman)** · JuliusBrussee       | 90.8k | The viral "why use many token when few token do trick" project — its caveman-speak philosophy powers our standard compression mode and 30+ filler/condensation rules.                                    |
 | **[RTK – Rust Token Killer](https://github.com/rtk-ai/rtk)** · rtk-ai         | 71.8k | High-performance command-output compression — inspired our RTK engine, JSON filter DSL, raw-output recovery and the stacked RTK → Caveman pipeline.                                                      |
@@ -1041,7 +1045,7 @@ OmniRoute stands on the shoulders of giants. It started as a fork of **[9router]
 
 ### 🧩 Compact formats, token research & code-aware tooling
 
-| Project                                                                                        |    ⭐ | How it inspired OmniRoute                                                                                                                                                                                      |
+| Project                                                                                        |    ⭐ | How it inspired Aera Router                                                                                                                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[TOON](https://github.com/toon-format/toon)** · toon-format                                  | 24.9k | Token-Oriented Object Notation — its columnar, header-plus-rows model shaped our tabular compaction stage.                                                                                                     |
 | **[GCF – Graph Compact Format](https://github.com/blackwell-systems/gcf)** · Blackwell Systems |    22 | First inspired our tabular compaction stage; now its zero-dependency, lossless generic-profile encoder is **vendored directly** as the Headroom codec (MIT, SPDX-marked), current with GCF spec v3.2.          |
@@ -1058,7 +1062,7 @@ OmniRoute stands on the shoulders of giants. It started as a fork of **[9router]
 
 ### 🧠 Memory & RAG
 
-| Project                                                            |    ⭐ | How it inspired OmniRoute                                                                                           |
+| Project                                                            |    ⭐ | How it inspired Aera Router                                                                                         |
 | ------------------------------------------------------------------ | ----: | ------------------------------------------------------------------------------------------------------------------- |
 | **[Mem0](https://github.com/mem0ai/mem0)** · mem0ai                | 61.2k | Universal memory layer — its proxy-as-write/read-boundary model shaped our memory architecture.                     |
 | **[Letta (MemGPT)](https://github.com/letta-ai/letta)** · letta-ai | 23.9k | Stateful agents with tiered memory — inspired our Context Control & Recovery (CCR) tiered model.                    |
@@ -1066,14 +1070,14 @@ OmniRoute stands on the shoulders of giants. It started as a fork of **[9router]
 
 ### 🛰️ Traffic inspection, MITM & transparent proxy
 
-| Project                                                                           |   ⭐ | How it inspired OmniRoute                                                                                                                                                        |
+| Project                                                                           |   ⭐ | How it inspired Aera Router                                                                                                                                                      |
 | --------------------------------------------------------------------------------- | ---: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[llm-interceptor](https://github.com/chouzz/llm-interceptor)** · chouzz         |   49 | MITM interception/analysis of coding-assistant ↔ LLM traffic — our Traffic Inspector ports its SSE merge, conversation normalization, host passthrough and secret masking (MIT). |
 | **[ProxyBridge](https://github.com/InterceptSuite/ProxyBridge)** · InterceptSuite | 5.5k | Transparent per-process proxy routing — inspired our crash-safe MITM teardown, socket idle-timeouts, `/proc` process attribution and TPROXY capture.                             |
 
 ### 📚 Model data, observability & UI
 
-| Project                                                                    |    ⭐ | How it inspired OmniRoute                                                                                                  |
+| Project                                                                    |    ⭐ | How it inspired Aera Router                                                                                                |
 | -------------------------------------------------------------------------- | ----: | -------------------------------------------------------------------------------------------------------------------------- |
 | **[models.dev](https://github.com/anomalyco/models.dev)** · SST / OpenCode |  6.0k | Open database of AI model specs, pricing and capabilities — synced natively into our model catalog.                        |
 | **[React Flow / xyflow](https://github.com/xyflow/xyflow)** · xyflow       | 37.7k | The node-based graph library powering our real-time Compression Studio and Combo/Routing Studio.                           |
@@ -1084,19 +1088,19 @@ OmniRoute stands on the shoulders of giants. It started as a fork of **[9router]
 
 ### 🛡️ Security
 
-| Project                                                                                     |  ⭐ | How it inspired OmniRoute                                                                                                                        |
+| Project                                                                                     |  ⭐ | How it inspired Aera Router                                                                                                                      |
 | ------------------------------------------------------------------------------------------- | --: | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **[awesome-secure-defaults](https://github.com/tldrsec/awesome-secure-defaults)** · tldrsec | 710 | A curated list of secure-by-default libraries that guides our security choices (Helmet.js, DOMPurify, ssrf-req-filter, safe-regex, Google Tink). |
 
 ### 🧭 Complementary tools
 
-| Project                                                                       | How it composes with OmniRoute                                                                                                                                                                             |
-| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[CodeWebChat](https://github.com/robertpiosik/CodeWebChat)** · robertpiosik | Editor-side companion — VS Code + browser extension that autofills 15+ chatbot web UIs with editor context. Owns the free-web-UI rail alongside OmniRoute's API rail; can point its API mode at OmniRoute. |
+| Project                                                                       | How it composes with Aera Router                                                                                                                                                                               |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[CodeWebChat](https://github.com/robertpiosik/CodeWebChat)** · robertpiosik | Editor-side companion — VS Code + browser extension that autofills 15+ chatbot web UIs with editor context. Owns the free-web-UI rail alongside Aera Router's API rail; can point its API mode at Aera Router. |
 
 ## 💖 Sponsors
 
-> **Want to appear here?** OmniRoute puts sponsors in front of one of GitHub's fastest-growing AI-gateway communities — and we say publicly where every sponsored token goes. Reach out: [diegosouza.pw@outlook.com](mailto:diegosouza.pw@outlook.com)
+> **Want to appear here?** Aera Router puts sponsors in front of one of GitHub's fastest-growing AI-gateway communities — and we say publicly where every sponsored token goes. Reach out: [diegosouza.pw@outlook.com](mailto:diegosouza.pw@outlook.com)
 
 <table>
   <tr>
@@ -1106,20 +1110,20 @@ OmniRoute stands on the shoulders of giants. It started as a fork of **[9router]
       <img src="https://img.shields.io/badge/Official_Supporter-1783FF?style=flat-square" alt="Official Supporter"/>
     </td>
     <td>
-      Thanks to <b>Kimi (Moonshot AI)</b> for sponsoring this project! Kimi is the AI lab behind the open-weight K2 and K3 model families — <b>Kimi K3</b> delivers a 1M-token context window, native vision and frontier-level coding at a fraction of closed-model prices, and works out of the box with Claude Code, Codex and every coding tool OmniRoute serves.
+      Thanks to <b>Kimi (Moonshot AI)</b> for sponsoring this project! Kimi is the AI lab behind the open-weight K2 and K3 model families — <b>Kimi K3</b> delivers a 1M-token context window, native vision and frontier-level coding at a fraction of closed-model prices, and works out of the box with Claude Code, Codex and every coding tool Aera Router serves.
       <br/><br/>
-      <b>Where the sponsorship goes:</b> Kimi's API credits power OmniRoute's AI-validated release pipeline — the <i>merge validation powered by Kimi K3</i> stage that reviews every pull request before it ships — plus day-to-day feature development. First-class Kimi support ships on both rails: the direct <a href="https://platform.kimi.ai">Moonshot API</a> (<code>kimi-k3</code>) and the <a href="https://www.kimi.com">Kimi Code coding plan</a> (OAuth and API key). <a href="https://platform.kimi.ai"><b>Get a Moonshot API key →</b></a>
+      <b>Where the sponsorship goes:</b> Kimi's API credits power Aera Router's AI-validated release pipeline — the <i>merge validation powered by Kimi K3</i> stage that reviews every pull request before it ships — plus day-to-day feature development. First-class Kimi support ships on both rails: the direct <a href="https://platform.kimi.ai">Moonshot API</a> (<code>kimi-k3</code>) and the <a href="https://www.kimi.com">Kimi Code coding plan</a> (OAuth and API key). <a href="https://platform.kimi.ai"><b>Get a Moonshot API key →</b></a>
     </td>
   </tr>
 </table>
 
 ## ❤️ Support
 
-OmniRoute is free and open source, built and maintained in the open. If it saves you time or money, consider supporting development:
+Aera Router is free and open source, built and maintained in the open. If it saves you time or money, consider supporting development:
 
 - ⭐ **Star the repo** — it genuinely helps visibility
 - 💖 **[GitHub Sponsors](https://github.com/sponsors/diegosouzapw)** — fund ongoing maintenance and new providers
-- 🐛 **Report bugs and share feedback** in [Discussions](https://github.com/diegosouzapw/OmniRoute/discussions)
+- 🐛 **Report bugs and share feedback** in [Discussions](https://github.com/manoj-dahal/Aera-router/discussions)
 
 ## 📄 License
 
@@ -1129,9 +1133,9 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-**[⬆ Back to top](#-omniroute)** · Built with ❤️ for the open-source AI community.
+**[⬆ Back to top](#-aera-router)** · Built with ❤️ for the open-source AI community.
 
-<sub>OmniRoute v3.8.49 · Node ≥22.22.2 · MIT License · <a href="https://omniroute.online">omniroute.online</a></sub>
+<sub>Aera Router v3.8.49 · Node ≥22.22.2 · MIT License · <a href="https://aera-router.online">aera-router.online</a></sub>
 
 </div>
 <!-- GitHub Discussions enabled for community Q&A -->

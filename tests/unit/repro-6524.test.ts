@@ -28,19 +28,16 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-repro-6524-"));
+const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-repro-6524-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 
 const core = await import("../../src/lib/db/core.ts");
-const { saveModelsDevCapabilities, clearModelsDevCapabilities } = await import(
-  "../../src/lib/modelsDevSync.ts"
-);
-const { setModelCapabilityOverride, removeModelCapabilityOverride } = await import(
-  "../../src/lib/db/modelCapabilityOverrides.ts"
-);
-const { resolveReasoningBufferedMaxTokens } = await import(
-  "../../open-sse/services/reasoningTokenBuffer.ts"
-);
+const { saveModelsDevCapabilities, clearModelsDevCapabilities } =
+  await import("../../src/lib/modelsDevSync.ts");
+const { setModelCapabilityOverride, removeModelCapabilityOverride } =
+  await import("../../src/lib/db/modelCapabilityOverrides.ts");
+const { resolveReasoningBufferedMaxTokens } =
+  await import("../../open-sse/services/reasoningTokenBuffer.ts");
 
 const PROVIDER = "ollama-cloud";
 const MODEL = "deepseek-v4-flash";

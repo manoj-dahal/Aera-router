@@ -446,7 +446,12 @@ export class GlmExecutor extends DefaultExecutor {
    */
   private async finalizeAnthropicTransportResult(
     input: ExecuteInput,
-    result: { response: Response; url: string; headers: Record<string, string>; transformedBody: unknown }
+    result: {
+      response: Response;
+      url: string;
+      headers: Record<string, string>;
+      transformedBody: unknown;
+    }
   ): Promise<GlmExecuteResult> {
     const { response: rawResponse, url, headers, transformedBody } = result;
     const clientHeaders = input.clientHeaders ?? {};
@@ -454,7 +459,7 @@ export class GlmExecutor extends DefaultExecutor {
       userAgent: clientHeaders["user-agent"] ?? clientHeaders["User-Agent"] ?? null,
       thinkingMarkerHeader:
         clientHeaders[THINKING_MARKER_HEADER] ??
-        clientHeaders["x-omniroute-thinking-marker"] ??
+        clientHeaders["x-aera-router-thinking-marker"] ??
         null,
       clientResponseFormat: input.clientResponseFormat ?? null,
     });

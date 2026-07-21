@@ -21,7 +21,7 @@
  * when to schedule it, so importing this module in tests never spawns a timer.
  */
 
-import { cooldownUntilMs } from "@omniroute/open-sse/services/accountFallback.ts";
+import { cooldownUntilMs } from "@aera-router/open-sse/services/accountFallback.ts";
 import { isAutomatedTestProcess } from "@/shared/utils/testProcess";
 
 /**
@@ -148,8 +148,7 @@ export async function runConnectionRecoveryTick(
         return (Array.isArray(rows) ? rows : []).map((row) => ({
           id: typeof row.id === "string" ? row.id : "",
           testStatus: typeof row.testStatus === "string" ? row.testStatus : null,
-          rateLimitedUntil:
-            typeof row.rateLimitedUntil === "string" ? row.rateLimitedUntil : null,
+          rateLimitedUntil: typeof row.rateLimitedUntil === "string" ? row.rateLimitedUntil : null,
         }));
       });
     connections = await load();
@@ -203,16 +202,15 @@ const RECOVERY_LOG_PREFIX = "[ConnectionRecovery]";
 const TRUE_ENV_VALUES = new Set(["1", "true", "yes", "on"]);
 
 declare global {
-  var __omnirouteConnRecovery:
-    | { initialized: boolean; interval: ReturnType<typeof setInterval> | null }
-    | undefined;
+  var __aeraRouterConnRecovery:
+    { initialized: boolean; interval: ReturnType<typeof setInterval> | null } | undefined;
 }
 
 function getRecoveryState() {
-  if (!globalThis.__omnirouteConnRecovery) {
-    globalThis.__omnirouteConnRecovery = { initialized: false, interval: null };
+  if (!globalThis.__aeraRouterConnRecovery) {
+    globalThis.__aeraRouterConnRecovery = { initialized: false, interval: null };
   }
-  return globalThis.__omnirouteConnRecovery;
+  return globalThis.__aeraRouterConnRecovery;
 }
 
 function isEnvFlagEnabled(name: string): boolean {
@@ -224,23 +222,22 @@ function isBuildProcess(): boolean {
   return typeof process !== "undefined" && process.env.NEXT_PHASE === "phase-production-build";
 }
 
-
 function isRecoverySchedulerDisabled(): boolean {
   return (
-    isEnvFlagEnabled("OMNIROUTE_DISABLE_CONNECTION_RECOVERY") ||
-    isEnvFlagEnabled("OMNIROUTE_DISABLE_BACKGROUND_SERVICES") ||
+    isEnvFlagEnabled("AERA_ROUTER_DISABLE_CONNECTION_RECOVERY") ||
+    isEnvFlagEnabled("AERA_ROUTER_DISABLE_BACKGROUND_SERVICES") ||
     isBuildProcess() ||
     isAutomatedTestProcess()
   );
 }
 
 /**
- * Resolve the tick interval (ms) from OMNIROUTE_CONNECTION_RECOVERY_INTERVAL_MS,
+ * Resolve the tick interval (ms) from AERA_ROUTER_CONNECTION_RECOVERY_INTERVAL_MS,
  * falling back to the 60s default and clamping to a small floor.
  */
 export function resolveConnectionRecoveryIntervalMs(
   rawValue: string | undefined = typeof process !== "undefined"
-    ? process.env.OMNIROUTE_CONNECTION_RECOVERY_INTERVAL_MS
+    ? process.env.AERA_ROUTER_CONNECTION_RECOVERY_INTERVAL_MS
     : undefined
 ): number {
   if (!rawValue) return DEFAULT_TICK_MS;

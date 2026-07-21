@@ -46,7 +46,7 @@ const ALLOWED_RESPONSES_USAGE_FIELDS = new Set([
 type JsonRecord = Record<string, unknown>;
 type ParseOptions = { parseTextualReasoningTags?: boolean };
 
-export const OMIT_STREAMING_CHUNK_MARKER = "__omniroute_omit_streaming_chunk";
+export const OMIT_STREAMING_CHUNK_MARKER = "__aera_router_omit_streaming_chunk";
 
 function toRecord(value: unknown): JsonRecord | null {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
@@ -233,7 +233,7 @@ export interface SanitizeOpenAIResponseOptions {
    * When true, unconditionally remove `reasoning_content` from every choice
    * message in the final payload — including reasoning-only messages and
    * DeepSeek V4 — even though the default sanitizer keeps it in those cases.
-   * Wired to the `x-omniroute-strip-reasoning` request header for clients whose
+   * Wired to the `x-aera-router-strip-reasoning` request header for clients whose
    * JSON parsers cannot tolerate the non-standard field (e.g. Firecrawl AI SDK).
    * Ported from upstream 9router#517 (closes upstream #509).
    */
@@ -519,10 +519,7 @@ function sanitizeResponsesUsage(usage: unknown): unknown {
 
   const inputDetails = toRecord(normalized.input_tokens_details) || {};
   const cachedTokens = normalized.cached_tokens ?? normalized.cache_read_input_tokens;
-  if (
-    cachedTokens !== undefined &&
-    inputDetails.cached_tokens === undefined
-  ) {
+  if (cachedTokens !== undefined && inputDetails.cached_tokens === undefined) {
     inputDetails.cached_tokens = cachedTokens;
   }
   if (

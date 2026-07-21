@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
  * GLM's Anthropic transport does its own Claude→OpenAI SSE translation inside
  * the executor (via `translateSseResponse`), bypassing chatCore's stream
  * pipeline. chatCore already resolves `suppressThinkClose` from the client
- * User-Agent / `x-omniroute-thinking-marker` header, but the GLM executor was
+ * User-Agent / `x-aera-router-thinking-marker` header, but the GLM executor was
  * not passing the flag to its internal stream transform — so the textual
  * `</think>` marker leaked into the visible content for OpenCode and other
  * clients that render it verbatim (#5245 / #5312).
@@ -98,7 +98,7 @@ async function collectStreamOutput(response: Response): Promise<string> {
   const reader = response.body!.getReader();
   const decoder = new TextDecoder();
   let output = "";
-   
+
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
@@ -185,7 +185,7 @@ test("resolveSuppressThinkClose: OpenCode UA triggers suppression for GLM path",
   );
   assert.equal(
     THINKING_MARKER_HEADER,
-    "x-omniroute-thinking-marker",
+    "x-aera-router-thinking-marker",
     "Header constant must match wire name"
   );
 });

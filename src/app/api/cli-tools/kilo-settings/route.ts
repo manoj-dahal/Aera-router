@@ -23,14 +23,16 @@ const KILO_CONFIG_DIR = path.join(os.homedir(), ".config", "kilo");
 // "installed but not configured" instead of a 500 misread as "not installed".
 const readAuth = async () => readJsoncConfig(AUTH_PATH);
 
-// Check if OmniRoute OpenAI-compatible provider is configured
-const hasOmniRouteConfig = (auth) => {
+// Check if Aera Router OpenAI-compatible provider is configured
+const hasAeraRouterConfig = (auth) => {
   if (!auth) return false;
-  const routerEntry = auth["openai-compatible"] || auth["omniroute"];
+  const routerEntry = auth["openai-compatible"] || auth["aera-router"];
   if (!routerEntry) return false;
   const baseUrl = routerEntry.baseUrl || routerEntry.baseURL || "";
   return (
-    baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1") || baseUrl.includes("omniroute")
+    baseUrl.includes("localhost") ||
+    baseUrl.includes("127.0.0.1") ||
+    baseUrl.includes("aera-router")
   );
 };
 
@@ -98,7 +100,7 @@ export async function GET(request: Request) {
         auth: auth ? Object.keys(auth) : [],
         extensionSettings,
       },
-      hasOmniRoute: hasOmniRouteConfig(auth),
+      hasAeraRouter: hasAeraRouterConfig(auth),
       authPath: AUTH_PATH,
     });
   } catch (error) {
@@ -107,7 +109,7 @@ export async function GET(request: Request) {
   }
 }
 
-// POST - Configure Kilo Code to use OmniRoute as OpenAI-compatible provider
+// POST - Configure Kilo Code to use Aera Router as OpenAI-compatible provider
 export async function POST(request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -161,10 +163,10 @@ export async function POST(request) {
     // Normalize baseUrl
     const normalizedBaseUrl = baseUrl.endsWith("/v1") ? baseUrl : `${baseUrl}/v1`;
 
-    // Add/update OmniRoute as openai-compatible provider
+    // Add/update Aera Router as openai-compatible provider
     auth["openai-compatible"] = {
       type: "api-key",
-      apiKey: apiKey || "sk_omniroute",
+      apiKey: apiKey || "sk_aera_router",
       baseUrl: normalizedBaseUrl,
       model: model,
     };
@@ -190,9 +192,9 @@ export async function POST(request) {
 
       // Set custom provider config for the extension
       vscodeSettings["kilocode.customProvider"] = {
-        name: "OmniRoute",
+        name: "Aera Router",
         baseURL: normalizedBaseUrl,
-        apiKey: apiKey || "sk_omniroute",
+        apiKey: apiKey || "sk_aera_router",
       };
       vscodeSettings["kilocode.defaultModel"] = model;
 
@@ -219,7 +221,7 @@ export async function POST(request) {
   }
 }
 
-// DELETE - Remove OmniRoute config from Kilo
+// DELETE - Remove Aera Router config from Kilo
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -245,9 +247,9 @@ export async function DELETE(request: Request) {
       throw error;
     }
 
-    // Remove OmniRoute provider
+    // Remove Aera Router provider
     delete auth["openai-compatible"];
-    delete auth["omniroute"];
+    delete auth["aera-router"];
 
     await fs.writeFile(AUTH_PATH, JSON.stringify(auth, null, 2));
 
@@ -278,7 +280,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "OmniRoute settings removed from Kilo Code",
+      message: "Aera Router settings removed from Kilo Code",
     });
   } catch (error) {
     console.log("Error resetting kilo settings:", error);

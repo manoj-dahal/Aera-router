@@ -61,7 +61,7 @@ export function detectVisionInput(record: JsonRecord): boolean {
 }
 
 // #7694: nested `reasoning.supported_efforts` shape some OpenAI-compatible upstreams
-// expose (as opposed to the flat `supportedThinkingEfforts` field OmniRoute's own
+// expose (as opposed to the flat `supportedThinkingEfforts` field Aera Router's own
 // import format already emits). Hard Rule #7 — validate the untrusted upstream
 // payload with Zod before it is trusted/stored; a malformed shape degrades to
 // `undefined` instead of throwing, so one bad record never fails the whole sync.
@@ -71,7 +71,7 @@ const reasoningSupportedEffortsSchema = z
   .nullable()
   .optional();
 
-// Maps common upstream synonyms onto OmniRoute's canonical effort vocabulary
+// Maps common upstream synonyms onto Aera Router's canonical effort vocabulary
 // (`src/shared/reasoning/effortStandardization.ts`). Values already in
 // `CANONICAL_EFFORT_VALUES`, and any unrecognized provider-native tier (e.g.
 // Codex's own "ultra"), pass through unchanged — only known synonyms are mapped.
@@ -177,7 +177,7 @@ export function normalizeDiscoveredModels(models: unknown): SyncedAvailableModel
         : {}),
       ...(supportedEndpoints && supportedEndpoints.length > 0 ? { supportedEndpoints } : {}),
       ...(() => {
-        // #7694: the flat field (OmniRoute's own import format) wins verbatim when
+        // #7694: the flat field (Aera Router's own import format) wins verbatim when
         // present, unchanged from its current pass-through behavior; only fall back to
         // the nested `reasoning.supported_efforts` shape (normalized onto the canonical
         // vocabulary) when the flat field is absent.
@@ -201,12 +201,8 @@ export function normalizeDiscoveredModels(models: unknown): SyncedAvailableModel
         ? { supportsThinking: record.supportsThinking }
         : {}),
       ...(record.alwaysThinking === true ? { alwaysThinking: true } : {}),
-      ...(typeof record.supportsTools === "boolean"
-        ? { supportsTools: record.supportsTools }
-        : {}),
-      ...(typeof record.supportsVideo === "boolean"
-        ? { supportsVideo: record.supportsVideo }
-        : {}),
+      ...(typeof record.supportsTools === "boolean" ? { supportsTools: record.supportsTools } : {}),
+      ...(typeof record.supportsVideo === "boolean" ? { supportsVideo: record.supportsVideo } : {}),
       ...(supportsVision ? { supportsVision: true } : {}),
     });
   }

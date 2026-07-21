@@ -14,7 +14,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-health-cache-"));
+const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-health-cache-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 process.env.REQUIRE_API_KEY = "false";
 process.env.JWT_SECRET = "test-health-cache-secret";
@@ -54,7 +54,7 @@ test("DELETE (circuit-breaker reset) invalidates the cache immediately", async (
     new Request("http://localhost/api/monitoring/health", {
       method: "DELETE",
       headers: { cookie: `auth_token=${authToken}` },
-    }),
+    })
   );
   assert.ok(delRes.status < 400, `DELETE should succeed, got ${delRes.status}`);
   await new Promise((r) => setTimeout(r, 5)); // ensure the clock advances past ms precision

@@ -4,28 +4,28 @@ import { homedir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const APP_LABEL = "com.omniroute.autostart";
-const WIN_REG_VALUE = "OmniRoute";
-const WIN_STARTUP_FILE = "OmniRoute.vbs";
-const LINUX_SERVICE_NAME = "omniroute.service";
-const LINUX_DESKTOP_NAME = "omniroute.desktop";
+const APP_LABEL = "com.aera-router.autostart";
+const WIN_REG_VALUE = "Aera Router";
+const WIN_STARTUP_FILE = "Aera Router.vbs";
+const LINUX_SERVICE_NAME = "aera-router.service";
+const LINUX_DESKTOP_NAME = "aera-router.desktop";
 
 function resolveCliPath() {
   const candidates = [];
   if (process.argv[1]) candidates.push(process.argv[1]);
   try {
-    const which = execSync("command -v omniroute 2>/dev/null", { encoding: "utf8" }).trim();
+    const which = execSync("command -v aera-router 2>/dev/null", { encoding: "utf8" }).trim();
     if (which) candidates.push(which);
   } catch {
     // command -v unavailable
   }
-  candidates.push(join(dirname(fileURLToPath(import.meta.url)), "..", "..", "omniroute.mjs"));
+  candidates.push(join(dirname(fileURLToPath(import.meta.url)), "..", "..", "aera-router.mjs"));
 
   for (const candidate of candidates) {
     if (!candidate) continue;
     try {
       const resolved = realpathSync(candidate);
-      if (resolved.endsWith("omniroute.mjs") && existsSync(resolved)) return resolved;
+      if (resolved.endsWith("aera-router.mjs") && existsSync(resolved)) return resolved;
     } catch {
       // try next candidate
     }
@@ -113,10 +113,10 @@ function tryEnableLinger() {
 function writeLinuxSystemdUnit(cliPath) {
   const unitDir = dirname(linuxSystemdUnitPath());
   mkdirSync(unitDir, { recursive: true });
-  const envFile = join(userHomeDir(), ".omniroute", ".env");
+  const envFile = join(userHomeDir(), ".aera-router", ".env");
   const lines = [
     "[Unit]",
-    "Description=OmniRoute AI proxy router",
+    "Description=Aera Router AI proxy router",
     "After=network-online.target",
     "Wants=network-online.target",
     "",
@@ -138,7 +138,7 @@ function writeLinuxDesktopEntry(cliPath) {
     [
       "[Desktop Entry]",
       "Type=Application",
-      "Name=OmniRoute",
+      "Name=Aera Router",
       "Comment=AI proxy router with auto fallback",
       `Exec=${buildServeExecLine(cliPath, { tray: true })}`,
       "Terminal=false",
@@ -242,7 +242,7 @@ export function isLaunchdAgentLoaded(runList) {
  * managing under our agent label.
  *
  * `launchctl unload`/`load -w` for a user-domain agent sends SIGTERM to the
- * running process. When the running OmniRoute cli was itself spawned by the
+ * running process. When the running Aera Router cli was itself spawned by the
  * autostart launchd agent (autostart was enabled, then the machine rebooted,
  * then the user clicked the tray "Disable Autostart" item), an unload would
  * kill the very process executing the click handler — the tray icon would
@@ -344,7 +344,7 @@ function winStartupPath() {
 }
 
 /**
- * Builds the VBScript source that launches OmniRoute with WSH's Run method
+ * Builds the VBScript source that launches Aera Router with WSH's Run method
  * using SW_HIDE (0) so no console window appears.
  *
  * 9Router uses the same pattern: a .vbs file in the Startup folder that calls

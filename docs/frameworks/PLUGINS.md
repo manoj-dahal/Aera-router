@@ -1,37 +1,37 @@
 ---
-title: "OmniRoute CLI Plugin System"
+title: "Aera Router CLI Plugin System"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# OmniRoute CLI Plugin System
+# Aera Router CLI Plugin System
 
-Extend the `omniroute` CLI without modifying its core. Plugins follow the `omniroute-cmd-*` naming convention, similar to `gh extension` or `kubectl plugin`.
+Extend the `aera-router` CLI without modifying its core. Plugins follow the `aera-router-cmd-*` naming convention, similar to `gh extension` or `kubectl plugin`.
 
 ## Quick start
 
 ```bash
 # Install a plugin from npm
-omniroute plugin install stripe
+aera-router plugin install stripe
 
 # Install a local plugin in development
-omniroute plugin install ./my-plugin
+aera-router plugin install ./my-plugin
 
 # List installed plugins
-omniroute plugin list
+aera-router plugin list
 
 # Scaffold a new plugin
-omniroute plugin scaffold myplugin
-cd omniroute-cmd-myplugin
-omniroute plugin install .
+aera-router plugin scaffold myplugin
+cd aera-router-cmd-myplugin
+aera-router plugin install .
 ```
 
 ## Plugin anatomy
 
-A plugin is an npm package named `omniroute-cmd-<name>` (or `@scope/omniroute-cmd-<name>`).
+A plugin is an npm package named `aera-router-cmd-<name>` (or `@scope/aera-router-cmd-<name>`).
 
 ```
-omniroute-cmd-myplugin/
+aera-router-cmd-myplugin/
 ├── package.json     # must have "type": "module" and "main": "index.mjs"
 ├── index.mjs        # exports register(program, ctx) + optional meta
 └── README.md
@@ -41,12 +41,12 @@ omniroute-cmd-myplugin/
 
 ```json
 {
-  "name": "omniroute-cmd-myplugin",
+  "name": "aera-router-cmd-myplugin",
   "version": "0.1.0",
   "type": "module",
   "main": "index.mjs",
-  "engines": { "omniroute": ">=4.0.0" },
-  "keywords": ["omniroute-plugin", "omniroute-cmd"]
+  "engines": { "aera-router": ">=4.0.0" },
+  "keywords": ["aera-router-plugin", "aera-router-cmd"]
 }
 ```
 
@@ -56,8 +56,8 @@ omniroute-cmd-myplugin/
 export const meta = {
   name: "myplugin",
   version: "0.1.0",
-  description: "My plugin for OmniRoute",
-  omnirouteApi: ">=4.0.0",
+  description: "My plugin for Aera Router",
+  aeraRouterApi: ">=4.0.0",
 };
 
 export function register(program, ctx) {
@@ -83,7 +83,7 @@ The `ctx` object passed to `register(program, ctx)`:
 
 | Property                     | Type             | Description                                        |
 | ---------------------------- | ---------------- | -------------------------------------------------- |
-| `ctx.apiFetch(path, opts)`   | `async function` | Authenticated fetch to the OmniRoute server        |
+| `ctx.apiFetch(path, opts)`   | `async function` | Authenticated fetch to the Aera Router server      |
 | `ctx.emit(data, opts)`       | `function`       | Output in table/json/jsonl/csv per `--output` flag |
 | `ctx.t(key)`                 | `async function` | i18n translation lookup                            |
 | `ctx.withSpinner(label, fn)` | `async function` | Wraps async fn with ora spinner                    |
@@ -94,21 +94,21 @@ The `ctx` object passed to `register(program, ctx)`:
 
 Plugins are discovered from:
 
-1. `~/.omniroute/plugins/<name>/` — user-local installs
-2. `OMNIROUTE_PLUGIN_PATH` env var — custom directory
+1. `~/.aera-router/plugins/<name>/` — user-local installs
+2. `AERA_ROUTER_PLUGIN_PATH` env var — custom directory
 
 Loading errors are caught and printed as warnings — a broken plugin never crashes the CLI.
 
 ## Security
 
-Plugins run with the same Node.js process privileges as `omniroute`. Only install plugins from sources you trust. `omniroute plugin install` shows an explicit warning and requires `--yes` or interactive confirmation.
+Plugins run with the same Node.js process privileges as `aera-router`. Only install plugins from sources you trust. `aera-router plugin install` shows an explicit warning and requires `--yes` or interactive confirmation.
 
 ## Publishing
 
-1. Ensure `package.json` has `"keywords": ["omniroute-plugin"]`
+1. Ensure `package.json` has `"keywords": ["aera-router-plugin"]`
 2. `npm publish` as normal
-3. Users discover via `omniroute plugin search <query>` (searches npm registry)
+3. Users discover via `aera-router plugin search <query>` (searches npm registry)
 
 ## Example plugin
 
-See [`examples/omniroute-cmd-hello/`](../../examples/omniroute-cmd-hello/index.mjs) for a minimal working example with `meta` + `register()`.
+See [`examples/aera-router-cmd-hello/`](../../examples/aera-router-cmd-hello/index.mjs) for a minimal working example with `meta` + `register()`.

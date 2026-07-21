@@ -172,7 +172,7 @@ export class LMArenaExecutor extends BaseExecutor {
       body: JSON.stringify(transformedBody),
       signal: ctx.signal,
       stream: ctx.stream,
-      streamEofSymbol: "__OMNIROUTE_LMARENA_EOF_NEVER__",
+      streamEofSymbol: "__AERA_ROUTER_LMARENA_EOF_NEVER__",
     });
 
     const failed = mapFailedTlsResult({

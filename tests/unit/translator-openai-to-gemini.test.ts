@@ -538,7 +538,9 @@ test("OpenAI -> Cloud Code Gemini applies native request defaults", () => {
     "gemini-3-flash-preview",
     { messages: [{ role: "user", content: "Hello" }], reasoning_effort: "high" },
     true
-  ) as { generationConfig: { thinkingConfig: { thinkingBudget: number; includeThoughts: boolean } } };
+  ) as {
+    generationConfig: { thinkingConfig: { thinkingBudget: number; includeThoughts: boolean } };
+  };
   assert.equal(flash.generationConfig.thinkingConfig.thinkingBudget, 0);
   assert.equal(flash.generationConfig.thinkingConfig.includeThoughts, false);
   assert.equal(request.generationConfig.topK, undefined);
@@ -712,7 +714,7 @@ test("OpenAI -> Antigravity preserves multiple signature-less historical tool re
     "gemini-3.5-flash-low",
     {
       messages: [
-        { role: "user", content: "Inspect OmniRoute config" },
+        { role: "user", content: "Inspect Aera Router config" },
         {
           role: "assistant",
           tool_calls: [
@@ -724,7 +726,7 @@ test("OpenAI -> Antigravity preserves multiple signature-less historical tool re
             {
               id: "call_list_dir",
               type: "function",
-              function: { name: "terminal", arguments: '{"command":"ls ~/.omniroute"}' },
+              function: { name: "terminal", arguments: '{"command":"ls ~/.aera-router"}' },
             },
           ],
         },

@@ -1,0 +1,3 @@
+# Aera Router persistent data (SQLite DB, logs, backups)
+[Volume]
+Label=aera-router

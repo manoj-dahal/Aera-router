@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { runSingleModelTest } from "@/lib/api/modelTestRunner";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
+import { sanitizeErrorMessage } from "@aera-router/open-sse/utils/error.ts";
 import { getSettings } from "@/lib/db/settings";
 import { isFreeModel, providerHasFreeModels } from "@/shared/utils/freeModels";
 

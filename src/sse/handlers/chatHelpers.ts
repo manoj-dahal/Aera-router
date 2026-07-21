@@ -1,32 +1,32 @@
 import { getModelInfo, getComboForModel } from "../services/model";
 import { clearAccountError, markAccountUnavailable } from "../services/auth";
-import { connectionHasExtraKeys } from "@omniroute/open-sse/services/apiKeyRotator.ts";
-import { createBuiltinAutoCombo } from "@omniroute/open-sse/services/autoCombo/builtinCatalog.ts";
+import { connectionHasExtraKeys } from "@aera-router/open-sse/services/apiKeyRotator.ts";
+import { createBuiltinAutoCombo } from "@aera-router/open-sse/services/autoCombo/builtinCatalog.ts";
 import * as log from "../utils/logger";
 import { updateProviderCredentials } from "../services/tokenRefresh";
 import {
   detectFormatFromEndpoint,
   getTargetFormat,
-} from "@omniroute/open-sse/services/provider.ts";
+} from "@aera-router/open-sse/services/provider.ts";
 import {
   getModelTargetFormat,
   PROVIDER_ID_TO_ALIAS,
-} from "@omniroute/open-sse/config/providerModels.ts";
-import { handleChatCore } from "@omniroute/open-sse/handlers/chatCore.ts";
+} from "@aera-router/open-sse/config/providerModels.ts";
+import { handleChatCore } from "@aera-router/open-sse/handlers/chatCore.ts";
 import {
   errorResponse,
   modelCooldownResponse,
   providerCircuitOpenResponse,
   unavailableResponse,
-} from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+} from "@aera-router/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@aera-router/open-sse/config/constants.ts";
 import {
   runWithProxyContext,
   runWithAppliedProxyCapture,
   runWithTlsTracking,
   isTlsFingerprintActive,
   type AppliedProxySink,
-} from "@omniroute/open-sse/utils/proxyFetch.ts";
+} from "@aera-router/open-sse/utils/proxyFetch.ts";
 import { resolveProxyForConnection } from "@/lib/localDb";
 import { hasBlockingProxyAssignment } from "@/lib/db/proxies";
 import {
@@ -39,7 +39,7 @@ import { resolveUseUpstream429BreakerHints } from "../../shared/utils/providerHi
 
 import { logProxyEvent } from "../../lib/proxyLogger";
 import { logTranslationEvent } from "../../lib/translatorEvents";
-import { getRuntimeProviderProfile } from "@omniroute/open-sse/services/accountFallback.ts";
+import { getRuntimeProviderProfile } from "@aera-router/open-sse/services/accountFallback.ts";
 
 // Models that explicitly cannot run on the codex/ChatGPT-Pro OAuth pool — when
 // a caller writes `codex/deepseek-v4-pro` we transparently reroute to the
@@ -776,7 +776,7 @@ export async function safeLogEvents({
     let egressIp: string | null = null;
     try {
       const { getCachedEgressIp, warmEgressIp } = await import("../../lib/proxyEgress");
-      const { proxyConfigToUrl } = await import("@omniroute/open-sse/utils/proxyDispatcher.ts");
+      const { proxyConfigToUrl } = await import("@aera-router/open-sse/utils/proxyDispatcher.ts");
       const proxyUrl = proxyInfo?.proxy ? proxyConfigToUrl(proxyInfo.proxy) : null;
       egressIp = getCachedEgressIp(proxyUrl);
       warmEgressIp(proxyUrl);
@@ -826,7 +826,7 @@ export function withSessionHeader(response: Response, sessionId: string | null):
   if (!response || !sessionId) return response;
 
   try {
-    response.headers.set("X-OmniRoute-Session-Id", sessionId);
+    response.headers.set("X-Aera-Router-Session-Id", sessionId);
     return response;
   } catch {
     const cloned = new Response(response.body, {
@@ -834,7 +834,7 @@ export function withSessionHeader(response: Response, sessionId: string | null):
       statusText: response.statusText,
       headers: response.headers,
     });
-    cloned.headers.set("X-OmniRoute-Session-Id", sessionId);
+    cloned.headers.set("X-Aera-Router-Session-Id", sessionId);
     return cloned;
   }
 }
@@ -863,7 +863,7 @@ export function withSelectedConnectionHeader(
   if (!response || !connectionId) return response;
 
   try {
-    response.headers.set("X-OmniRoute-Selected-Connection-Id", connectionId);
+    response.headers.set("X-Aera-Router-Selected-Connection-Id", connectionId);
     return response;
   } catch {
     const cloned = new Response(response.body, {
@@ -871,7 +871,7 @@ export function withSelectedConnectionHeader(
       statusText: response.statusText,
       headers: response.headers,
     });
-    cloned.headers.set("X-OmniRoute-Selected-Connection-Id", connectionId);
+    cloned.headers.set("X-Aera-Router-Selected-Connection-Id", connectionId);
     return cloned;
   }
 }

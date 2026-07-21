@@ -7,7 +7,7 @@ import { getProviderRegistry } from "./providerRegistryAccessor";
 import type { ConnectionFields } from "@/lib/db/encryption";
 import { NOAUTH_PROVIDERS } from "@/shared/constants/providers";
 import { hasUsableWebSessionCredential } from "@/shared/providers/webSessionCredentials";
-import { defaultLogger as log } from "@omniroute/open-sse/utils/logger";
+import { defaultLogger as log } from "@aera-router/open-sse/utils/logger";
 import { getTokenLimit } from "../contextManager";
 import { getResolvedModelCapabilities } from "@/lib/modelCapabilities";
 import {
@@ -465,13 +465,13 @@ export async function createVirtualAutoCombo(
       effectivePool = narrowed;
     } else if (
       !spec?.family &&
-      (process.env.OMNIROUTE_AUTO_FREE_FALLBACK_TO_FULL_POOL === "true" ||
-        process.env.OMNIROUTE_AUTO_FREE_FALLBACK_TO_FULL_POOL === "1")
+      (process.env.AERA_ROUTER_AUTO_FREE_FALLBACK_TO_FULL_POOL === "true" ||
+        process.env.AERA_ROUTER_AUTO_FREE_FALLBACK_TO_FULL_POOL === "1")
     ) {
       // Opt-in legacy behavior (category/tier only): warn loudly, then keep the full pool.
       log.warn(
         "AUTO",
-        `${label} matched no connected models; falling back to the full pool (OMNIROUTE_AUTO_FREE_FALLBACK_TO_FULL_POOL=true)`
+        `${label} matched no connected models; falling back to the full pool (AERA_ROUTER_AUTO_FREE_FALLBACK_TO_FULL_POOL=true)`
       );
     } else {
       // Family combos always degrade to an empty pool when unavailable — a family
@@ -479,7 +479,7 @@ export async function createVirtualAutoCombo(
       // no sensible "fall back to the full pool" behavior for it.
       log.warn(
         "AUTO",
-        `${label} matched no connected models; returning an empty pool.${spec?.family ? "" : ' Set OMNIROUTE_AUTO_FREE_FALLBACK_TO_FULL_POOL=true to restore the legacy "use full pool" behavior.'}`
+        `${label} matched no connected models; returning an empty pool.${spec?.family ? "" : ' Set AERA_ROUTER_AUTO_FREE_FALLBACK_TO_FULL_POOL=true to restore the legacy "use full pool" behavior.'}`
       );
       effectivePool = [];
     }

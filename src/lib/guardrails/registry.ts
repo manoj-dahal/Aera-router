@@ -69,7 +69,7 @@ export function resolveDisabledGuardrails({
       ? (apiKeyInfo as Record<string, unknown>).disabledGuardrails
       : undefined;
   const headerDisabled =
-    getHeaderValue(headers, "x-omniroute-disabled-guardrails") ||
+    getHeaderValue(headers, "x-aera-router-disabled-guardrails") ||
     getHeaderValue(headers, "x-disabled-guardrails");
 
   return [...coerceDisabledGuardrails(apiKeyDisabled)]

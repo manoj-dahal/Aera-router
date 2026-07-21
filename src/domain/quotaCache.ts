@@ -13,9 +13,9 @@
  * @module domain/quotaCache
  */
 
-import { getUsageForProvider } from "@omniroute/open-sse/services/usage.ts";
+import { getUsageForProvider } from "@aera-router/open-sse/services/usage.ts";
 import { getCachedProviderConnectionById, resolveProxyForConnection } from "@/lib/localDb";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
+import { runWithProxyContext } from "@aera-router/open-sse/utils/proxyFetch.ts";
 import { safePercentage } from "@/shared/utils/formatting";
 import {
   saveQuotaSnapshot,
@@ -23,8 +23,8 @@ import {
   getLatestQuotaSnapshotsForConnection,
 } from "@/lib/db/quotaSnapshots";
 import { recordProviderQuotaResetEventIfChanged } from "@/lib/db/quotaResetEvents";
-import { getCodexQuotaWindowFilterForModel } from "@omniroute/open-sse/config/codexQuotaScopes.ts";
-import { getAntigravityQuotaFamily } from "@omniroute/open-sse/services/antigravityQuotaFamily.ts";
+import { getCodexQuotaWindowFilterForModel } from "@aera-router/open-sse/config/codexQuotaScopes.ts";
+import { getAntigravityQuotaFamily } from "@aera-router/open-sse/services/antigravityQuotaFamily.ts";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

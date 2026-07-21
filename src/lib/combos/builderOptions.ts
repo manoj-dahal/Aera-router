@@ -19,7 +19,7 @@ import {
   isClaudeCodeCompatibleProvider,
   isOpenAICompatibleProvider,
 } from "@/shared/constants/providers";
-import type { RegistryModel } from "@omniroute/open-sse/config/providerRegistry.ts";
+import type { RegistryModel } from "@aera-router/open-sse/config/providerRegistry.ts";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -575,9 +575,8 @@ export async function getComboBuilderOptions(): Promise<ComboBuilderOptionsPaylo
       customModels
     );
 
-    const normalizedConnections = expandConnectionOptions(providerConnections).sort(
-      compareConnections
-    );
+    const normalizedConnections =
+      expandConnectionOptions(providerConnections).sort(compareConnections);
 
     const activeConnectionCount = normalizedConnections.filter(
       (connection) => connection.isActive

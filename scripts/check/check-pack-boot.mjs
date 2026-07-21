@@ -56,11 +56,15 @@ function log(msg) {
 async function main() {
   const ROOT = process.cwd();
   if (!fs.existsSync(path.join(ROOT, "dist", "server.js"))) {
-    console.error("[pack-boot] dist/server.js missing — run `npm run build:cli` first (this is a --with-build gate)");
+    console.error(
+      "[pack-boot] dist/server.js missing — run `npm run build:cli` first (this is a --with-build gate)"
+    );
     process.exit(2);
   }
-  const expectedVersion = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8")).version;
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-pack-boot-"));
+  const expectedVersion = JSON.parse(
+    fs.readFileSync(path.join(ROOT, "package.json"), "utf8")
+  ).version;
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-pack-boot-"));
   let child = null;
   let exitCode = 1;
   try {
@@ -81,7 +85,7 @@ async function main() {
     const port = pickPort();
     const dataDir = path.join(tmp, "data");
     fs.mkdirSync(dataDir, { recursive: true });
-    const binPath = path.join(prefix, "bin", "omniroute");
+    const binPath = path.join(prefix, "bin", "aera-router");
     log(`booting installed CLI on :${port} (DATA_DIR isolated)…`);
     child = spawn(binPath, ["serve", "--port", String(port)], {
       env: {
@@ -91,7 +95,7 @@ async function main() {
         JWT_SECRET: "pack-boot-smoke-secret-with-sufficient-length-000",
         API_KEY_SECRET: "pack-boot-smoke-api-key-secret-long",
         DISABLE_SQLITE_AUTO_BACKUP: "true",
-        OMNIROUTE_SKIP_SYSTEM_TRUST: "1",
+        AERA_ROUTER_SKIP_SYSTEM_TRUST: "1",
       },
       stdio: ["ignore", "pipe", "pipe"],
       detached: true,
@@ -134,7 +138,9 @@ async function main() {
       exitCode = 0;
     } else {
       console.error(`[pack-boot] ❌ boot FAILED: ${verdict.failures.join("; ")}`);
-      console.error("[pack-boot] last server output:\n" + tail.join("").split("\n").slice(-40).join("\n"));
+      console.error(
+        "[pack-boot] last server output:\n" + tail.join("").split("\n").slice(-40).join("\n")
+      );
       exitCode = 1;
     }
   } finally {
@@ -157,7 +163,8 @@ async function main() {
 }
 
 const isDirectRun =
-  process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
 if (isDirectRun) {
   main().catch((e) => {
     console.error("[pack-boot] fatal:", e.message);

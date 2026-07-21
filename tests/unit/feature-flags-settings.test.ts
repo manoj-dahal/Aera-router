@@ -5,7 +5,7 @@ import path from "node:path";
 import fs from "node:fs";
 
 // Set DATA_DIR to temp dir before any imports that touch DB
-const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-test-flags-"));
+const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-test-flags-"));
 process.env.DATA_DIR = tmpDir;
 
 const core = await import("../../src/lib/db/core.ts");
@@ -120,8 +120,8 @@ describe("featureFlagDefinitions", () => {
   });
 
   it("defines emergency fallback as a runtime boolean flag enabled by default", () => {
-    const def = FEATURE_FLAG_DEFINITIONS.find((d) => d.key === "OMNIROUTE_EMERGENCY_FALLBACK");
-    assert.ok(def, "OMNIROUTE_EMERGENCY_FALLBACK should exist");
+    const def = FEATURE_FLAG_DEFINITIONS.find((d) => d.key === "AERA_ROUTER_EMERGENCY_FALLBACK");
+    assert.ok(def, "AERA_ROUTER_EMERGENCY_FALLBACK should exist");
     assert.strictEqual(def.category, "runtime");
     assert.strictEqual(def.type, "boolean");
     assert.strictEqual(def.defaultValue, "true");
@@ -151,9 +151,9 @@ describe("featureFlagDefinitions", () => {
 
   it("defines control-plane proxy direct fallback as a network boolean flag disabled by default", () => {
     const def = FEATURE_FLAG_DEFINITIONS.find(
-      (d) => d.key === "OMNIROUTE_CONTROL_PLANE_PROXY_DIRECT_FALLBACK"
+      (d) => d.key === "AERA_ROUTER_CONTROL_PLANE_PROXY_DIRECT_FALLBACK"
     );
-    assert.ok(def, "OMNIROUTE_CONTROL_PLANE_PROXY_DIRECT_FALLBACK should exist");
+    assert.ok(def, "AERA_ROUTER_CONTROL_PLANE_PROXY_DIRECT_FALLBACK should exist");
     assert.strictEqual(def.category, "network");
     assert.strictEqual(def.type, "boolean");
     assert.strictEqual(def.defaultValue, "false");
@@ -163,8 +163,8 @@ describe("featureFlagDefinitions", () => {
 
   it("defines CLI profile auto-sync flags as CLI booleans disabled by default", () => {
     for (const key of [
-      "OMNIROUTE_AUTO_SYNC_CODEX_PROFILES",
-      "OMNIROUTE_AUTO_SYNC_CLAUDE_PROFILES",
+      "AERA_ROUTER_AUTO_SYNC_CODEX_PROFILES",
+      "AERA_ROUTER_AUTO_SYNC_CLAUDE_PROFILES",
     ]) {
       const def = FEATURE_FLAG_DEFINITIONS.find((d) => d.key === key);
       assert.ok(def, `${key} should exist`);
@@ -391,10 +391,10 @@ describe("resolveFeatureFlag", () => {
     it("isControlPlaneProxyDirectFallbackEnabled defaults off and follows DB overrides", () => {
       assert.strictEqual(isControlPlaneProxyDirectFallbackEnabled(), false);
       try {
-        setFeatureFlagOverride("OMNIROUTE_CONTROL_PLANE_PROXY_DIRECT_FALLBACK", "true");
+        setFeatureFlagOverride("AERA_ROUTER_CONTROL_PLANE_PROXY_DIRECT_FALLBACK", "true");
         assert.strictEqual(isControlPlaneProxyDirectFallbackEnabled(), true);
       } finally {
-        removeFeatureFlagOverride("OMNIROUTE_CONTROL_PLANE_PROXY_DIRECT_FALLBACK");
+        removeFeatureFlagOverride("AERA_ROUTER_CONTROL_PLANE_PROXY_DIRECT_FALLBACK");
       }
     });
   });

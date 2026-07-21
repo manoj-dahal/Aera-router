@@ -6,13 +6,13 @@ import { syncToCloud } from "@/lib/cloudSync";
 import { kiroImportSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { isAuthRequired, isAuthenticated } from "@/shared/utils/apiAuth";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { runWithProxyContext } from "@aera-router/open-sse/utils/proxyFetch.ts";
+import { sanitizeErrorMessage } from "@aera-router/open-sse/utils/error";
 import {
   emailFromExternalIdpToken,
   isExternalIdpAuthMethod,
   normalizeScope,
-} from "@omniroute/open-sse/services/kiroExternalIdp.ts";
+} from "@aera-router/open-sse/services/kiroExternalIdp.ts";
 
 /**
  * Build the user-facing error message for a failed Kiro/Amazon-Q token import.

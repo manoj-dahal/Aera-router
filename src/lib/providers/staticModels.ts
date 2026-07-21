@@ -1,15 +1,15 @@
-import { getEmbeddingProvider } from "@omniroute/open-sse/config/embeddingRegistry.ts";
-import { getRerankProvider } from "@omniroute/open-sse/config/rerankRegistry.ts";
-import { getImageProvider } from "@omniroute/open-sse/config/imageRegistry.ts";
-import { getVideoProvider } from "@omniroute/open-sse/config/videoRegistry.ts";
+import { getEmbeddingProvider } from "@aera-router/open-sse/config/embeddingRegistry.ts";
+import { getRerankProvider } from "@aera-router/open-sse/config/rerankRegistry.ts";
+import { getImageProvider } from "@aera-router/open-sse/config/imageRegistry.ts";
+import { getVideoProvider } from "@aera-router/open-sse/config/videoRegistry.ts";
 import {
   getSpeechProvider,
   getTranscriptionProvider,
-} from "@omniroute/open-sse/config/audioRegistry.ts";
-import { ANTIGRAVITY_PUBLIC_MODELS } from "@omniroute/open-sse/config/antigravityModelAliases.ts";
-import { getStaticQoderModels } from "@omniroute/open-sse/services/qoderCli.ts";
-import { getSearchProvider } from "@omniroute/open-sse/config/searchRegistry.ts";
-import { BAILIAN_CODING_PLAN_MODELS } from "@omniroute/open-sse/config/providers/registry/bailian-coding-plan/index.ts";
+} from "@aera-router/open-sse/config/audioRegistry.ts";
+import { ANTIGRAVITY_PUBLIC_MODELS } from "@aera-router/open-sse/config/antigravityModelAliases.ts";
+import { getStaticQoderModels } from "@aera-router/open-sse/services/qoderCli.ts";
+import { getSearchProvider } from "@aera-router/open-sse/config/searchRegistry.ts";
+import { BAILIAN_CODING_PLAN_MODELS } from "@aera-router/open-sse/config/providers/registry/bailian-coding-plan/index.ts";
 
 import { getModelsByProviderId } from "@/shared/constants/models";
 

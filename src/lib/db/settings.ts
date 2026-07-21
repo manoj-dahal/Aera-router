@@ -4,7 +4,7 @@
 
 import { getDbInstance } from "./core";
 import { backupDbFile } from "./backup";
-import { PROVIDER_ID_TO_ALIAS } from "@omniroute/open-sse/config/providerModels.ts";
+import { PROVIDER_ID_TO_ALIAS } from "@aera-router/open-sse/config/providerModels.ts";
 import { invalidateDbCache } from "./readCache";
 import { encrypt, decrypt } from "./encryption";
 import { getProxyRegistryGeneration, resolveProxyForScopeFromRegistry } from "./proxies";
@@ -103,7 +103,9 @@ function withFamilyDefault(value: ProxyValue): ProxyValue {
 function applySessionAffinityLegacyFallback(settings: Record<string, unknown>): void {
   if (settings.sessionAffinityTtlMs === undefined) {
     settings.sessionAffinityTtlMs =
-      typeof settings.codexSessionAffinityTtlMs === "number" ? settings.codexSessionAffinityTtlMs : 0;
+      typeof settings.codexSessionAffinityTtlMs === "number"
+        ? settings.codexSessionAffinityTtlMs
+        : 0;
   }
 }
 
@@ -147,7 +149,7 @@ export async function getSettings() {
     hideEndpointTailscaleFunnel: false,
     hideEndpointNgrokTunnel: false,
     preferClaudeCodeForUnprefixedClaudeModels: isTruthyEnvFlag(
-      process.env.OMNIROUTE_PREFER_CLAUDE_CODE_FOR_UNPREFIXED_CLAUDE_MODELS
+      process.env.AERA_ROUTER_PREFER_CLAUDE_CODE_FOR_UNPREFIXED_CLAUDE_MODELS
     ),
     // Opt-in (default "off"): short-circuits Claude Code's `--permission-mode auto`
     // internal security-classifier request with a synthetic `<block>no</block>` ALLOW
@@ -683,7 +685,8 @@ export async function resolveProxyForConnection(
 
   // Step 11: Auto-selection fallback (only when global proxy is enabled)
   try {
-    const { selectWorkingProxyFallback } = await import("@omniroute/open-sse/utils/proxyFallback");
+    const { selectWorkingProxyFallback } =
+      await import("@aera-router/open-sse/utils/proxyFallback");
     const fallback = await selectWorkingProxyFallback(connectionId);
     if (fallback) {
       // Auto-selected proxies are probed via a URL roundtrip that drops any

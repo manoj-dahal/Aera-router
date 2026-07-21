@@ -1,6 +1,6 @@
 import { CORS_HEADERS } from "@/shared/utils/cors";
 import { buildClientRawRequest, handleChat } from "@/sse/handlers/chat";
-import { initTranslators } from "@omniroute/open-sse/translator/index.ts";
+import { initTranslators } from "@aera-router/open-sse/translator/index.ts";
 import { createInjectionGuard } from "@/middleware/promptInjectionGuard";
 import { asTextCompletionResponse } from "./textCompletionTransform.ts";
 import {
@@ -86,7 +86,7 @@ export async function POST(request: Request) {
         // #3571 — translate the chat-pipeline response back to the legacy
         // text-completion shape so OpenAI Completion clients (e.g. TabbyML) work.
         // Thread `body.model` so response `body.model` echoes the caller's
-        // requested identifier, matching the `x-omniroute-model` header, and
+        // requested identifier, matching the `x-aera-router-model` header, and
         // echo the compression header on the way out.
         return withCompressionHeaderEcho(
           await asTextCompletionResponse(
@@ -106,7 +106,10 @@ export async function POST(request: Request) {
   // Re-read body.model so the response echoes the caller's requested identifier.
   let requestedModel: string | undefined;
   try {
-    const bodyForModel = await request.clone().json().catch(() => null);
+    const bodyForModel = await request
+      .clone()
+      .json()
+      .catch(() => null);
     if (bodyForModel && typeof bodyForModel.model === "string") {
       requestedModel = bodyForModel.model;
     }

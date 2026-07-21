@@ -18,11 +18,15 @@ export function getOmpCredentials(providerId: string) {
 
     if (row?.data) {
       const parsed = JSON.parse(row.data);
-      return { hasOmniRoute: true, baseUrl: parsed.baseUrl || null, apiKey: parsed.apiKey || null };
+      return {
+        hasAeraRouter: true,
+        baseUrl: parsed.baseUrl || null,
+        apiKey: parsed.apiKey || null,
+      };
     }
-    return { hasOmniRoute: false, baseUrl: null, apiKey: null };
+    return { hasAeraRouter: false, baseUrl: null, apiKey: null };
   } catch {
-    return { hasOmniRoute: false, baseUrl: null, apiKey: null };
+    return { hasAeraRouter: false, baseUrl: null, apiKey: null };
   }
 }
 

@@ -10,17 +10,17 @@ lastUpdated: 2026-07-15
 
 🌐 **Languages:** 🇺🇸 [English](./TROUBLESHOOTING.md) | 🇧🇷 [Português (Brasil)](../i18n/pt-BR/docs/guides/TROUBLESHOOTING.md) | 🇪🇸 [Español](../i18n/es/docs/guides/TROUBLESHOOTING.md) | 🇫🇷 [Français](../i18n/fr/docs/guides/TROUBLESHOOTING.md) | 🇮🇹 [Italiano](../i18n/it/docs/guides/TROUBLESHOOTING.md) | 🇷🇺 [Русский](../i18n/ru/docs/guides/TROUBLESHOOTING.md) | 🇨🇳 [中文 (简体)](../i18n/zh-CN/docs/guides/TROUBLESHOOTING.md) | 🇩🇪 [Deutsch](../i18n/de/docs/guides/TROUBLESHOOTING.md) | 🇮🇳 [हिन्दी](../i18n/in/docs/guides/TROUBLESHOOTING.md) | 🇹🇭 [ไทย](../i18n/th/docs/guides/TROUBLESHOOTING.md) | 🇺🇦 [Українська](../i18n/uk-UA/docs/guides/TROUBLESHOOTING.md) | 🇸🇦 [العربية](../i18n/ar/docs/guides/TROUBLESHOOTING.md) | 🇯🇵 [日本語](../i18n/ja/docs/guides/TROUBLESHOOTING.md) | 🇻🇳 [Tiếng Việt](../i18n/vi/docs/guides/TROUBLESHOOTING.md) | 🇧🇬 [Български](../i18n/bg/docs/guides/TROUBLESHOOTING.md) | 🇩🇰 [Dansk](../i18n/da/docs/guides/TROUBLESHOOTING.md) | 🇫🇮 [Suomi](../i18n/fi/docs/guides/TROUBLESHOOTING.md) | 🇮🇱 [עברית](../i18n/he/docs/guides/TROUBLESHOOTING.md) | 🇭🇺 [Magyar](../i18n/hu/docs/guides/TROUBLESHOOTING.md) | 🇮🇩 [Bahasa Indonesia](../i18n/id/docs/guides/TROUBLESHOOTING.md) | 🇰🇷 [한국어](../i18n/ko/docs/guides/TROUBLESHOOTING.md) | 🇲🇾 [Bahasa Melayu](../i18n/ms/docs/guides/TROUBLESHOOTING.md) | 🇳🇱 [Nederlands](../i18n/nl/docs/guides/TROUBLESHOOTING.md) | 🇳🇴 [Norsk](../i18n/no/docs/guides/TROUBLESHOOTING.md) | 🇵🇹 [Português (Portugal)](../i18n/pt/docs/guides/TROUBLESHOOTING.md) | 🇷🇴 [Română](../i18n/ro/docs/guides/TROUBLESHOOTING.md) | 🇵🇱 [Polski](../i18n/pl/docs/guides/TROUBLESHOOTING.md) | 🇸🇰 [Slovenčina](../i18n/sk/docs/guides/TROUBLESHOOTING.md) | 🇸🇪 [Svenska](../i18n/sv/docs/guides/TROUBLESHOOTING.md) | 🇵🇭 [Filipino](../i18n/phi/docs/guides/TROUBLESHOOTING.md) | 🇨🇿 [Čeština](../i18n/cs/docs/guides/TROUBLESHOOTING.md)
 
-Common problems and solutions for OmniRoute.
+Common problems and solutions for Aera Router.
 
 ---
 
 ## Quick Reference
 
-**New to OmniRoute?** Start here — these solve 90% of problems:
+**New to Aera Router?** Start here — these solve 90% of problems:
 
 | I see this              | What it means                       | What to do                                                                                        |
 | ----------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------- |
-| "Can't connect"         | OmniRoute isn't running             | Run `omniroute` or `docker restart omniroute`                                                     |
+| "Can't connect"         | Aera Router isn't running           | Run `aera-router` or `docker restart aera-router`                                                 |
 | "Invalid API key"       | Your key is wrong or expired        | Re-copy the key from the provider's website                                                       |
 | "Rate limit exceeded"   | You're sending too many requests    | Wait 1 minute, or use `model: "auto"` for automatic fallback                                      |
 | "Quota exceeded"        | You've used up your free/paid quota | Connect more providers, or use free providers (Kiro, Pollinations)                                |
@@ -40,18 +40,18 @@ Common problems and solutions for OmniRoute.
 
 ## Quick Fixes
 
-| Problem                                             | Solution                                                                                                                                                 |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| First login not working                             | Set `INITIAL_PASSWORD` in `.env` (no hardcoded default)                                                                                                  |
-| Dashboard opens on wrong port                       | Set `PORT=20128` and `NEXT_PUBLIC_BASE_URL=http://localhost:20128`                                                                                       |
-| No logs written to disk                             | Set `APP_LOG_TO_FILE=true` and verify call log capture is enabled                                                                                        |
-| EACCES: permission denied                           | Set `DATA_DIR=/path/to/writable/dir` to override `~/.omniroute`                                                                                          |
-| Routing strategy not saving                         | Update to the latest v3.x release (Zod schema fix for settings persistence shipped in earlier versions)                                                  |
-| Login crash / blank page                            | Check Node.js version — see [Node.js Compatibility](#nodejs-compatibility) below                                                                         |
-| `dlopen` / `slice is not valid mach-o file` (macOS) | Run `cd $(npm root -g)/omniroute/app && npm rebuild better-sqlite3 && omniroute` — see [macOS native module rebuild](#macos-native-module-rebuild) below |
-| Proxy "fetch failed"                                | Ensure proxy config is set at the correct level — see [Proxy Issues](#proxy-issues) below                                                                |
-| Antivirus quarantines `README.md`                   | False positive — see [Antivirus false positives](#antivirus-false-positives) below                                                                       |
-| Kaspersky flags the Desktop app as a Trojan         | Behavioral false positive on the unsigned installer — see [Antivirus false positives](#antivirus-false-positives) below                                  |
+| Problem                                             | Solution                                                                                                                                                     |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| First login not working                             | Set `INITIAL_PASSWORD` in `.env` (no hardcoded default)                                                                                                      |
+| Dashboard opens on wrong port                       | Set `PORT=20128` and `NEXT_PUBLIC_BASE_URL=http://localhost:20128`                                                                                           |
+| No logs written to disk                             | Set `APP_LOG_TO_FILE=true` and verify call log capture is enabled                                                                                            |
+| EACCES: permission denied                           | Set `DATA_DIR=/path/to/writable/dir` to override `~/.aera-router`                                                                                            |
+| Routing strategy not saving                         | Update to the latest v3.x release (Zod schema fix for settings persistence shipped in earlier versions)                                                      |
+| Login crash / blank page                            | Check Node.js version — see [Node.js Compatibility](#nodejs-compatibility) below                                                                             |
+| `dlopen` / `slice is not valid mach-o file` (macOS) | Run `cd $(npm root -g)/aera-router/app && npm rebuild better-sqlite3 && aera-router` — see [macOS native module rebuild](#macos-native-module-rebuild) below |
+| Proxy "fetch failed"                                | Ensure proxy config is set at the correct level — see [Proxy Issues](#proxy-issues) below                                                                    |
+| Antivirus quarantines `README.md`                   | False positive — see [Antivirus false positives](#antivirus-false-positives) below                                                                           |
+| Kaspersky flags the Desktop app as a Trojan         | Behavioral false positive on the unsigned installer — see [Antivirus false positives](#antivirus-false-positives) below                                      |
 
 ---
 
@@ -64,8 +64,8 @@ Common problems and solutions for OmniRoute.
 **This is a false positive. Nothing is infected, and no action is required.**
 
 Avast and AVG run a heuristic that flags plain-text/Markdown files containing many
-HTTP-request-looking links. OmniRoute's `README.md` ships inside the npm package (it is
-listed in `package.json` → `files`), so it lands at `node_modules/omniroute/README.md` on
+HTTP-request-looking links. Aera Router's `README.md` ships inside the npm package (it is
+listed in `package.json` → `files`), so it lands at `node_modules/aera-router/README.md` on
 a global install — and it contains ~15 `http://localhost:20128/...` examples (the MCP
 HTTP/SSE endpoints, the A2A `.well-known` URL, and `curl` snippets). That link density is
 enough to trip the heuristic.
@@ -81,7 +81,7 @@ from quarantine.
 
 1. **Stop the notifications** — exclude the install directory in your antivirus
    (Avast: Settings → Exceptions), adding your global `node_modules` path and/or the
-   OmniRoute data dir (`~/.omniroute/`).
+   Aera Router data dir (`~/.aera-router/`).
 2. **Report the false positive** — <https://www.avast.com/false-positive-file-form.php>,
    attaching the quarantined `README.md`. This is the fix that helps everyone, since it is
    the vendor's heuristic overreacting to a text file.
@@ -94,7 +94,7 @@ dodge one vendor's heuristic would hurt every reader to satisfy a scanner bug.
 
 **This is a false positive from a behavioral heuristic. Nothing is infected.** Kaspersky's
 `PDM:` prefix means the verdict comes from its Proactive Defense Module (System Watcher),
-which judges what the installer *does* rather than matching it against known malware. When
+which judges what the installer _does_ rather than matching it against known malware. When
 it fires, Kaspersky "rolls back" the whole installation — deleting files it had already
 written — so the app ends up broken or missing.
 
@@ -111,24 +111,24 @@ desktop app, for example:
 **Why it fires:** the Windows installer is **not yet code-signed**, so an unsigned NSIS
 installer has zero reputation and behavioral heuristics run at maximum aggression. Combined
 with a bundled native DLL and hundreds of `.js` files written under
-`%LOCALAPPDATA%\Programs\OmniRoute` (including hash-suffixed package directories from the
+`%LOCALAPPDATA%\Programs\Aera Router` (including hash-suffixed package directories from the
 Next.js standalone build), that is enough to trip the heuristic. Code signing is planned;
 until it lands, new releases can repeat this.
 
 **What to do:**
 
 1. **Verify your download first** (rules out a tampered file). Every release publishes
-   `latest.yml`, whose `sha512` field (base64) covers the `OmniRoute.Setup.<version>.exe`
+   `latest.yml`, whose `sha512` field (base64) covers the `Aera Router.Setup.<version>.exe`
    installer. In PowerShell, from the folder containing the installer:
    ```powershell
    $b = [System.Security.Cryptography.SHA512]::Create().ComputeHash(
-     [System.IO.File]::ReadAllBytes("$PWD\OmniRoute.Setup.<version>.exe"))
+     [System.IO.File]::ReadAllBytes("$PWD\Aera Router.Setup.<version>.exe"))
    [Convert]::ToBase64String($b)
    ```
    The output must match `latest.yml` → `sha512`. If it does not, delete the file and
-   re-download only from the [GitHub releases page](https://github.com/diegosouzapw/OmniRoute/releases).
+   re-download only from the [GitHub releases page](https://github.com/manoj-dahal/Aera-router/releases).
 2. **Restore + exclude** — restore the rolled-back items from quarantine and add an exclusion
-   for `%LOCALAPPDATA%\Programs\OmniRoute` (Kaspersky → Settings → Threats and Exclusions),
+   for `%LOCALAPPDATA%\Programs\Aera Router` (Kaspersky → Settings → Threats and Exclusions),
    then reinstall.
 3. **Report the false positive** — <https://opentip.kaspersky.com/>. User-submitted FP
    reports genuinely speed up allowlisting.
@@ -141,7 +141,7 @@ until it lands, new releases can repeat this.
 
 ### Login page crashes or shows "Module self-registration" error
 
-**Cause:** You are running a Node.js version outside OmniRoute's approved secure runtime floor. The most common case is running an older Node 22 or 24 patch level that falls below the patched security floor OmniRoute requires.
+**Cause:** You are running a Node.js version outside Aera Router's approved secure runtime floor. The most common case is running an older Node 22 or 24 patch level that falls below the patched security floor Aera Router requires.
 
 **Symptoms:**
 
@@ -157,8 +157,8 @@ until it lands, new releases can repeat this.
    nvm use 24
    ```
 2. Verify your version: `node --version` should show `v24.0.0` or newer on the 24.x LTS line
-3. Reinstall OmniRoute: `npm install -g omniroute`
-4. Restart: `omniroute`
+3. Reinstall Aera Router: `npm install -g aera-router`
+4. Restart: `aera-router`
 
 > **Supported secure versions:** `>=22.22.2 <23` or `>=24.0.0 <27`. Node.js 24.x LTS (Krypton) and Node.js 26 are fully supported.
 
@@ -166,7 +166,7 @@ until it lands, new releases can repeat this.
 
 <a name="macos-native-module-rebuild"></a>
 
-**Cause:** After a global `npm install -g omniroute`, the `better-sqlite3` native binary inside the package may have been compiled for a different architecture or Node.js ABI than what is running locally. This is common on macOS (both Apple Silicon and Intel) when the pre-built binary does not match your environment.
+**Cause:** After a global `npm install -g aera-router`, the `better-sqlite3` native binary inside the package may have been compiled for a different architecture or Node.js ABI than what is running locally. This is common on macOS (both Apple Silicon and Intel) when the pre-built binary does not match your environment.
 
 **Symptoms:**
 
@@ -175,15 +175,15 @@ until it lands, new releases can repeat this.
 - Full example:
 
 ```
-dlopen(/Users/<user>/.nvm/versions/node/v24.14.1/lib/node_modules/omniroute/app/node_modules/better-sqlite3/build/Release/better_sqlite3.node, 0x0001): tried: '...' (slice is not valid mach-o file)
+dlopen(/Users/<user>/.nvm/versions/node/v24.14.1/lib/node_modules/aera-router/app/node_modules/better-sqlite3/build/Release/better_sqlite3.node, 0x0001): tried: '...' (slice is not valid mach-o file)
 ```
 
 **Fix — rebuild for your local environment (no Node.js downgrade required):**
 
 ```bash
-cd $(npm root -g)/omniroute/app
+cd $(npm root -g)/aera-router/app
 npm rebuild better-sqlite3
-omniroute
+aera-router
 ```
 
 > **Note:** This recompiles the native binding against your local Node.js version and CPU architecture, resolving the binary mismatch. The officially supported runtime range is **`>=22.22.2 <23` or `>=24.0.0 <27`** (`SUPPORTED_NODE_RANGE` in `src/shared/utils/nodeRuntimeSupport.ts`, aligned with the `package.json` `engines` field). Node.js 24.x LTS (Krypton) and Node.js 26 are fully supported with `better-sqlite3` v12.x.
@@ -210,13 +210,13 @@ omniroute
 
 **Cause:** On Node.js 22, the undici@8 dispatcher is incompatible with Node's built-in `fetch()` implementation.
 
-**Fix (v3.5.5+):** OmniRoute now uses undici's own `fetch()` function when a proxy dispatcher is active, ensuring consistent behavior. Update to v3.5.5+.
+**Fix (v3.5.5+):** Aera Router now uses undici's own `fetch()` function when a proxy dispatcher is active, ensuring consistent behavior. Update to v3.5.5+.
 
 ### MITM proxy under WSL: desktop apps on the Windows host are not intercepted
 
-**Cause:** The MITM proxy and its CA certificate install into the environment where OmniRoute runs. Under WSL that environment is the Linux guest, while the AI desktop apps (Kiro, Trae, Copilot, Zed, …) run on the Windows host. The host apps do not trust the guest's certificate store and do not route through the guest's system proxy, so desktop interception does not engage there.
+**Cause:** The MITM proxy and its CA certificate install into the environment where Aera Router runs. Under WSL that environment is the Linux guest, while the AI desktop apps (Kiro, Trae, Copilot, Zed, …) run on the Windows host. The host apps do not trust the guest's certificate store and do not route through the guest's system proxy, so desktop interception does not engage there.
 
-**Recommendation:** Run OmniRoute natively on the same OS as the desktop apps you want to intercept (Windows for Windows apps; macOS/Linux likewise). Keeping OmniRoute inside WSL while targeting host apps requires manually trusting the generated CA certificate on the Windows host and pointing each host app's network/proxy settings at the WSL proxy endpoint — an unsupported, fragile setup.
+**Recommendation:** Run Aera Router natively on the same OS as the desktop apps you want to intercept (Windows for Windows apps; macOS/Linux likewise). Keeping Aera Router inside WSL while targeting host apps requires manually trusting the generated CA certificate on the Windows host and pointing each host app's network/proxy settings at the WSL proxy endpoint — an unsupported, fragile setup.
 
 ---
 
@@ -243,7 +243,7 @@ omniroute
 
 ### OAuth Token Expired
 
-OmniRoute auto-refreshes tokens. If issues persist:
+Aera Router auto-refreshes tokens. If issues persist:
 
 1. Dashboard → Provider → Reconnect
 2. Delete and re-add the provider connection
@@ -275,7 +275,7 @@ see [`docs/guides/KIRO_SETUP.md`](./KIRO_SETUP.md).
 ### Cloud Sync Errors
 
 1. Verify `BASE_URL` points to your running instance (e.g., `http://localhost:20128`)
-2. Verify `CLOUD_URL` points to your cloud endpoint (e.g., `https://omniroute.dev`)
+2. Verify `CLOUD_URL` points to your cloud endpoint (e.g., `https://aera-router.dev`)
 3. Keep `NEXT_PUBLIC_*` values aligned with server-side values
 
 ### Cloud `stream=false` Returns 500
@@ -436,13 +436,13 @@ Provider profiles support these settings:
 
 ### Anti-thundering herd
 
-When many concurrent requests hit a rate-limited provider, OmniRoute uses mutex + auto rate-limiting to serialize requests and prevent cascading failures. This is automatic for API key providers.
+When many concurrent requests hit a rate-limited provider, Aera Router uses mutex + auto rate-limiting to serialize requests and prevent cascading failures. This is automatic for API key providers.
 
 ---
 
 ## Optional RAG / LLM failure taxonomy (16 problems)
 
-Some OmniRoute users place the gateway in front of RAG or agent stacks. In those setups it is common to see a strange pattern: OmniRoute looks healthy (providers up, routing profiles ok, no rate limit alerts) but the final answer is still wrong.
+Some Aera Router users place the gateway in front of RAG or agent stacks. In those setups it is common to see a strange pattern: Aera Router looks healthy (providers up, routing profiles ok, no rate limit alerts) but the final answer is still wrong.
 
 In practice these incidents usually come from the downstream RAG pipeline, not from the gateway itself.
 
@@ -461,17 +461,17 @@ The idea is simple:
 
 1. When you investigate a bad response, capture:
    - user task and request
-   - route or provider combo in OmniRoute
+   - route or provider combo in Aera Router
    - any RAG context used downstream (retrieved documents, tool calls, etc)
 2. Map the incident to one or two WFGY ProblemMap numbers (`No.1` … `No.16`).
-3. Store the number in your own dashboard, runbook, or incident tracker next to the OmniRoute logs.
+3. Store the number in your own dashboard, runbook, or incident tracker next to the Aera Router logs.
 4. Use the corresponding WFGY page to decide whether you need to change your RAG stack, retriever, or routing strategy.
 
 Full text and concrete recipes live here (MIT license, text only):
 
 [WFGY ProblemMap README](https://github.com/onestardao/WFGY/blob/main/ProblemMap/README.md)
 
-You can ignore this section if you do not run RAG or agent pipelines behind OmniRoute.
+You can ignore this section if you do not run RAG or agent pipelines behind Aera Router.
 
 ---
 
@@ -495,7 +495,7 @@ Issues specific to the v3.8.0 release and their current workarounds. If a fix la
 **Fix:**
 
 1. Verify both `WINDSURF_FIREBASE_API_KEY` and `WINDSURF_API_KEY` are set in `.env`
-2. Restart OmniRoute so the new env values are picked up
+2. Restart Aera Router so the new env values are picked up
 3. Re-run the OAuth flow from **Dashboard → Providers → Windsurf → Reconnect**
 
 ### Devin CLI auth failures
@@ -514,7 +514,7 @@ Issues specific to the v3.8.0 release and their current workarounds. If a fix la
 
 1. Install the Devin CLI for your platform
 2. Set `CLI_DEVIN_BIN=/usr/local/bin/devin` (or the real path) in `.env`
-3. Restart OmniRoute and re-test from **Dashboard → CLI Tools**
+3. Restart Aera Router and re-test from **Dashboard → CLI Tools**
 
 ### Model cooldown stuck (manual reset)
 
@@ -539,7 +539,7 @@ Issues specific to the v3.8.0 release and their current workarounds. If a fix la
 
 **Fix:**
 
-- Run `omniroute providers` from the CLI to re-trigger the OAuth flow, or
+- Run `aera-router providers` from the CLI to re-trigger the OAuth flow, or
 - Re-run OAuth from **Dashboard → Providers → Command Code → Reconnect**
 
 ### ModelScope returns aggressive 429 cooldowns
@@ -556,20 +556,20 @@ Issues specific to the v3.8.0 release and their current workarounds. If a fix la
 - Ensure you are on v3.8.0 or later
 - Verify the `useUpstream429BreakerHints` toggle is enabled under **Settings → Resilience**
 
-### OMNIROUTE_WS_BRIDGE_SECRET missing in production
+### AERA_ROUTER_WS_BRIDGE_SECRET missing in production
 
 **Symptoms:**
 
 - 401 on every Codex/Responses WebSocket bridge request when running on a remote production host
 - WebSocket bridge handshake closes immediately after connect
 
-**Cause:** The `OMNIROUTE_WS_BRIDGE_SECRET` env var is missing from the production environment.
+**Cause:** The `AERA_ROUTER_WS_BRIDGE_SECRET` env var is missing from the production environment.
 
 **Fix:**
 
 1. Generate a random secret: `openssl rand -hex 32`
-2. Set `OMNIROUTE_WS_BRIDGE_SECRET=<random-secret>` in the production server env (and any client that talks to the bridge)
-3. Restart OmniRoute
+2. Set `AERA_ROUTER_WS_BRIDGE_SECRET=<random-secret>` in the production server env (and any client that talks to the bridge)
+3. Restart Aera Router
 
 ### Responses API: background mode degraded to synchronous
 
@@ -589,7 +589,7 @@ Issues specific to the v3.8.0 release and their current workarounds. If a fix la
 
 ## Still Stuck?
 
-- **GitHub Issues**: [github.com/diegosouzapw/OmniRoute/issues](https://github.com/diegosouzapw/OmniRoute/issues)
+- **GitHub Issues**: [github.com/manoj-dahal/Aera-router/issues](https://github.com/manoj-dahal/Aera-router/issues)
 - **Architecture**: See [`docs/architecture/ARCHITECTURE.md`](../architecture/ARCHITECTURE.md) for internal details
 - **API Reference**: See [`docs/reference/API_REFERENCE.md`](../reference/API_REFERENCE.md) for all endpoints
 - **Health Dashboard**: Check **Dashboard → Health** for real-time system status

@@ -1,4 +1,4 @@
-import { handleImageGeneration } from "@omniroute/open-sse/handlers/imageGeneration.ts";
+import { handleImageGeneration } from "@aera-router/open-sse/handlers/imageGeneration.ts";
 import { withInjectionGuard } from "@/middleware/promptInjectionGuard";
 import {
   getProviderCredentialsWithQuotaPreflight,
@@ -11,9 +11,9 @@ import {
   getImageProvider,
   getImageModelEntry,
   modalitiesRequireImageInput,
-} from "@omniroute/open-sse/config/imageRegistry.ts";
-import { errorResponse, unavailableResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+} from "@aera-router/open-sse/config/imageRegistry.ts";
+import { errorResponse, unavailableResponse } from "@aera-router/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@aera-router/open-sse/config/constants.ts";
 import { isAllRateLimitedCredentials } from "@/app/api/v1/_shared/rateLimit";
 import * as log from "@/sse/utils/logger";
 import { toJsonErrorPayload } from "@/shared/utils/upstreamError";
@@ -23,8 +23,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
 import { getAllCustomModels, resolveProxyForConnection } from "@/lib/localDb";
 import { resolveImageRouteModel } from "@/lib/images/imageRouteModel";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
-import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { runWithProxyContext } from "@aera-router/open-sse/utils/proxyFetch.ts";
+import { attachAeraRouterMetaHeaders } from "@/domain/aeraRouterResponseMeta";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { getSpecialtyModelsResponse } from "@/app/api/v1/_shared/specialtyCatalog";
@@ -257,7 +257,7 @@ async function postHandler(request, context) {
     );
     const costUsd = await calculateModalCost("image", provider, body.model, { n });
     const headers = new Headers({ "Content-Type": "application/json" });
-    attachOmniRouteMetaHeaders(headers, {
+    attachAeraRouterMetaHeaders(headers, {
       provider,
       model: body.model,
       costUsd,

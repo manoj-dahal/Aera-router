@@ -84,8 +84,8 @@ bun.lock
 llm.txt
 images
 clipr
-omnirouteCloud
-omnirouteSite
+aeraRouterCloud
+aeraRouterSite
 
 # Temporary/Scratch Folders
 _*

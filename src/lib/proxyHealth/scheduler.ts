@@ -12,12 +12,12 @@
  */
 
 import { deleteProxyById, listProxies, updateProxy } from "@/lib/localDb";
-import { createProxyDispatcher, clearDispatcherCache } from "@omniroute/open-sse/utils/proxyDispatcher";
-import { fetch as undiciFetch } from "undici";
 import {
-  decideProxyHealthAction,
-  type ProxyProbeOutcome,
-} from "./decision.ts";
+  createProxyDispatcher,
+  clearDispatcherCache,
+} from "@aera-router/open-sse/utils/proxyDispatcher";
+import { fetch as undiciFetch } from "undici";
+import { decideProxyHealthAction, type ProxyProbeOutcome } from "./decision.ts";
 
 // #6246: a HEAD to the public probe target through a legit (often loaded) proxy
 // can exceed a few seconds; the old 5s ceiling produced false negatives that
@@ -68,7 +68,7 @@ function isBuildProcess(): boolean {
 }
 
 function isBackgroundServicesDisabled(): boolean {
-  const raw = process.env.OMNIROUTE_DISABLE_BACKGROUND_SERVICES;
+  const raw = process.env.AERA_ROUTER_DISABLE_BACKGROUND_SERVICES;
   if (!raw) return false;
   return ["1", "true", "yes", "on"].includes(raw.trim().toLowerCase());
 }
@@ -97,7 +97,7 @@ async function testOneProxy(proxy: {
       method: "HEAD",
       signal: controller.signal,
       dispatcher,
-      headers: { "User-Agent": "OmniRoute/1.0" },
+      headers: { "User-Agent": "Aera Router/1.0" },
     });
     // A 5xx from the probe target means the proxy DID relay — the target is at
     // fault, not the proxy. Do not penalize the proxy for that.
@@ -161,7 +161,11 @@ async function sweep(): Promise<void> {
         if (await deleteProxyById(id, { force: true }).catch(() => false)) {
           failureMap.delete(id);
           removed++;
-          try { clearDispatcherCache(); } catch { /* non-critical */ }
+          try {
+            clearDispatcherCache();
+          } catch {
+            /* non-critical */
+          }
         }
       }
     }

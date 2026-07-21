@@ -155,40 +155,44 @@ const bootstrapEnvVars = bootstrapEnv({
   dataDirOverride: playwrightDataDir,
 });
 const runtimePorts = resolveRuntimePorts(bootstrapEnvVars);
-const bootstrapMode = process.env.OMNIROUTE_E2E_BOOTSTRAP_MODE || "auth";
+const bootstrapMode = process.env.AERA_ROUTER_E2E_BOOTSTRAP_MODE || "auth";
 const playwrightPassword =
-  process.env.OMNIROUTE_E2E_PASSWORD || process.env.INITIAL_PASSWORD || "omniroute-e2e-password";
+  process.env.AERA_ROUTER_E2E_PASSWORD ||
+  process.env.INITIAL_PASSWORD ||
+  "aera-router-e2e-password";
 const testServerEnv = {
   ...sanitizeColorEnv(bootstrapEnvVars),
   ...sanitizeColorEnv(process.env),
   NODE_ENV: mode === "start" ? "production" : "development",
   DATA_DIR: playwrightDataDir,
-  NEXT_PUBLIC_OMNIROUTE_E2E_MODE: process.env.NEXT_PUBLIC_OMNIROUTE_E2E_MODE || "1",
-  OMNIROUTE_DISABLE_BACKGROUND_SERVICES:
-    process.env.OMNIROUTE_DISABLE_BACKGROUND_SERVICES || "true",
-  OMNIROUTE_DISABLE_TOKEN_HEALTHCHECK: process.env.OMNIROUTE_DISABLE_TOKEN_HEALTHCHECK || "true",
-  OMNIROUTE_DISABLE_LOCAL_HEALTHCHECK: process.env.OMNIROUTE_DISABLE_LOCAL_HEALTHCHECK || "true",
-  OMNIROUTE_HIDE_HEALTHCHECK_LOGS: process.env.OMNIROUTE_HIDE_HEALTHCHECK_LOGS || "true",
+  NEXT_PUBLIC_AERA_ROUTER_E2E_MODE: process.env.NEXT_PUBLIC_AERA_ROUTER_E2E_MODE || "1",
+  AERA_ROUTER_DISABLE_BACKGROUND_SERVICES:
+    process.env.AERA_ROUTER_DISABLE_BACKGROUND_SERVICES || "true",
+  AERA_ROUTER_DISABLE_TOKEN_HEALTHCHECK:
+    process.env.AERA_ROUTER_DISABLE_TOKEN_HEALTHCHECK || "true",
+  AERA_ROUTER_DISABLE_LOCAL_HEALTHCHECK:
+    process.env.AERA_ROUTER_DISABLE_LOCAL_HEALTHCHECK || "true",
+  AERA_ROUTER_HIDE_HEALTHCHECK_LOGS: process.env.AERA_ROUTER_HIDE_HEALTHCHECK_LOGS || "true",
   ...(bootstrapMode === "open"
     ? {
         INITIAL_PASSWORD: "",
-        OMNIROUTE_E2E_PASSWORD: "",
-        OMNIROUTE_API_KEY: "",
+        AERA_ROUTER_E2E_PASSWORD: "",
+        AERA_ROUTER_API_KEY: "",
       }
     : {
         INITIAL_PASSWORD: playwrightPassword,
-        OMNIROUTE_E2E_PASSWORD: playwrightPassword,
+        AERA_ROUTER_E2E_PASSWORD: playwrightPassword,
       }),
-  ...(process.env.OMNIROUTE_USE_TURBOPACK
+  ...(process.env.AERA_ROUTER_USE_TURBOPACK
     ? {
-        OMNIROUTE_USE_TURBOPACK: process.env.OMNIROUTE_USE_TURBOPACK,
+        AERA_ROUTER_USE_TURBOPACK: process.env.AERA_ROUTER_USE_TURBOPACK,
       }
     : {}),
 };
 
 export function shouldUseWebpackForPlaywrightDev({ mode, env }) {
   // Webpack only on the explicit escape hatch (=0) — turbopack is the default.
-  return mode === "dev" && env.OMNIROUTE_USE_TURBOPACK === "0";
+  return mode === "dev" && env.AERA_ROUTER_USE_TURBOPACK === "0";
 }
 
 function runChild(command, args, env) {
@@ -215,7 +219,7 @@ function runChild(command, args, env) {
 
 async function runBuildForStart() {
   if (mode !== "start") return;
-  if (process.env.OMNIROUTE_PLAYWRIGHT_SKIP_BUILD === "1") return;
+  if (process.env.AERA_ROUTER_PLAYWRIGHT_SKIP_BUILD === "1") return;
   console.log("[Playwright WebServer] Building fresh standalone app for this run...");
 
   const buildEnv = withRuntimePortEnv(testServerEnv, runtimePorts);

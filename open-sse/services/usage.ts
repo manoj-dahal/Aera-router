@@ -62,7 +62,7 @@ import { getKiroUsage, buildKiroUsageResult, discoverKiroProfileArn } from "./us
 export { buildKiroUsageResult, discoverKiroProfileArn } from "./usage/kiro.ts";
 
 // Quota / usage upstream URLs (overridable for testing or relays).
-const CROF_USAGE_URL = process.env.OMNIROUTE_CROF_USAGE_URL ?? "https://crof.ai/usage_api/";
+const CROF_USAGE_URL = process.env.AERA_ROUTER_CROF_USAGE_URL ?? "https://crof.ai/usage_api/";
 
 const NANOGPT_CONFIG = {
   usageUrl: "https://nano-gpt.com/api/subscription/v1/usage",
@@ -286,10 +286,10 @@ const XIAOMI_MIMO_MONTHLY_TOKEN_LIMIT = 4_100_000_000;
  *
  * Xiaomi exposes plan usage only behind the console session cookie (the API key
  * cannot reach the `tokenPlan/usage` endpoint), so there is no upstream usage
- * API to call. Instead we count the tokens OmniRoute itself routed to this
+ * API to call. Instead we count the tokens Aera Router itself routed to this
  * connection in the current UTC month (from `usage_history`) and compare them
  * to the known Token Plan monthly limit. This reflects only traffic that went
- * through OmniRoute, not the provider's own dashboard figure.
+ * through Aera Router, not the provider's own dashboard figure.
  */
 async function getXiaomiMimoUsage(connectionId: string) {
   if (!connectionId) {
@@ -304,7 +304,7 @@ async function getXiaomiMimoUsage(connectionId: string) {
       Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1)
     ).toISOString();
     return {
-      plan: "Xiaomi MiMo Token Plan (OmniRoute-tracked)",
+      plan: "Xiaomi MiMo Token Plan (Aera-Router-tracked)",
       quotas: {
         monthly: createQuotaFromUsage(used, total, resetAt),
       },
@@ -319,7 +319,7 @@ async function getXiaomiMimoUsage(connectionId: string) {
  *
  * xAI has no public per-account quota API (the billing console at console.x.ai
  * requires a session cookie, not an API key), so — exactly like the Xiaomi
- * MiMo self-track pattern above — OmniRoute sums the tokens it itself routed
+ * MiMo self-track pattern above — Aera Router sums the tokens it itself routed
  * to this connection (from `usage_history`) instead of calling an upstream
  * endpoint. Unlike Xiaomi MiMo, xAI has no fixed monthly cap, so the
  * aggregate is reported as `unlimited: true` with `remaining: 100` — this
@@ -334,7 +334,7 @@ async function getXaiUsage(connectionId: string) {
     const { getMonthlyProviderTokensForConnection } = await import("@/lib/usage/usageStats");
     const used = getMonthlyProviderTokensForConnection("xai", connectionId);
     return {
-      plan: "xAI / Grok (OmniRoute-tracked)",
+      plan: "xAI / Grok (Aera-Router-tracked)",
       quotas: {
         monthly: {
           used,
@@ -628,11 +628,7 @@ export async function getUsageForProvider(
     case "promptql":
     case "pql":
       // DDN lux JWTs carry projectId only in JWT aud; connection.projectId may be set by sync.
-      return await getPromptQlUsage(
-        apiKey || accessToken,
-        providerSpecificData,
-        projectId
-      );
+      return await getPromptQlUsage(apiKey || accessToken, providerSpecificData, projectId);
     default:
       return { message: `Usage API not implemented for ${provider}` };
   }
@@ -852,7 +848,7 @@ function inferGitHubPlanName(data: JsonRecord, premiumQuota: UsageQuota | null):
  *
  * Vertex AI exposes no usage/quota API for an API key or Service Account (billing/credit balance
  * lives behind the Cloud Billing API, which the proxy credential can't reach). Instead we report
- * the USD that OmniRoute has spent through this connection since the account was added — summed
+ * the USD that Aera Router has spent through this connection since the account was added — summed
  * from `usage_history` and priced via the backend pricing table. Returns a `message` (with the $
  * figure) plus a `spend` quota entry so the limits cache persists it (a message-only result is
  * treated as a transient error and not cached).
@@ -876,7 +872,7 @@ async function getVertexUsage(connectionId: string, provider: string) {
     if (requests === 0) {
       return {
         plan: "Vertex AI",
-        message: "Vertex connected. No usage recorded through OmniRoute yet for this account.",
+        message: "Vertex connected. No usage recorded through Aera Router yet for this account.",
         quotas: { spend },
       };
     }

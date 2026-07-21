@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 
-export const REDIS_CONTAINER_NAME = process.env.OMNIROUTE_REDIS_CONTAINER_NAME || "omniroute-redis";
+export const REDIS_CONTAINER_NAME =
+  process.env.AERA_ROUTER_REDIS_CONTAINER_NAME || "aera-router-redis";
 
 export const RUNTIME_PREFERENCE = ["podman", "docker"] as const;
 

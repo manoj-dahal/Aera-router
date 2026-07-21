@@ -4,7 +4,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-usage-analytics-route-"));
+const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-usage-analytics-route-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
 const ORIGINAL_API_KEY_SECRET = process.env.API_KEY_SECRET;
 process.env.API_KEY_SECRET = "test-usage-analytics-secret";
@@ -332,4 +332,3 @@ test("GET /api/usage/analytics includes byAccount array with cost data", async (
     body.summary.totalCost
   );
 });
-

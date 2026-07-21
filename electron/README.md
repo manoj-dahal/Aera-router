@@ -1,6 +1,6 @@
-# OmniRoute Electron Desktop App
+# Aera Router Electron Desktop App
 
-This directory contains the Electron desktop application wrapper for OmniRoute.
+This directory contains the Electron desktop application wrapper for Aera Router.
 
 ## Architecture (v1.6.4)
 
@@ -108,38 +108,42 @@ Built applications are placed in `dist-electron/`:
 
 ### macOS
 
-1. Download the latest `.dmg` from the [Releases](https://github.com/diegosouzapw/OmniRoute/releases) page.
+1. Download the latest `.dmg` from the [Releases](https://github.com/manoj-dahal/Aera-router/releases) page.
 2. Open the `.dmg` file.
-3. Drag `OmniRoute.app` to the Applications folder.
+3. Drag `Aera Router.app` to the Applications folder.
 4. Launch from Applications.
 
 > ⚠️ **Note:** The app is not signed with an Apple Developer certificate yet. If macOS blocks the app, run:
+>
 > ```bash
-> xattr -cr /Applications/OmniRoute.app
+> xattr -cr /Applications/Aera Router.app
 > ```
+>
 > Or right-click the app → Open → Open (to bypass Gatekeeper on first launch).
 
 ### Windows
 
 **Installer (Recommended):**
-1. Download `OmniRoute.Setup.*.exe` from [Releases](https://github.com/diegosouzapw/OmniRoute/releases).
+
+1. Download `Aera Router.Setup.*.exe` from [Releases](https://github.com/manoj-dahal/Aera-router/releases).
 2. Run the installer.
 3. Launch from Start Menu or Desktop shortcut.
 
 **Portable (No Installation):**
-1. Download `OmniRoute.exe` from [Releases](https://github.com/diegosouzapw/OmniRoute/releases).
+
+1. Download `Aera Router.exe` from [Releases](https://github.com/manoj-dahal/Aera-router/releases).
 2. Run directly from any folder.
 
 ### Linux
 
-1. Download the `.AppImage` from [Releases](https://github.com/diegosouzapw/OmniRoute/releases).
+1. Download the `.AppImage` from [Releases](https://github.com/manoj-dahal/Aera-router/releases).
 2. Make it executable:
    ```bash
-   chmod +x OmniRoute-*.AppImage
+   chmod +x Aera Router-*.AppImage
    ```
 3. Run:
    ```bash
-   ./OmniRoute-*.AppImage
+   ./Aera Router-*.AppImage
    ```
 
 ## Features
@@ -156,11 +160,11 @@ Built applications are placed in `dist-electron/`:
 
 ### Environment Variables
 
-| Variable              | Default      | Description                       |
-| --------------------- | ------------ | --------------------------------- |
-| `OMNIROUTE_PORT`      | `20128`      | Server port                       |
-| `OMNIROUTE_MEMORY_MB` | `512`        | Node.js heap limit (64–16384 MB)  |
-| `NODE_ENV`            | `production` | Set to `development` for dev mode |
+| Variable                | Default      | Description                       |
+| ----------------------- | ------------ | --------------------------------- |
+| `AERA_ROUTER_PORT`      | `20128`      | Server port                       |
+| `AERA_ROUTER_MEMORY_MB` | `512`        | Node.js heap limit (64–16384 MB)  |
+| `NODE_ENV`              | `production` | Set to `development` for dev mode |
 
 ### Custom Icon
 

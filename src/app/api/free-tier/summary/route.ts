@@ -1,5 +1,5 @@
-import { computeFreeModelTotals } from "@omniroute/open-sse/config/freeModelCatalog.ts";
-import { FREE_CATALOG_CURATED_AT } from "@omniroute/open-sse/config/freeModelCatalog.data.ts";
+import { computeFreeModelTotals } from "@aera-router/open-sse/config/freeModelCatalog.ts";
+import { FREE_CATALOG_CURATED_AT } from "@aera-router/open-sse/config/freeModelCatalog.data.ts";
 import { listNoCredentialProviders } from "@/shared/utils/providerCredentialRequirement";
 import { sumUsageTokensThisMonth } from "@/lib/db/usageSummary";
 

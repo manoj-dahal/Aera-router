@@ -384,7 +384,10 @@ export async function buildAutoCandidates(
   await Promise.all(
     uniqueProviders.map(async (provider) => {
       try {
-        const connections = (await getCachedProviderConnections({ provider, isActive: true })) as Array<Record<string, unknown>>;
+        const connections = (await getCachedProviderConnections({
+          provider,
+          isActive: true,
+        })) as Array<Record<string, unknown>>;
         const active = Array.isArray(connections) ? connections : [];
         connectionPoolCounts.set(provider, active.length);
         connectionsByProvider.set(provider, active);
@@ -1790,8 +1793,8 @@ export async function handleComboChat({
           // Success — validate response quality before returning
           if (result.ok) {
             const selectedConnectionId =
-              result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-              result.headers?.get("x-omniroute-selected-connection-id") ||
+              result.headers?.get("X-Aera-Router-Selected-Connection-Id") ||
+              result.headers?.get("x-aera-router-selected-connection-id") ||
               undefined;
             const effectiveConnectionId = selectedConnectionId || target.connectionId || "";
 
@@ -2177,8 +2180,8 @@ export async function handleComboChat({
               ? cooldownMs
               : (fallbackResult.quotaResetHintMs ?? 0);
           const selectedConnectionId =
-            result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-            result.headers?.get("x-omniroute-selected-connection-id") ||
+            result.headers?.get("X-Aera-Router-Selected-Connection-Id") ||
+            result.headers?.get("x-aera-router-selected-connection-id") ||
             undefined;
           const targetWithConnection = selectedConnectionId
             ? { ...target, connectionId: selectedConnectionId }
@@ -2986,8 +2989,8 @@ async function handleRoundRobinCombo({
             // so release the sticky pin here rather than on the next turn.
             {
               const rrSelectedConnectionId =
-                result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-                result.headers?.get("x-omniroute-selected-connection-id") ||
+                result.headers?.get("X-Aera-Router-Selected-Connection-Id") ||
+                result.headers?.get("x-aera-router-selected-connection-id") ||
                 undefined;
               releaseStickyPinOnFailure(
                 _rrSessionSticky.messageHash,
@@ -3024,8 +3027,8 @@ async function handleRoundRobinCombo({
           recordedAttempts++;
 
           const selectedConnectionId =
-            result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-            result.headers?.get("x-omniroute-selected-connection-id") ||
+            result.headers?.get("X-Aera-Router-Selected-Connection-Id") ||
+            result.headers?.get("x-aera-router-selected-connection-id") ||
             undefined;
           const effectiveConnectionId = selectedConnectionId || target.connectionId || "";
 
@@ -3189,8 +3192,8 @@ async function handleRoundRobinCombo({
         );
         const { cooldownMs } = fallbackResult;
         const selectedConnectionId =
-          result.headers?.get("X-OmniRoute-Selected-Connection-Id") ||
-          result.headers?.get("x-omniroute-selected-connection-id") ||
+          result.headers?.get("X-Aera-Router-Selected-Connection-Id") ||
+          result.headers?.get("x-aera-router-selected-connection-id") ||
           undefined;
         const targetWithConnection = selectedConnectionId
           ? { ...target, connectionId: selectedConnectionId }

@@ -14,10 +14,10 @@ import { saveCliToolLastConfigured, deleteCliToolLastConfigured } from "@/lib/db
 import { cliModelConfigSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { resolveApiKey } from "@/shared/services/apiKeyResolver";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
+import { sanitizeErrorMessage } from "@aera-router/open-sse/utils/error.ts";
 
 const TOOL_ID = "grok-build";
-const MODEL_SLOT = "omniroute";
+const MODEL_SLOT = "aera-router";
 // Grok Build ships with a built-in default model id; restored on Reset when no
 // prior custom default was recorded.
 const BUILTIN_DEFAULT_MODEL = "grok-build";
@@ -27,14 +27,14 @@ const getGrokBuildConfigPath = (): string =>
 
 const getGrokBuildDir = () => path.dirname(getGrokBuildConfigPath());
 
-// [model.omniroute] ... until the next [section] header or EOF
+// [model.aera-router] ... until the next [section] header or EOF
 const MODEL_SECTION_RE = new RegExp(
   `^\\[model\\.${MODEL_SLOT}\\][ \\t]*\\r?\\n(?:(?!\\[)[^\\r\\n]*\\r?\\n?)*`,
   "m"
 );
 const MODELS_SECTION_RE = /^\[models\][ \t]*\r?\n((?:(?!\[)[^\r\n]*\r?\n?)*)/m;
 // Marker written on Apply so Reset can restore the previously configured default.
-const PREV_DEFAULT_RE = /^# omniroute-prev-default = "([^"]*)"[ \t]*\r?\n?/m;
+const PREV_DEFAULT_RE = /^# aera-router-prev-default = "([^"]*)"[ \t]*\r?\n?/m;
 
 const getTomlField = (body: string, key: string): string | null => {
   const m = body.match(new RegExp(`^[ \\t]*${key}[ \\t]*=[ \\t]*"([^"]*)"`, "m"));
@@ -53,7 +53,7 @@ type GrokModelSection = {
  * Parse the `~/.grok/config.toml` produced by the Grok Build CLI (a subset of
  * TOML — flat `key = "value"` pairs inside `[section]` headers). Grok Build's
  * config format is not guaranteed to be quote-escaped or nested, so this reads
- * only the flat string fields OmniRoute itself writes.
+ * only the flat string fields Aera Router itself writes.
  */
 const parseModelSection = (toml: string): GrokModelSection | null => {
   const match = toml.match(MODEL_SECTION_RE);
@@ -81,15 +81,15 @@ const buildModelSection = (model: string, baseUrl: string, apiKey: string): stri
     `[model.${MODEL_SLOT}]`,
     `model = "${escapeTomlString(model)}"`,
     `base_url = "${escapeTomlString(baseUrl)}"`,
-    `name = "OmniRoute"`,
-    `description = "Routed via OmniRoute gateway"`,
+    `name = "Aera Router"`,
+    `description = "Routed via Aera Router gateway"`,
     `api_backend = "chat_completions"`,
   ];
   if (apiKey) lines.push(`api_key = "${escapeTomlString(apiKey)}"`);
   return `${lines.join("\n")}\n`;
 };
 
-/** Insert/replace the `[model.omniroute]` section, preserving the rest of the file. */
+/** Insert/replace the `[model.aera-router]` section, preserving the rest of the file. */
 const upsertModelSection = (toml: string, section: string): string => {
   if (MODEL_SECTION_RE.test(toml)) return toml.replace(MODEL_SECTION_RE, section);
   const needsNl = toml.length > 0 && !toml.endsWith("\n");
@@ -118,7 +118,7 @@ const rememberPrevDefault = (toml: string): string => {
   if (PREV_DEFAULT_RE.test(toml)) return toml;
   const current = parseModelsDefault(toml);
   if (!current || current === MODEL_SLOT) return toml;
-  const marker = `# omniroute-prev-default = "${current}"\n`;
+  const marker = `# aera-router-prev-default = "${current}"\n`;
   if (MODEL_SECTION_RE.test(toml)) {
     return toml.replace(MODEL_SECTION_RE, (section) => marker + section);
   }
@@ -138,7 +138,7 @@ const clearModelsDefaultIfOurs = (toml: string): string => {
   return next;
 };
 
-const hasOmniRouteConfig = (modelCfg: GrokModelSection | null): boolean =>
+const hasAeraRouterConfig = (modelCfg: GrokModelSection | null): boolean =>
   Boolean(modelCfg?.base_url);
 
 // Read current config.toml
@@ -151,7 +151,7 @@ const readConfigToml = async (): Promise<string> => {
   }
 };
 
-// GET — check Grok Build CLI and return current [model.omniroute] config
+// GET — check Grok Build CLI and return current [model.aera-router] config
 export async function GET(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -187,7 +187,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config: { model, default: defaultModel },
-      hasOmniRoute: hasOmniRouteConfig(model),
+      hasAeraRouter: hasAeraRouterConfig(model),
       configPath: getGrokBuildConfigPath(),
     });
   } catch (err) {
@@ -195,7 +195,7 @@ export async function GET(request: Request) {
   }
 }
 
-// POST — write the [model.omniroute] section into ~/.grok/config.toml and set it default
+// POST — write the [model.aera-router] section into ~/.grok/config.toml and set it default
 export async function POST(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -255,7 +255,7 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE — remove the [model.omniroute] section and restore the previous default
+// DELETE — remove the [model.aera-router] section and restore the previous default
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -292,7 +292,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "OmniRoute model slot removed from Grok Build",
+      message: "Aera Router model slot removed from Grok Build",
     });
   } catch (err) {
     return NextResponse.json({ error: { message: sanitizeErrorMessage(err) } }, { status: 500 });

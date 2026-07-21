@@ -407,10 +407,10 @@ export default function OAuthModal({
       let forceManual = false;
 
       // Claude Code and Cline OAuth flows can finish on provider-hosted pages that
-      // show an auth code instead of redirecting back to OmniRoute.
+      // show an auth code instead of redirecting back to Aera Router.
       // Start directly in manual mode so users always have an input to paste code/url.
       // zed-hosted's native-app sign-in always redirects the browser to a local
-      // 127.0.0.1:<port> callback that OmniRoute never listens on (the port is
+      // 127.0.0.1:<port> callback that Aera Router never listens on (the port is
       // arbitrary and unrelated to the dashboard's own port) — nothing can
       // auto-close the popup, so always show the manual paste-URL input.
       if (provider === "claude" || provider === "cline" || provider === "zed-hosted") {
@@ -481,14 +481,14 @@ export default function OAuthModal({
       // Authorization code flow
       // Redirect URI strategy:
       // - Codex/OpenAI: always port 1455 (registered in OAuth app)
-      // - Windsurf/Devin CLI (remote fallback): use localhost with OmniRoute port + /auth/callback
+      // - Windsurf/Devin CLI (remote fallback): use localhost with Aera Router port + /auth/callback
       //   (on true localhost the callback server handles it; this is only reached on remote)
       // - Google OAuth providers (antigravity/agy): default to loopback so the
       //   bundled native/desktop credentials keep working. Prefer 127.0.0.1 over
       //   localhost for the Google native-app handoff; Google documents that localhost
       //   can run into local firewall/name-resolution edge cases. The authorize route
       //   upgrades this to the public callback when custom Google web credentials plus
-      //   NEXT_PUBLIC_BASE_URL or OMNIROUTE_PUBLIC_BASE_URL are configured.
+      //   NEXT_PUBLIC_BASE_URL or AERA_ROUTER_PUBLIC_BASE_URL are configured.
       // - Other providers on remote: use actual origin (supports PUBLIC_URL env var)
       // - Localhost: use localhost:port
       let redirectUri: string;
@@ -496,11 +496,11 @@ export default function OAuthModal({
         redirectUri = "http://localhost:1455/auth/callback";
       } else if (provider === "xai-oauth") {
         // xAI registers a fixed native-app loopback callback. On remote installs
-        // the browser cannot reach OmniRoute there, so the user pastes the
+        // the browser cannot reach Aera Router there, so the user pastes the
         // resulting callback URL into the existing manual-flow input.
         redirectUri = "http://127.0.0.1:56121/callback";
       } else if (provider === "windsurf" || provider === "devin-cli") {
-        // Remote fallback: use OmniRoute's port with the /auth/callback path Windsurf expects.
+        // Remote fallback: use Aera Router's port with the /auth/callback path Windsurf expects.
         // On true localhost this code is never reached (callback server handles the flow above).
         const port = window.location.port || "20128";
         redirectUri = `http://localhost:${port}/auth/callback`;
@@ -510,7 +510,7 @@ export default function OAuthModal({
         const port = window.location.port || "20128";
         redirectUri = `http://127.0.0.1:${port}/callback`;
       } else if (!isLocalhost) {
-        // Behind reverse proxy: use actual origin (e.g., https://omniroute.example.com/callback)
+        // Behind reverse proxy: use actual origin (e.g., https://aera-router.example.com/callback)
         // Supports PUBLIC_URL env var override, or falls back to window.location.origin.
         const publicUrl = process.env.NEXT_PUBLIC_BASE_URL;
         const origin =

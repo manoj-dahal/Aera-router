@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
-import { CodexExecutor } from "@omniroute/open-sse/executors/codex.ts";
+import { CodexExecutor } from "@aera-router/open-sse/executors/codex.ts";
 import { getApiKeyMetadata } from "@/lib/db/apiKeys";
 import { authorizeWebSocketHandshake, extractWsTokenFromRequest } from "@/lib/ws/handshake";
 import { getModelInfo } from "@/sse/services/model";
@@ -17,10 +17,10 @@ import {
   getMemorySettings,
   toMemoryRetrievalConfig,
 } from "@/lib/memory/settings";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
-import { logger } from "@omniroute/open-sse/utils/logger.ts";
-import { resolveProxy } from "@omniroute/open-sse/utils/networkProxy.ts";
-import { proxyConfigToUrl } from "@omniroute/open-sse/utils/proxyDispatcher.ts";
+import { sanitizeErrorMessage } from "@aera-router/open-sse/utils/error.ts";
+import { logger } from "@aera-router/open-sse/utils/logger.ts";
+import { resolveProxy } from "@aera-router/open-sse/utils/networkProxy.ts";
+import { proxyConfigToUrl } from "@aera-router/open-sse/utils/proxyDispatcher.ts";
 import {
   attachReasoningRuleDirective,
   applyReasoningRuleDirective,
@@ -208,7 +208,7 @@ async function maybeInjectResponsesWsMemory(
 }
 
 function getBridgeSecret(): string {
-  return process.env.OMNIROUTE_WS_BRIDGE_SECRET || "";
+  return process.env.AERA_ROUTER_WS_BRIDGE_SECRET || "";
 }
 
 function hashBridgeSecret(value: string): Buffer {
@@ -225,7 +225,7 @@ export function bridgeSecretMatches(expectedSecret: string, receivedSecret: stri
 function getAuthRequest(body: JsonRecord): Request {
   const requestUrl = typeof body.requestUrl === "string" ? body.requestUrl : "/api/v1/responses";
   const headers = isRecord(body.headers) ? body.headers : {};
-  const url = new URL(requestUrl, "http://omniroute.local");
+  const url = new URL(requestUrl, "http://aera-router.local");
   const requestHeaders = new Headers();
 
   for (const [key, value] of Object.entries(headers)) {
@@ -387,7 +387,7 @@ async function resolveCodexCredentials(
 }
 
 async function resolveCodexRequestContext(body: JsonRecord) {
-  if (!isFeatureFlagEnabled("OMNIROUTE_CODEX_WS_ENABLED")) {
+  if (!isFeatureFlagEnabled("AERA_ROUTER_CODEX_WS_ENABLED")) {
     return {
       error: jsonError(503, "codex_ws_disabled", "Codex Responses WebSocket transport is disabled"),
     };
@@ -506,11 +506,11 @@ async function prepare(body: JsonRecord) {
   let reasoningRouting: JsonRecord | null = null;
   if (reasoningDecision) {
     const withDirective = attachReasoningRuleDirective(responseBodyWithMemory, reasoningDecision);
-    reasoningRouting = isRecord(withDirective._omnirouteReasoningRouteTrace)
-      ? withDirective._omnirouteReasoningRouteTrace
+    reasoningRouting = isRecord(withDirective._aeraRouterReasoningRouteTrace)
+      ? withDirective._aeraRouterReasoningRouteTrace
       : null;
     responseBodyWithMemory = applyReasoningRuleDirective(withDirective) as JsonRecord;
-    delete responseBodyWithMemory._omnirouteReasoningRouteTrace;
+    delete responseBodyWithMemory._aeraRouterReasoningRouteTrace;
   }
   const transformed = (await executor.transformRequest(
     model,
@@ -525,7 +525,7 @@ async function prepare(body: JsonRecord) {
   const headers = normalizeUpstreamHeaders(executor.buildHeaders(refreshedCredentials, true));
 
   // #5611: apply the configured Global/provider proxy to the upstream Codex
-  // Responses WebSocket too. The downstream client→OmniRoute hop works, but the
+  // Responses WebSocket too. The downstream client→Aera Router hop works, but the
   // upstream wreq-js.websocket() connect previously ignored the Proxy Registry,
   // so a no-direct-egress container failed with a DNS lookup error.
   const proxy = await resolveCodexProxy(provider);
@@ -552,7 +552,7 @@ async function prepare(body: JsonRecord) {
 
 export async function POST(request: Request) {
   const expectedSecret = getBridgeSecret();
-  const receivedSecret = request.headers.get("x-omniroute-ws-bridge-secret") || "";
+  const receivedSecret = request.headers.get("x-aera-router-ws-bridge-secret") || "";
   if (!bridgeSecretMatches(expectedSecret, receivedSecret)) {
     return jsonError(403, "internal_bridge_forbidden", "Forbidden");
   }

@@ -27,14 +27,14 @@ import {
   type McpAccessibilityConfig,
   type RtkConfig,
   type UltraConfig,
-} from "@omniroute/open-sse/services/compression/types.ts";
-import { DEFAULT_CONTEXT_BUDGET } from "@omniroute/open-sse/services/compression/adaptiveCompression/types.ts";
+} from "@aera-router/open-sse/services/compression/types.ts";
+import { DEFAULT_CONTEXT_BUDGET } from "@aera-router/open-sse/services/compression/adaptiveCompression/types.ts";
 import { normalizeContextBudgetConfig } from "./compressionContextBudget";
 import {
   isPreserveSystemPromptMode,
   normalizePreserveSystemPromptMode,
-} from "@omniroute/open-sse/services/compression/preserveSystemPromptMode.ts";
-import { maybePrewarmUltraSlmOnConfig } from "@omniroute/open-sse/services/compression/ultra.ts";
+} from "@aera-router/open-sse/services/compression/preserveSystemPromptMode.ts";
+import { maybePrewarmUltraSlmOnConfig } from "@aera-router/open-sse/services/compression/ultra.ts";
 
 const NAMESPACE = "compression";
 const COMPRESSION_MODES = new Set<CompressionMode>([

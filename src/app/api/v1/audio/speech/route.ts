@@ -1,4 +1,4 @@
-import { handleAudioSpeech } from "@omniroute/open-sse/handlers/audioSpeech.ts";
+import { handleAudioSpeech } from "@aera-router/open-sse/handlers/audioSpeech.ts";
 import { withInjectionGuard } from "@/middleware/promptInjectionGuard";
 import {
   getProviderCredentialsWithQuotaPreflight,
@@ -9,9 +9,9 @@ import {
   getSpeechProvider,
   buildDynamicAudioProvider,
   type ProviderNodeRow,
-} from "@omniroute/open-sse/config/audioRegistry.ts";
-import { errorResponse } from "@omniroute/open-sse/utils/error.ts";
-import { HTTP_STATUS } from "@omniroute/open-sse/config/constants.ts";
+} from "@aera-router/open-sse/config/audioRegistry.ts";
+import { errorResponse } from "@aera-router/open-sse/utils/error.ts";
+import { HTTP_STATUS } from "@aera-router/open-sse/config/constants.ts";
 import { enforceApiKeyPolicy } from "@/shared/utils/apiKeyPolicy";
 import { getCachedProviderNodes } from "@/lib/localDb";
 import { v1AudioSpeechSchema } from "@/shared/validation/schemas";
@@ -20,7 +20,7 @@ import {
   isAllRateLimitedCredentials,
   rateLimitedProviderResponse,
 } from "@/app/api/v1/_shared/rateLimit";
-import { attachOmniRouteMetaToResponse } from "@/domain/omnirouteResponseMeta";
+import { attachAeraRouterMetaToResponse } from "@/domain/aeraRouterResponseMeta";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { generateRequestId } from "@/shared/utils/requestId";
 import { getClientIpFromRequest } from "@/lib/ipUtils";
@@ -123,7 +123,7 @@ async function postHandler(request, context) {
     const costUsd = await calculateModalCost("audio", provider, resolvedModel || body.model, {
       characters,
     });
-    response = attachOmniRouteMetaToResponse(response, {
+    response = attachAeraRouterMetaToResponse(response, {
       provider,
       model: resolvedModel || body.model,
       costUsd,

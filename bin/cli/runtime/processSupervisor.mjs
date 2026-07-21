@@ -13,7 +13,13 @@ import { buildNodeHeapArgs } from "../../../scripts/build/runtime-env.mjs";
 const CRASH_LOG_LINES = 50;
 
 export class ServerSupervisor {
-  constructor({ serverPath, env, maxRestarts = DEFAULT_MAX_RESTARTS, memoryLimit = 512, onCrashCallback }) {
+  constructor({
+    serverPath,
+    env,
+    maxRestarts = DEFAULT_MAX_RESTARTS,
+    memoryLimit = 512,
+    onCrashCallback,
+  }) {
     this.serverPath = serverPath;
     this.env = env;
     this.maxRestarts = maxRestarts;
@@ -30,12 +36,12 @@ export class ServerSupervisor {
     this.startedAt = Date.now();
     this.crashLog = [];
 
-    const showLog = process.env.OMNIROUTE_SHOW_LOG === "1";
+    const showLog = process.env.AERA_ROUTER_SHOW_LOG === "1";
     // #5238: skip the explicit CLI --max-old-space-size when the user pinned the
     // heap via NODE_OPTIONS (a CLI arg would shadow/override their value). The
     // calibrated heap is already carried by env.NODE_OPTIONS either way.
     const heapArgs = buildNodeHeapArgs(process.env, this.memoryLimit);
-    // #6321: stdout used to be discarded (`"ignore"`) whenever `--log`/OMNIROUTE_SHOW_LOG
+    // #6321: stdout used to be discarded (`"ignore"`) whenever `--log`/AERA_ROUTER_SHOW_LOG
     // wasn't set (the default) — any debug/pino output written to stdout vanished
     // silently, so a boot that never becomes ready looked like a dead hang with zero
     // output even at APP_LOG_LEVEL=debug. Pipe stdout too and buffer it alongside

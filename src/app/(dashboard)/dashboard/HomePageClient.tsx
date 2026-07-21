@@ -139,28 +139,28 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
     if (platform === "darwin") {
       return {
         label: "Download DMG (macOS)",
-        url: `https://github.com/diegosouzapw/OmniRoute/releases/download/v${cleanLatest}/OmniRoute-${cleanLatest}.dmg`,
-        desc: `A new version of the OmniRoute desktop app is available. Please download and install the macOS DMG installer to update (current: v${versionInfo?.current || ""}).`,
+        url: `https://github.com/manoj-dahal/Aera-router/releases/download/v${cleanLatest}/Aera%20Router-${cleanLatest}.dmg`,
+        desc: `A new version of the Aera Router desktop app is available. Please download and install the macOS DMG installer to update (current: v${versionInfo?.current || ""}).`,
       };
     }
     if (platform === "win32") {
       return {
         label: "Download EXE (Windows)",
-        url: `https://github.com/diegosouzapw/OmniRoute/releases/download/v${cleanLatest}/OmniRoute.Setup.${cleanLatest}.exe`,
-        desc: `A new version of the OmniRoute desktop app is available. Please download and install the Windows EXE installer to update (current: v${versionInfo?.current || ""}).`,
+        url: `https://github.com/manoj-dahal/Aera-router/releases/download/v${cleanLatest}/Aera%20Router.Setup.${cleanLatest}.exe`,
+        desc: `A new version of the Aera Router desktop app is available. Please download and install the Windows EXE installer to update (current: v${versionInfo?.current || ""}).`,
       };
     }
     if (platform === "linux") {
       return {
         label: "Download AppImage (Linux)",
-        url: `https://github.com/diegosouzapw/OmniRoute/releases/download/v${cleanLatest}/OmniRoute-${cleanLatest}.AppImage`,
-        desc: `A new version of the OmniRoute desktop app is available. Please download the Linux AppImage package to update (current: v${versionInfo?.current || ""}).`,
+        url: `https://github.com/manoj-dahal/Aera-router/releases/download/v${cleanLatest}/Aera%20Router-${cleanLatest}.AppImage`,
+        desc: `A new version of the Aera Router desktop app is available. Please download the Linux AppImage package to update (current: v${versionInfo?.current || ""}).`,
       };
     }
     return {
       label: "Download Update",
-      url: `https://github.com/diegosouzapw/OmniRoute/releases/tag/v${cleanLatest}`,
-      desc: `A new version of the OmniRoute desktop app is available. Please download the respective app format for your system to update (current: v${versionInfo?.current || ""}).`,
+      url: `https://github.com/manoj-dahal/Aera-router/releases/tag/v${cleanLatest}`,
+      desc: `A new version of the Aera Router desktop app is available. Please download the respective app format for your system to update (current: v${versionInfo?.current || ""}).`,
     };
   }, [platform, versionInfo?.latest, versionInfo?.current]);
 
@@ -543,7 +543,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
               {
                 step: "restart",
                 status: "pending",
-                message: "Waiting for OmniRoute to restart with the new version.",
+                message: "Waiting for Aera Router to restart with the new version.",
               },
             ]
           : [
@@ -555,7 +555,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
               {
                 step: "restart",
                 status: "pending",
-                message: "Waiting for OmniRoute to restart with the new version.",
+                message: "Waiting for Aera Router to restart with the new version.",
               },
             ];
 
@@ -587,14 +587,14 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
               next = mergeUpdateStep(next, {
                 step: "complete",
                 status: "done",
-                message: `OmniRoute is now running v${targetVersion}.`,
+                message: `Aera Router is now running v${targetVersion}.`,
               });
 
               return next;
             });
             setUpdating(false);
             setUpdatePhase("done");
-            notify.success(`OmniRoute updated to v${targetVersion}.`);
+            notify.success(`Aera Router updated to v${targetVersion}.`);
             await fetchData();
             return;
           }
@@ -618,7 +618,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
             next = mergeUpdateStep(next, {
               step: "restart",
               status: "pending",
-              message: `Waiting for OmniRoute to come back on v${targetVersion}.`,
+              message: `Waiting for Aera Router to come back on v${targetVersion}.`,
             });
 
             return next;
@@ -643,7 +643,8 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
             next = mergeUpdateStep(next, {
               step: "restart",
               status: "running",
-              message: "Service restart in progress. Waiting for OmniRoute to come back online...",
+              message:
+                "Service restart in progress. Waiting for Aera Router to come back online...",
             });
 
             return next;
@@ -798,7 +799,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                     ? "Update Complete!"
                     : updatePhase === "failed"
                       ? "Update Failed"
-                      : "Updating OmniRoute..."}
+                      : "Updating Aera Router..."}
                 </h3>
                 <p className="text-xs text-text-muted mt-0.5">
                   {updatePhase === "done"
@@ -1018,7 +1019,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                       variant="secondary"
                       onClick={() =>
                         openExternal(
-                          `https://github.com/diegosouzapw/OmniRoute/releases/tag/v${versionInfo.latest}`
+                          `https://github.com/manoj-dahal/Aera-router/releases/tag/v${versionInfo.latest}`
                         )
                       }
                       className="font-semibold text-xs py-1"

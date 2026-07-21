@@ -77,7 +77,7 @@ export async function buildMultipartBody(
   fields: Record<string, string>,
   fileFieldName = "file"
 ): Promise<{ body: Uint8Array; contentType: string }> {
-  const boundary = "----OmniRouteAudioBoundary" + Date.now().toString(36);
+  const boundary = "----AeraRouterAudioBoundary" + Date.now().toString(36);
   const parts: Uint8Array[] = [];
   const encoder = new TextEncoder();
 

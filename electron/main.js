@@ -1,5 +1,5 @@
 /**
- * OmniRoute Electron Desktop App - Main Process
+ * Aera Router Electron Desktop App - Main Process
  *
  * This is the entry point for the Electron desktop application.
  * It manages the main window, system tray, server lifecycle, and IPC communication.
@@ -13,7 +13,7 @@
  * #8  Removed dead isProduction variable
  * #9  Platform-conditional titleBarStyle
  * #10 stdio: pipe + stdout/stderr capture for readiness detection
- * #14 Removed dead omniroute:// protocol (no handler existed)
+ * #14 Removed dead aera-router:// protocol (no handler existed)
  * #15 Content Security Policy via session headers
  */
 
@@ -75,7 +75,7 @@ function resolveNodeExecutable(env = process.env) {
   // instead of a randomly found system Node to prevent ABI architecture mismatches.
   //
   // On macOS packaged builds, process.execPath is the main Electron binary
-  // (e.g. OmniRoute.app/Contents/MacOS/OmniRoute). Spawning it with
+  // (e.g. Aera Router.app/Contents/MacOS/Aera Router). Spawning it with
   // ELECTRON_RUN_AS_NODE causes macOS to show a second dock icon and/or
   // flash a shell window. Use the Helper binary instead — macOS treats
   // Helper processes as background tasks with no visible UI artifacts.
@@ -83,7 +83,7 @@ function resolveNodeExecutable(env = process.env) {
     // #7941: derive the Helper name from the packaged binary name
     // (path.basename(process.execPath)) rather than app.getName(). electron-builder
     // generates BOTH the main binary and the Helper.app bundles from build.productName
-    // ("OmniRoute"), whereas app.getName() reads package.json `name` ("omniroute-desktop")
+    // ("Aera Router"), whereas app.getName() reads package.json `name` ("aera-router-desktop")
     // — the two diverged, so app.getName() never matched a real Helper path and this fell
     // through to process.execPath, spawning the main Electron binary and producing a
     // second, inert macOS Dock icon.
@@ -134,13 +134,13 @@ function resolveDataDir(overridePath, env = process.env) {
 
   if (process.platform === "win32") {
     const appData = env.APPDATA || path.join(require("os").homedir(), "AppData", "Roaming");
-    return path.join(appData, "omniroute");
+    return path.join(appData, "aera-router");
   }
 
   const xdg = env.XDG_CONFIG_HOME?.trim();
-  if (xdg) return path.join(path.resolve(xdg), "omniroute");
+  if (xdg) return path.join(path.resolve(xdg), "aera-router");
 
-  return path.join(require("os").homedir(), ".omniroute");
+  return path.join(require("os").homedir(), ".aera-router");
 }
 
 function getPreferredEnvFilePath(env = process.env) {
@@ -197,7 +197,7 @@ async function waitForServerExit(proc, timeoutMs = 5000) {
       setTimeout(() => {
         try {
           // #3347: force-kill the whole tree (Windows leaves grandchildren alive on a
-          // bare SIGKILL of the direct child, keeping omniroute.exe locked).
+          // bare SIGKILL of the direct child, keeping aera-router.exe locked).
           killProcessTree(proc, { signal: "SIGKILL" });
         } catch {
           /* already dead */
@@ -240,7 +240,7 @@ function setupAutoUpdater() {
 
     if (Notification.isSupported()) {
       const notification = new Notification({
-        title: "OmniRoute Update Ready",
+        title: "Aera Router Update Ready",
         body: `Version ${info.version} is ready to install. Click to restart.`,
       });
       notification.on("click", () => {
@@ -285,7 +285,7 @@ async function downloadUpdate() {
 function installUpdate() {
   if (nextServer) {
     // #3347: tree-kill before quitAndInstall — a surviving server child (and its
-    // grandchildren) keeps omniroute.exe locked and the updater fails with "file in use".
+    // grandchildren) keeps aera-router.exe locked and the updater fails with "file in use".
     killProcessTree(nextServer, { signal: "SIGTERM" });
     nextServer = null;
   }
@@ -314,7 +314,7 @@ function setupContentSecurityPolicy() {
       "form-action 'self'",
       // Single connect-src: a duplicate directive is ignored by the browser (first wins),
       // which previously dropped the 127.0.0.1 origins. Keep both loopback forms here.
-      `connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* wss://localhost:* wss://127.0.0.1:* https://*.omniroute.online https://*.omniroute.dev`,
+      `connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* wss://localhost:* wss://127.0.0.1:* https://*.aera-router.online https://*.aera-router.dev`,
       scriptSrc,
       "script-src-attr 'none'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
@@ -347,7 +347,7 @@ function createWindow() {
     height: 900,
     minWidth: 1024,
     minHeight: 700,
-    title: "OmniRoute",
+    title: "Aera Router",
     icon: path.join(RESOURCES_PATH, "assets", "icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -434,7 +434,7 @@ function createTray() {
 
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: "Open OmniRoute",
+      label: "Open Aera Router",
       click: () => {
         if (mainWindow) {
           mainWindow.show();
@@ -472,7 +472,7 @@ function createTray() {
     },
   ]);
 
-  tray.setToolTip("OmniRoute");
+  tray.setToolTip("Aera Router");
   tray.setContextMenu(contextMenu);
 
   tray.on("double-click", () => {
@@ -590,11 +590,11 @@ function startNextServer() {
     console.log("[Electron] ✨ API_KEY_SECRET auto-generated");
   }
   if (changed) {
-    serverEnv.OMNIROUTE_BOOTSTRAPPED = "true";
+    serverEnv.AERA_ROUTER_BOOTSTRAPPED = "true";
     try {
       fs.mkdirSync(dataDir, { recursive: true });
       const lines = [
-        "# Auto-generated by OmniRoute bootstrap",
+        "# Auto-generated by Aera Router bootstrap",
         "",
         ...Object.entries(persisted).map(([k, v]) => `${k}=${v}`),
         "",
@@ -612,12 +612,12 @@ function startNextServer() {
   // default V8 heap (~512MB) and OOM-crashed on RAM-rich boxes under load
   // (65 providers / 2600 models → "Ineffective mark-compacts near heap limit").
   // Default the heap to ~35% of physical RAM (clamped [512, 4096]); an explicit
-  // OMNIROUTE_MEMORY_MB or a pre-set --max-old-space-size still wins. Mirrors
+  // AERA_ROUTER_MEMORY_MB or a pre-set --max-old-space-size still wins. Mirrors
   // scripts/build/runtime-env.mjs (CJS can't import the ESM helper).
   const serverNodeOptions = (() => {
     const existing = serverEnv.NODE_OPTIONS || "";
     if (existing.includes("--max-old-space-size")) return existing;
-    const explicit = parseInt(serverEnv.OMNIROUTE_MEMORY_MB, 10);
+    const explicit = parseInt(serverEnv.AERA_ROUTER_MEMORY_MB, 10);
     let heapMb;
     if (Number.isFinite(explicit) && explicit >= 64 && explicit <= 16384) {
       heapMb = explicit;
@@ -666,10 +666,10 @@ function startNextServer() {
       const isHeadless =
         process.argv.includes("--headless") ||
         process.argv.includes("--cli") ||
-        process.env.OMNIROUTE_HEADLESS === "true";
+        process.env.AERA_ROUTER_HEADLESS === "true";
       if (isHeadless && !global.loggedHeadlessReady) {
         global.loggedHeadlessReady = true;
-        console.log("\n\x1b[32m✔ OmniRoute Headless CLI Server is ready and listening!\x1b[0m");
+        console.log("\n\x1b[32m✔ Aera Router Headless CLI Server is ready and listening!\x1b[0m");
         console.log(`  \x1b[1mPort:\x1b[0m       http://localhost:${serverPort}`);
         console.log(`  \x1b[1mAPI Base:\x1b[0m   http://localhost:${serverPort}/v1`);
         console.log("  \x1b[2mPress Ctrl+C to terminate the process.\x1b[0m\n");
@@ -696,8 +696,8 @@ function startNextServer() {
 function stopNextServer() {
   if (nextServer) {
     // #3347: kill the whole tree, not just the direct child. On Windows the server
-    // (omniroute.exe-as-node) spawns grandchildren that a bare SIGTERM leaves alive,
-    // holding a lock on omniroute.exe and blocking updates.
+    // (aera-router.exe-as-node) spawns grandchildren that a bare SIGTERM leaves alive,
+    // holding a lock on aera-router.exe and blocking updates.
     killProcessTree(nextServer, { signal: "SIGTERM" });
     nextServer = null;
   }
@@ -717,15 +717,15 @@ function enableLinuxDesktopAutostart() {
       [
         "[Desktop Entry]",
         "Type=Application",
-        "Name=OmniRoute",
-        "Comment=OmniRoute Desktop Client",
+        "Name=Aera Router",
+        "Comment=Aera Router Desktop Client",
         `Exec="${execPath}" --hidden`,
         "Terminal=false",
         "Hidden=false",
         "X-GNOME-Autostart-enabled=true",
       ].join("\n") + "\n";
 
-    fs.writeFileSync(path.join(autostartDir, "omniroute-desktop.desktop"), desktopFileContent, {
+    fs.writeFileSync(path.join(autostartDir, "aera-router-desktop.desktop"), desktopFileContent, {
       mode: 0o644,
     });
     return true;
@@ -744,7 +744,7 @@ function disableLinuxDesktopAutostart() {
       os.homedir(),
       ".config",
       "autostart",
-      "omniroute-desktop.desktop"
+      "aera-router-desktop.desktop"
     );
     if (fs.existsSync(desktopPath)) {
       fs.unlinkSync(desktopPath);
@@ -762,7 +762,7 @@ function isLinuxDesktopAutostartEnabled() {
     const fs = require("fs");
     const path = require("path");
     return fs.existsSync(
-      path.join(os.homedir(), ".config", "autostart", "omniroute-desktop.desktop")
+      path.join(os.homedir(), ".config", "autostart", "aera-router-desktop.desktop")
     );
   } catch {
     return false;
@@ -935,7 +935,7 @@ app.whenReady().then(async () => {
   const isHeadless =
     process.argv.includes("--headless") ||
     process.argv.includes("--cli") ||
-    process.env.OMNIROUTE_HEADLESS === "true";
+    process.env.AERA_ROUTER_HEADLESS === "true";
 
   // Fix #1: Start server and WAIT for readiness before showing window
   startNextServer();
@@ -988,7 +988,7 @@ app.on("window-all-closed", () => {
   const isHeadless =
     process.argv.includes("--headless") ||
     process.argv.includes("--cli") ||
-    process.env.OMNIROUTE_HEADLESS === "true";
+    process.env.AERA_ROUTER_HEADLESS === "true";
   if (process.platform !== "darwin" && !isHeadless) {
     app.quit();
   }

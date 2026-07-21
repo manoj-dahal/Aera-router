@@ -15,9 +15,9 @@ import os from "node:os";
 import path from "node:path";
 
 const { AuggieExecutor, buildAuggiePrompt, resolveAuggieBin, resolveAuggieModel } =
-  await import("@omniroute/open-sse/executors/auggie");
+  await import("@aera-router/open-sse/executors/auggie");
 
-const TMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-auggie-test-"));
+const TMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-auggie-test-"));
 
 /** Write an executable shell script and return its absolute path. */
 function writeFakeBin(name: string, script: string): string {
@@ -406,7 +406,7 @@ test("execute() aborts a long-running CLI process instead of hanging (streaming)
 
 // ─── refreshCredentials() is a no-op ────────────────────────────────────────
 
-test("refreshCredentials() is a no-op (auggie has no OmniRoute-managed credentials)", async () => {
+test("refreshCredentials() is a no-op (auggie has no Aera-Router-managed credentials)", async () => {
   const executor = new AuggieExecutor();
   const result = await executor.refreshCredentials({} as never);
   assert.equal(result, null);
@@ -423,7 +423,7 @@ test("buildUrl/buildHeaders/transformRequest match the CLI-passthrough shape", (
 
 test("initAuggieModels discovers models from `auggie model list` output", async () => {
   const { initAuggieModels, resolveAuggieModel, __resetAuggieModels } =
-    await import("@omniroute/open-sse/executors/auggie");
+    await import("@aera-router/open-sse/executors/auggie");
   __resetAuggieModels(); // wipe stale cache from previous tests
   const bin = writeFakeBin(
     "fake-auggie-list.sh",
@@ -443,7 +443,7 @@ test("initAuggieModels discovers models from `auggie model list` output", async 
 });
 
 test("execute() spawns a model discovered via auto-fetch", async () => {
-  const { __resetAuggieModels } = await import("@omniroute/open-sse/executors/auggie");
+  const { __resetAuggieModels } = await import("@aera-router/open-sse/executors/auggie");
   __resetAuggieModels();
   const bin = writeFakeBin(
     "fake-auggie-autofetch.sh",
@@ -480,7 +480,7 @@ test("execute() spawns a model discovered via auto-fetch", async () => {
 });
 
 test("initAuggieModels failure does not block execute() for a known model", async () => {
-  const { __resetAuggieModels } = await import("@omniroute/open-sse/executors/auggie");
+  const { __resetAuggieModels } = await import("@aera-router/open-sse/executors/auggie");
   __resetAuggieModels();
   const bin = writeFakeBin(
     "fake-auggie-crash.sh",

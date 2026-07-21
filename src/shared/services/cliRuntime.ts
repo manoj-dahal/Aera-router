@@ -253,7 +253,7 @@ const CLI_TOOLS: Record<string, any> = {
     },
   },
   // Config path reconciled with bin/cli/commands/setup-crush.mjs::resolveCrushTarget's
-  // default (~/.config/crush/crush.json) so the dashboard and `omniroute setup-crush`
+  // default (~/.config/crush/crush.json) so the dashboard and `aera-router setup-crush`
   // agree on one canonical config location.
   crush: {
     defaultCommand: "crush",
@@ -873,7 +873,10 @@ const locateCommandCandidate = async (
   // This avoids searching PATH and reduces attack surface
   let bestKnownPathFailure: KnownPathResult | null = null;
   if (toolId) {
-    const { match, bestFailure } = await findKnownPathMatch(getKnownToolPaths(toolId), checkKnownPath);
+    const { match, bestFailure } = await findKnownPathMatch(
+      getKnownToolPaths(toolId),
+      checkKnownPath
+    );
     if (match) {
       return {
         command: commands[0],

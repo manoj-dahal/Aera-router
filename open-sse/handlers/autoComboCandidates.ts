@@ -15,9 +15,9 @@
  *     treated as always reachable on this axis).
  *   - model lockout: `isModelLocked(provider, connectionId, model)`.
  */
-import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
+import { buildErrorBody } from "@aera-router/open-sse/utils/error.ts";
 import { getCircuitBreaker } from "@/shared/utils/circuitBreaker";
-import { isModelLocked } from "@omniroute/open-sse/services/accountFallback.ts";
+import { isModelLocked } from "@aera-router/open-sse/services/accountFallback.ts";
 import { getProviderConnectionById } from "@/lib/db/providers";
 import { getExcludedConnectionIds } from "@/lib/db/autoCandidateOverrides";
 
@@ -102,11 +102,11 @@ export async function getAutoComboCandidates(
   let virtualCombo;
   if (channel === "auto") {
     const { createVirtualAutoCombo } =
-      await import("@omniroute/open-sse/services/autoCombo/virtualFactory.ts");
+      await import("@aera-router/open-sse/services/autoCombo/virtualFactory.ts");
     virtualCombo = await createVirtualAutoCombo(undefined);
   } else {
     const { createBuiltinAutoCombo } =
-      await import("@omniroute/open-sse/services/autoCombo/builtinCatalog.ts");
+      await import("@aera-router/open-sse/services/autoCombo/builtinCatalog.ts");
     virtualCombo = await createBuiltinAutoCombo(modelStr, channel);
   }
 

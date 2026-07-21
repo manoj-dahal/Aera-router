@@ -38,7 +38,7 @@ const TRUE_ENV_VALUES = new Set(["1", "true", "yes", "on"]);
 // ── State (globalThis singleton) ──────────────────────────────────────────
 
 declare global {
-  var __omnirouteCredentialHC:
+  var __aeraRouterCredentialHC:
     | {
         initialized: boolean;
         sweepTimer: ReturnType<typeof setTimeout> | null;
@@ -50,15 +50,15 @@ declare global {
 }
 
 function getSchedulerState() {
-  if (!globalThis.__omnirouteCredentialHC) {
-    globalThis.__omnirouteCredentialHC = {
+  if (!globalThis.__aeraRouterCredentialHC) {
+    globalThis.__aeraRouterCredentialHC = {
       initialized: false,
       sweepTimer: null,
       sweepInProgress: false,
       failureCounts: new Map(),
     };
   }
-  return globalThis.__omnirouteCredentialHC;
+  return globalThis.__aeraRouterCredentialHC;
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────
@@ -67,10 +67,9 @@ function isBuildProcess(): boolean {
   return typeof process !== "undefined" && process.env.NEXT_PHASE === "phase-production-build";
 }
 
-
 function isCredentialHealthCheckDisabled(): boolean {
   if (isBuildProcess() || isAutomatedTestProcess()) return true;
-  const val = process.env.OMNIROUTE_DISABLE_CREDENTIAL_HEALTH_CHECK;
+  const val = process.env.AERA_ROUTER_DISABLE_CREDENTIAL_HEALTH_CHECK;
   return val ? TRUE_ENV_VALUES.has(val.trim().toLowerCase()) : false;
 }
 

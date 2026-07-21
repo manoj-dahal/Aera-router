@@ -6,8 +6,8 @@ import {
   buildKimiCodeIdentityHeaders,
   normalizeKimiDeviceId,
   sanitizeKimiHeaderValue,
-} from "@omniroute/open-sse/config/providers/registry/kimi/coding/runtime.ts";
-import { getKimiDeviceModel } from "@omniroute/open-sse/utils/kimiDevice.ts";
+} from "@aera-router/open-sse/config/providers/registry/kimi/coding/runtime.ts";
+import { getKimiDeviceModel } from "@aera-router/open-sse/utils/kimiDevice.ts";
 import { resolveDataDir } from "../../dataPaths";
 import { KIMI_CODING_CONFIG } from "../constants/oauth";
 

@@ -16,17 +16,17 @@ function parsePositiveInt(value: string | undefined, fallback: number): number {
 }
 
 export const CHAT_LARGE_BODY_BYTES = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_LARGE_BODY_BYTES,
+  process.env.AERA_ROUTER_CHAT_LARGE_BODY_BYTES,
   256 * 1024
 );
 
 export const CHAT_HARD_MAX_BODY_BYTES = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_HARD_MAX_BODY_BYTES,
+  process.env.AERA_ROUTER_CHAT_HARD_MAX_BODY_BYTES,
   50 * 1024 * 1024
 );
 
 const CHAT_MAX_HEAVY_IN_FLIGHT = parsePositiveInt(
-  process.env.OMNIROUTE_CHAT_MAX_HEAVY_IN_FLIGHT,
+  process.env.AERA_ROUTER_CHAT_MAX_HEAVY_IN_FLIGHT,
   1
 );
 
@@ -37,7 +37,7 @@ export interface ChatAdmissionLease {
 
 /**
  * Process-local heavyweight reservation. The capacity check and increment execute in one
- * synchronous JavaScript turn, making acquisition atomic within an OmniRoute process.
+ * synchronous JavaScript turn, making acquisition atomic within an Aera Router process.
  * Queueing is intentionally separate: unavailable capacity is a retryable 503.
  */
 export class ChatAdmissionController {

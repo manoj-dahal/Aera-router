@@ -12,14 +12,14 @@ import { syncToCloud } from "@/lib/cloudSync";
 import { validateProviderApiKey } from "@/lib/providers/validation";
 import { getCliRuntimeStatus } from "@/shared/services/cliRuntime";
 // Use the shared open-sse token refresh with built-in dedup/race-condition cache
-import { getAccessToken } from "@omniroute/open-sse/services/tokenRefresh.ts";
-import { rotationGroupFor } from "@omniroute/open-sse/services/refreshSerializer.ts";
+import { getAccessToken } from "@aera-router/open-sse/services/tokenRefresh.ts";
+import { rotationGroupFor } from "@aera-router/open-sse/services/refreshSerializer.ts";
 import { saveCallLog } from "@/lib/usageDb";
 import { logProxyEvent } from "@/lib/proxyLogger";
-import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
+import { runWithProxyContext } from "@aera-router/open-sse/utils/proxyFetch.ts";
 import { isGitLabDirectAccessDisabled } from "@/lib/oauth/gitlab";
 import { providerAllowsOptionalApiKey } from "@/shared/constants/providers";
-import { removeConnectionHealth } from "@omniroute/open-sse/services/apiKeyRotator.ts";
+import { removeConnectionHealth } from "@aera-router/open-sse/services/apiKeyRotator.ts";
 import { classifyAmbiguousOrAuthError, type ClassifyFailureArgs } from "./mistralAmbiguousAuth";
 import { OAUTH_TEST_CONFIG } from "./oauthTestConfig";
 

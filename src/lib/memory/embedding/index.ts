@@ -2,7 +2,7 @@ import {
   EMBEDDING_PROVIDERS,
   buildDynamicEmbeddingProvider,
   type EmbeddingProviderNodeRow,
-} from "@omniroute/open-sse/config/embeddingRegistry.ts";
+} from "@aera-router/open-sse/config/embeddingRegistry.ts";
 import { getProviderCredentials } from "@/sse/services/auth";
 import { getCachedProviderNodes } from "@/lib/localDb";
 import type { MemorySettingsExtended } from "@/shared/schemas/memory";

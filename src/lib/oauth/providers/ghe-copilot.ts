@@ -1,5 +1,5 @@
 import { GHE_COPILOT_CONFIG } from "../constants/oauth";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@aera-router/open-sse/utils/error";
 
 /**
  * GHE Copilot OAuth provider.

@@ -16,7 +16,7 @@ Web-cookie-based provider for **Claude AI** (`claude.ai`) using session cookie a
 
 ### How It Works
 
-1. User pastes their `claude.ai` session cookies into the OmniRoute dashboard
+1. User pastes their `claude.ai` session cookies into the Aera Router dashboard
 2. `ClaudeWebExecutor` transforms OpenAI-format requests to Claude Web API format
 3. Requests are sent via **`tls-client-node`** with **Chrome 124 TLS fingerprint** to bypass Cloudflare Turnstile
 4. Responses are streamed back via SSE (`text/event-stream`)
@@ -31,7 +31,7 @@ Web-cookie-based provider for **Claude AI** (`claude.ai`) using session cookie a
 | `__cf_bm`      | Cloudflare bot management      | Auto-set by Cloudflare                 |
 | `_cfuvid`      | Cloudflare visitor ID          | Auto-set by Cloudflare                 |
 
-> **Note**: `cf_clearance` is bound to the TLS fingerprint of the browser that solved Cloudflare's Turnstile challenge. The `tls-client-node` library (via `claudeTlsClient.ts`) spoofs a Chrome 124 TLS handshake so the clearance token works from the OmniRoute server.
+> **Note**: `cf_clearance` is bound to the TLS fingerprint of the browser that solved Cloudflare's Turnstile challenge. The `tls-client-node` library (via `claudeTlsClient.ts`) spoofs a Chrome 124 TLS handshake so the clearance token works from the Aera Router server.
 
 ### API Reference
 
@@ -71,7 +71,7 @@ Referer: https://claude.ai/chat/{convId}
 ```
 User Cookies (claude.ai)
     ↓
-OmniRoute Dashboard
+Aera Router Dashboard
     ↓
 ClaudeWebExecutor (open-sse/executors/claude-web.ts)
     ↓ Request transformation (OpenAI → Claude Web format)
@@ -109,7 +109,7 @@ npx vitest run open-sse/services/__tests__/claudeTlsClient.test.ts
 
 ### Setup
 
-1. Start OmniRoute: `omniroute`
+1. Start Aera Router: `aera-router`
 2. Go to Dashboard → Providers → Add Provider
 3. Select "Web Cookie" category
 4. Choose "Claude Web"

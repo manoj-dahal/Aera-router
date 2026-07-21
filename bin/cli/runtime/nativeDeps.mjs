@@ -31,10 +31,10 @@ export function ensureRuntimeDir() {
       pkgPath,
       JSON.stringify(
         {
-          name: "omniroute-runtime",
+          name: "aera-router-runtime",
           version: "1.0.0",
           private: true,
-          description: "User-writable runtime deps for OmniRoute (native binaries)",
+          description: "User-writable runtime deps for Aera Router (native binaries)",
         },
         null,
         2
@@ -94,10 +94,12 @@ export function isBetterSqliteBinaryValid() {
     const magic = buf.toString("hex");
     const os = platform();
     let formatOk;
-    if (os === "linux") formatOk = magic.startsWith("7f454c46"); // ELF
+    if (os === "linux")
+      formatOk = magic.startsWith("7f454c46"); // ELF
     else if (os === "darwin")
       formatOk = magic.startsWith("cffaedfe") || magic.startsWith("cefaedfe"); // Mach-O
-    else if (os === "win32") formatOk = magic.startsWith("4d5a"); // PE/MZ
+    else if (os === "win32")
+      formatOk = magic.startsWith("4d5a"); // PE/MZ
     else formatOk = true;
     if (!formatOk) return false;
     // File-format magic bytes alone do not guarantee the binary was built for the Node ABI
@@ -129,7 +131,7 @@ export function npmInstallRuntime(pkgs, opts = {}) {
   const isWin = platform() === "win32";
   const [exe, args] = isWin ? ["cmd.exe", ["/c", "npm", ...npmArgs]] : ["npm", npmArgs];
   if (!opts.silent) {
-    process.stdout.write(`[omniroute][runtime] npm ${npmArgs.join(" ")}\n`);
+    process.stdout.write(`[aera-router][runtime] npm ${npmArgs.join(" ")}\n`);
   }
   const res = spawnSync(exe, args, {
     cwd,
@@ -149,12 +151,12 @@ export function ensureBetterSqliteRuntime({ silent = false, force = false } = {}
   ensureRuntimeDir();
   const valid = hasModule("better-sqlite3") && isBetterSqliteBinaryValid();
   if (valid && !force) {
-    if (!silent) process.stdout.write("[omniroute][runtime] better-sqlite3 OK\n");
+    if (!silent) process.stdout.write("[aera-router][runtime] better-sqlite3 OK\n");
     return { betterSqlite: true };
   }
   const ok = npmInstallRuntime([`better-sqlite3@${BETTER_SQLITE3_VERSION}`], { silent });
   if (!ok && !silent) {
-    process.stderr.write("[omniroute][runtime] better-sqlite3 install failed\n");
+    process.stderr.write("[aera-router][runtime] better-sqlite3 install failed\n");
   }
   return { betterSqlite: ok && hasModule("better-sqlite3") && isBetterSqliteBinaryValid() };
 }

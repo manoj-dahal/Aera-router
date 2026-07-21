@@ -130,7 +130,7 @@ export function resolveDisplayBaseUrl(envValue?: string, browserOrigin?: string)
  * DISPLAY ONLY — do NOT use this hook for OAuth `redirect_uri`.
  * OAuth callers must read `process.env.NEXT_PUBLIC_BASE_URL` directly to avoid
  * host-header attack surface. For server-side resolution, use
- * `src/shared/utils/resolveOmniRouteBaseUrl.ts` instead.
+ * `src/shared/utils/resolveAeraRouterBaseUrl.ts` instead.
  */
 export function useDisplayBaseUrl(): string {
   const envValue = normalizeUrl(process.env.NEXT_PUBLIC_BASE_URL);

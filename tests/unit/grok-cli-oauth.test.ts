@@ -2,9 +2,9 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 const { grokCli } = await import("../../src/lib/oauth/providers/grok-cli.ts");
-const { GrokCliExecutor } = await import("@omniroute/open-sse/executors/grok-cli");
-const { getGrokBuildClientVersion } = await import("@omniroute/open-sse/config/grokBuild.ts");
-const { resolvePublicCred } = await import("@omniroute/open-sse/utils/publicCreds");
+const { GrokCliExecutor } = await import("@aera-router/open-sse/executors/grok-cli");
+const { getGrokBuildClientVersion } = await import("@aera-router/open-sse/config/grokBuild.ts");
+const { resolvePublicCred } = await import("@aera-router/open-sse/utils/publicCreds");
 
 const GROK_CLI_SCOPE =
   "openid profile email offline_access grok-cli:access api:access conversations:read conversations:write workspaces:read workspaces:write";

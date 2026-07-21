@@ -8,10 +8,10 @@ import {
   extractComboTestStreamResult,
 } from "@/lib/combos/testHealth";
 import { getCustomModels } from "@/lib/localDb";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
-import { withRateLimit } from "@omniroute/open-sse/services/rateLimitManager";
+import { sanitizeErrorMessage } from "@aera-router/open-sse/utils/error";
+import { withRateLimit } from "@aera-router/open-sse/services/rateLimitManager";
 
-const INTERNAL_ORIGIN = "http://omniroute.internal";
+const INTERNAL_ORIGIN = "http://aera-router.internal";
 const DEFAULT_TEST_TIMEOUT_MS = 10_000;
 const DOLA_PRO_TEST_TIMEOUT_MS = 90_000;
 const DOUBAO_WEB_PROVIDER_ID = "doubao-web";
@@ -125,10 +125,10 @@ export function buildInternalChatRequest(testBody: Record<string, unknown>, sign
       "Content-Type": "application/json",
       // Reuse the existing strict-mode internal bypass for live health checks.
       "X-Internal-Test": "combo-health-check",
-      "X-OmniRoute-No-Cache": "true",
+      "X-Aera-Router-No-Cache": "true",
       // #6240: a connection test must be clean — never let the operator's globally-enabled
       // Output Styles (e.g. "Ultra terse") leak a system prompt into a test-model call.
-      "X-OmniRoute-Compression": "off",
+      "X-Aera-Router-Compression": "off",
       "X-Request-Id": `model-test-${randomUUID()}`,
     },
     body: JSON.stringify(testBody),
@@ -142,8 +142,8 @@ export function buildInternalRerankRequest(testBody: Record<string, unknown>, si
     headers: {
       "Content-Type": "application/json",
       "X-Internal-Test": "combo-health-check",
-      "X-OmniRoute-No-Cache": "true",
-      "X-OmniRoute-Compression": "off",
+      "X-Aera-Router-No-Cache": "true",
+      "X-Aera-Router-Compression": "off",
       "X-Request-Id": `model-test-${randomUUID()}`,
     },
     body: JSON.stringify(testBody),
@@ -271,9 +271,9 @@ export async function runSingleModelTest(
   const testBody = isRerank
     ? {
         model: fullModelStr,
-        query: "What is OmniRoute?",
+        query: "What is Aera Router?",
         documents: [
-          "OmniRoute routes AI requests across configured providers.",
+          "Aera Router routes AI requests across configured providers.",
           "This document is unrelated to the test query.",
         ],
         top_n: 1,

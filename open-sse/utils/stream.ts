@@ -22,7 +22,7 @@ import {
   hasActiveDeltaValue,
 } from "./streamHelpers.ts";
 import { calculateCost } from "@/lib/usage/costCalculator";
-import { buildOmniRouteSseMetadataComment } from "@/domain/omnirouteResponseMeta";
+import { buildAeraRouterSseMetadataComment } from "@/domain/aeraRouterResponseMeta";
 import {
   createStructuredSSECollector,
   buildStreamSummaryFromEvents,
@@ -87,7 +87,7 @@ export { backfillResponsesCompletedOutput, stripResponsesLifecycleEcho };
 
 type JsonRecord = Record<string, unknown>;
 
-export const PENDING_REQUEST_CLEARED_MARKER = "__omniroutePendingRequestCleared";
+export const PENDING_REQUEST_CLEARED_MARKER = "__aeraRouterPendingRequestCleared";
 
 function markPendingRequestCleared(error: Error): Error {
   (error as Error & Record<string, unknown>)[PENDING_REQUEST_CLEARED_MARKER] = true;
@@ -987,7 +987,7 @@ export function createSSEStream(options: StreamOptions = {}) {
     finalUsage: UsageTokenRecord | Record<string, unknown> | null | undefined
   ) => {
     const costUsd = finalUsage ? await calculateCost(provider, model, finalUsage) : 0;
-    const comment = buildOmniRouteSseMetadataComment({
+    const comment = buildAeraRouterSseMetadataComment({
       provider,
       model,
       cacheHit: false,
@@ -1584,7 +1584,7 @@ export function createSSEStream(options: StreamOptions = {}) {
                   //
                   // For a malformed empty `choices: []` chunk WITHOUT valid usage we DROP
                   // it (log server-side only). We must NOT inject an assistant-content
-                  // chunk like "[OmniRoute] Upstream returned an empty response. Please
+                  // chunk like "[Aera Router] Upstream returned an empty response. Please
                   // retry." with finish_reason: "stop" — clients (Goose/opencode) feed that
                   // text back as a turn and spin in a retry loop. This restores the #3400
                   // behavior that #3422 inadvertently reverted (regression #3388/#3502).

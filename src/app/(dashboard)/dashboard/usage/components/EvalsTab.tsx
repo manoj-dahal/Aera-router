@@ -576,7 +576,7 @@ export default function EvalsTab() {
   function handleExportSuite(suite: EvalSuite) {
     try {
       const exportPayload = {
-        format: "omniroute.eval-suite.v1",
+        format: "aera-router.eval-suite.v1",
         exportedAt: new Date().toISOString(),
         id: suite.id,
         name: suite.name || suite.id,
@@ -1846,7 +1846,11 @@ export default function EvalsTab() {
   );
 }
 
-const HeroSection = memo(function HeroSection({ t }: { t: (key: string, values?: Record<string, unknown>) => string }) {
+const HeroSection = memo(function HeroSection({
+  t,
+}: {
+  t: (key: string, values?: Record<string, unknown>) => string;
+}) {
   return (
     <Card className="p-0 overflow-hidden">
       <div

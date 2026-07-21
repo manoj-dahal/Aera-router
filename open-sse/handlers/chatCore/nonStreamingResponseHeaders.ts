@@ -3,13 +3,13 @@
  * decomposition, #3501).
  *
  * Extracted from handleChatCore's non-streaming success path: build the response header map for a
- * cache-MISS JSON response — the static Content-Type + cache marker, the OmniRoute meta headers
+ * cache-MISS JSON response — the static Content-Type + cache marker, the Aera Router meta headers
  * (provider/model/latency/usage/cost/request-id), and the optional compression header. Pure builder
  * (returns a fresh map; only mutates the map it owns). Behaviour is byte-identical to the previous
  * inline block, including `latencyMs: now - startTime`.
  */
-import { OMNIROUTE_RESPONSE_HEADERS } from "@/shared/constants/headers";
-import { attachOmniRouteMetaHeaders as defaultAttachMeta } from "@/domain/omnirouteResponseMeta";
+import { AERA_ROUTER_RESPONSE_HEADERS } from "@/shared/constants/headers";
+import { attachAeraRouterMetaHeaders as defaultAttachMeta } from "@/domain/aeraRouterResponseMeta";
 
 export function buildNonStreamingResponseHeaders(
   args: {
@@ -22,16 +22,16 @@ export function buildNonStreamingResponseHeaders(
     compressionResponseMeta?: string | null | undefined;
     comboStrategy?: string | null | undefined;
   },
-  deps: { attachOmniRouteMetaHeaders: typeof defaultAttachMeta; now: () => number } = {
-    attachOmniRouteMetaHeaders: defaultAttachMeta,
+  deps: { attachAeraRouterMetaHeaders: typeof defaultAttachMeta; now: () => number } = {
+    attachAeraRouterMetaHeaders: defaultAttachMeta,
     now: Date.now,
   }
 ): Record<string, string> {
   const responseHeaders: Record<string, string> = {
     "Content-Type": "application/json",
-    [OMNIROUTE_RESPONSE_HEADERS.cache]: "MISS",
+    [AERA_ROUTER_RESPONSE_HEADERS.cache]: "MISS",
   };
-  deps.attachOmniRouteMetaHeaders(responseHeaders, {
+  deps.attachAeraRouterMetaHeaders(responseHeaders, {
     provider: args.provider,
     model: args.model,
     cacheHit: false,
@@ -42,7 +42,7 @@ export function buildNonStreamingResponseHeaders(
     strategy: args.comboStrategy ?? "single",
   });
   if (args.compressionResponseMeta) {
-    responseHeaders[OMNIROUTE_RESPONSE_HEADERS.compression] = args.compressionResponseMeta;
+    responseHeaders[AERA_ROUTER_RESPONSE_HEADERS.compression] = args.compressionResponseMeta;
   }
   return responseHeaders;
 }

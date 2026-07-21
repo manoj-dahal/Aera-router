@@ -1,6 +1,6 @@
 import { PROVIDER_MODELS, PROVIDER_ID_TO_ALIAS } from "@/shared/constants/models";
 import { AI_PROVIDERS } from "@/shared/constants/providers";
-import { parseModel } from "@omniroute/open-sse/services/model";
+import { parseModel } from "@aera-router/open-sse/services/model";
 
 // Alias <-> providerId resolution maps for the unified model catalog. Extracted
 // verbatim from ./catalog.ts. `FALLBACK_ALIAS_TO_PROVIDER` is also consumed directly by
@@ -99,9 +99,9 @@ export function resolveCanonicalProviderId(
   );
 }
 
-/** True when `${prefix}/__omniroute_probe__` parses back to the given providerId. */
+/** True when `${prefix}/__aera_router_probe__` parses back to the given providerId. */
 export function prefixRoutesToProvider(prefix: string, providerId: string): boolean {
-  const parsed = parseModel(`${prefix}/__omniroute_probe__`);
+  const parsed = parseModel(`${prefix}/__aera_router_probe__`);
   return parsed.provider === providerId;
 }
 

@@ -11,30 +11,30 @@ import {
 } from "@/lib/localDb";
 import { createLazyConnectionView } from "@/lib/db/providers/lazyConnectionView";
 import { extractAliasBackedModels } from "./aliasBackedModels";
-import { appendNoThinkingVariants } from "@omniroute/open-sse/utils/noThinkingAlias";
-import { appendClaudeEffortVariants } from "@omniroute/open-sse/utils/claudeEffortVariants";
-import { appendSyncedEffortVariants } from "@omniroute/open-sse/utils/syncedEffortVariants";
+import { appendNoThinkingVariants } from "@aera-router/open-sse/utils/noThinkingAlias";
+import { appendClaudeEffortVariants } from "@aera-router/open-sse/utils/claudeEffortVariants";
+import { appendSyncedEffortVariants } from "@aera-router/open-sse/utils/syncedEffortVariants";
 import { buildSyncedCapabilities, mergeSyncedCapabilities } from "./syncedCapabilities";
-import { getAllEmbeddingModels } from "@omniroute/open-sse/config/embeddingRegistry";
+import { getAllEmbeddingModels } from "@aera-router/open-sse/config/embeddingRegistry";
 import {
   getAllImageModels,
   isRegisteredImageModel,
-} from "@omniroute/open-sse/config/imageRegistry";
-import { getAllRerankModels } from "@omniroute/open-sse/config/rerankRegistry";
-import { getAllAudioModels } from "@omniroute/open-sse/config/audioRegistry";
-import { getAllModerationModels } from "@omniroute/open-sse/config/moderationRegistry";
-import { getAllVideoModels } from "@omniroute/open-sse/config/videoRegistry";
-import { getAllMusicModels } from "@omniroute/open-sse/config/musicRegistry";
-import { REGISTRY } from "@omniroute/open-sse/config/providerRegistry";
-import { CODEX_NATIVE_UNPREFIXED_MODELS } from "@omniroute/open-sse/services/model";
-import { resolveNestedComboTargets } from "@omniroute/open-sse/services/combo";
+} from "@aera-router/open-sse/config/imageRegistry";
+import { getAllRerankModels } from "@aera-router/open-sse/config/rerankRegistry";
+import { getAllAudioModels } from "@aera-router/open-sse/config/audioRegistry";
+import { getAllModerationModels } from "@aera-router/open-sse/config/moderationRegistry";
+import { getAllVideoModels } from "@aera-router/open-sse/config/videoRegistry";
+import { getAllMusicModels } from "@aera-router/open-sse/config/musicRegistry";
+import { REGISTRY } from "@aera-router/open-sse/config/providerRegistry";
+import { CODEX_NATIVE_UNPREFIXED_MODELS } from "@aera-router/open-sse/services/model";
+import { resolveNestedComboTargets } from "@aera-router/open-sse/services/combo";
 import {
   AUTO_TEMPLATE_VARIANTS,
   AUTO_SUFFIX_VARIANTS,
   AUTO_FAMILY_IDS,
   createBuiltinAutoCombo,
   isPaidTierAutoId,
-} from "@omniroute/open-sse/services/autoCombo/builtinCatalog";
+} from "@aera-router/open-sse/services/autoCombo/builtinCatalog";
 import { getAllSyncedAvailableModels, type SyncedAvailableModel } from "@/lib/db/models";
 import { getModelCatalogCacheVersion } from "@/lib/db/readCache";
 import { getCompatibleFallbackModels } from "@/lib/providers/managedAvailableModels";
@@ -61,7 +61,7 @@ import {
   isNoAuthRawProviderPrefix,
   normalizeBlockedProviderSet,
 } from "@/shared/utils/noAuthProviders";
-import { getTokenLimit } from "@omniroute/open-sse/services/contextManager";
+import { getTokenLimit } from "@aera-router/open-sse/services/contextManager";
 import { extractApiKey } from "@/sse/services/auth";
 import type { ComboModelStep } from "@/lib/combos/steps";
 import {
@@ -1445,7 +1445,7 @@ async function buildUnifiedModelsResponseCore(
         );
       } else if (!keyMeta) {
         // #6406: A valid apiKey without a DB metadata row is an env-var master key
-        // (OMNIROUTE_API_KEY / ROUTER_API_KEY per isValidApiKey). Those keys have no
+        // (AERA_ROUTER_API_KEY / ROUTER_API_KEY per isValidApiKey). Those keys have no
         // per-key allow/deny/quota restrictions — they authenticate the request but
         // do NOT scope the catalog. Skipping the per-model filter matches the intent:
         // auth GATES access; env-var master keys see everything the unauth path sees.

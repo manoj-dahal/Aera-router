@@ -1,8 +1,5 @@
 import { errorResponse, unavailableResponse } from "../../utils/error.ts";
-import {
-  BudgetExceededError,
-  selectProvider as selectAutoProvider,
-} from "../autoCombo/engine.ts";
+import { BudgetExceededError, selectProvider as selectAutoProvider } from "../autoCombo/engine.ts";
 import {
   resolveRequestModePack,
   parseRequestBudgetCap,
@@ -59,11 +56,11 @@ export interface ResolveAutoStrategyDeps {
   relayOptions?: {
     bypassProviderQuotaPolicy?: boolean;
     sessionId?: string | null;
-    /** Per-request X-OmniRoute-Mode value (#6024/#6025). */
+    /** Per-request X-Aera-Router-Mode value (#6024/#6025). */
     mode?: string | null;
-    /** Per-request X-OmniRoute-Budget value in USD (#6023). */
+    /** Per-request X-Aera-Router-Budget value in USD (#6023). */
     budgetCap?: number | null;
-    /** Per-request X-OmniRoute-Budget-Fallback value ("cheapest" | "strict") — #3470. */
+    /** Per-request X-Aera-Router-Budget-Fallback value ("cheapest" | "strict") — #3470. */
     budgetFallback?: "cheapest" | "strict" | null;
   } | null;
   resilienceSettings: ResilienceSettings;
@@ -170,8 +167,8 @@ export async function resolveAutoStrategyOrder(
     slaPolicy,
   } = parseAutoConfig(combo, eligibleTargets);
 
-  // Per-request overrides (#6023 / #6024 / #6025 / #3470): X-OmniRoute-Budget,
-  // X-OmniRoute-Budget-Fallback and X-OmniRoute-Mode headers (threaded via
+  // Per-request overrides (#6023 / #6024 / #6025 / #3470): X-Aera-Router-Budget,
+  // X-Aera-Router-Budget-Fallback and X-Aera-Router-Mode headers (threaded via
   // relayOptions) take precedence over the combo's stored config for this single
   // request. Unknown/garbage header values are ignored so the saved config is
   // preserved.
@@ -184,7 +181,7 @@ export async function resolveAutoStrategyOrder(
   // #7008: `weights` must track the *effective* (post-override) modePack, not just
   // the combo's stored one. `selectAutoProvider()` (engine.ts) already re-derives
   // weights internally from the `modePack` it's given, so it correctly reacts to a
-  // per-request X-OmniRoute-Mode override — but `scoreAutoTargets()` (the fallback
+  // per-request X-Aera-Router-Mode override — but `scoreAutoTargets()` (the fallback
   // ranking below) has no such re-derivation and only ever sees whatever `weights`
   // it's handed. Without this recompute, a request overriding e.g. `quality-first`
   // to `ship-fast` would select its primary target under ship-fast weights but rank
@@ -192,7 +189,11 @@ export async function resolveAutoStrategyOrder(
   // select-under-one-policy/rank-under-another bug this module's original fix
   // (parseAutoConfig honoring the combo's own stored modePack) set out to close.
   const weights = modePack ? getModePack(modePack) || configWeights : configWeights;
-  if (requestModePack.override || requestBudgetCap !== undefined || requestBudgetFallback !== undefined) {
+  if (
+    requestModePack.override ||
+    requestBudgetCap !== undefined ||
+    requestBudgetFallback !== undefined
+  ) {
     log.debug?.(
       "COMBO",
       `Auto strategy: per-request controls applied (mode=${

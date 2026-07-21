@@ -78,7 +78,7 @@ export function registerBackup(program) {
       if (exitCode !== 0) process.exit(exitCode);
     });
 
-  // Legacy: `omniroute backup` without subcommand still creates a backup
+  // Legacy: `aera-router backup` without subcommand still creates a backup
   backup.action(async (opts) => {
     const exitCode = await runBackupCommand(opts);
     if (exitCode !== 0) process.exit(exitCode);
@@ -171,7 +171,7 @@ async function pruneBackups(backupDir, retention) {
   if (!retention || retention <= 0 || !existsSync(backupDir)) return;
   try {
     const dirs = readdirSync(backupDir)
-      .filter((f) => f.startsWith("omniroute-backup-"))
+      .filter((f) => f.startsWith("aera-router-backup-"))
       .sort()
       .reverse();
     for (const old of dirs.slice(retention)) {
@@ -186,7 +186,9 @@ export async function runBackupCommand(opts = {}) {
   const backupDir = getBackupDir();
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
   const safeName = opts.name ? String(opts.name).replace(/[/\\]/g, "_") : null;
-  const backupName = safeName ? `omniroute-backup-${safeName}` : `omniroute-backup-${timestamp}`;
+  const backupName = safeName
+    ? `aera-router-backup-${safeName}`
+    : `aera-router-backup-${timestamp}`;
   const backupPath = join(backupDir, backupName);
   const excludePatterns = opts.exclude || [];
 
@@ -242,7 +244,7 @@ export async function runBackupCommand(opts = {}) {
     if (backedUp > 0) {
       const info = {
         timestamp: new Date().toISOString(),
-        version: "omniroute-cli-v1",
+        version: "aera-router-cli-v1",
         encrypted: !!opts.encrypt,
         files: FILES_TO_BACKUP.filter(
           (f) => existsSync(join(dataDir, f.name)) && !shouldExclude(f.name, excludePatterns)
@@ -283,14 +285,14 @@ async function _uploadBackupToCloud(backupPath, info) {
     return 1;
   }
   try {
-    const boundary = `omniroute-backup-${Date.now().toString(36)}-${randomBytes(8).toString("hex")}`;
+    const boundary = `aera-router-backup-${Date.now().toString(36)}-${randomBytes(8).toString("hex")}`;
     const headers = new Headers({
       accept: "application/json",
       "content-type": `multipart/form-data; boundary=${boundary}`,
     });
-    const apiKey = process.env.OMNIROUTE_API_KEY;
+    const apiKey = process.env.AERA_ROUTER_API_KEY;
     if (apiKey) headers.set("authorization", `Bearer ${apiKey}`);
-    const cliToken = process.env.OMNIROUTE_CLI_TOKEN ?? (await getCliToken());
+    const cliToken = process.env.AERA_ROUTER_CLI_TOKEN ?? (await getCliToken());
     if (cliToken) headers.set(CLI_TOKEN_HEADER, cliToken);
 
     const controller = new AbortController();
@@ -394,7 +396,7 @@ export async function runRestoreCommand(backupId, opts = {}) {
 
     try {
       const dirs = readdirSync(backupDir)
-        .filter((f) => f.startsWith("omniroute-backup-"))
+        .filter((f) => f.startsWith("aera-router-backup-"))
         .sort()
         .reverse();
 
@@ -407,12 +409,12 @@ export async function runRestoreCommand(backupId, opts = {}) {
         const infoPath = join(backupDir, dir, "backup-info.json");
         if (existsSync(infoPath)) {
           const info = JSON.parse(readFileSync(infoPath, "utf8"));
-          const id = dir.replace("omniroute-backup-", "");
+          const id = dir.replace("aera-router-backup-", "");
           const dateStr = new Date(info.timestamp).toLocaleString();
           console.log(`  ${id}`);
           console.log(`\x1b[2m    ${dateStr} — ${info.files?.length || 0} files\x1b[0m`);
         } else {
-          console.log(`\x1b[2m  ${dir.replace("omniroute-backup-", "")}\x1b[0m`);
+          console.log(`\x1b[2m  ${dir.replace("aera-router-backup-", "")}\x1b[0m`);
         }
       }
     } catch (err) {
@@ -422,12 +424,12 @@ export async function runRestoreCommand(backupId, opts = {}) {
       return 1;
     }
 
-    if (!backupId) console.log("\nUsage: omniroute restore <backup-id>");
+    if (!backupId) console.log("\nUsage: aera-router restore <backup-id>");
     return 0;
   }
 
   const safeBackupId = String(backupId).replace(/[/\\]/g, "_");
-  const backupPath = join(backupDir, `omniroute-backup-${safeBackupId}`);
+  const backupPath = join(backupDir, `aera-router-backup-${safeBackupId}`);
   if (!existsSync(backupPath)) {
     console.error(t("backup.notFound", { name: backupId }));
     return 1;

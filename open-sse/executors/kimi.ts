@@ -28,7 +28,7 @@ function resolveKimiProtocol(
   credentials: ProviderCredentials | null | undefined,
   body?: unknown
 ): KimiProtocol {
-  const targetFormat = credentials?.providerSpecificData?._omnirouteKimiTargetFormat;
+  const targetFormat = credentials?.providerSpecificData?._aeraRouterKimiTargetFormat;
   if (targetFormat === FORMATS.OPENAI) return "openai";
   if (targetFormat === FORMATS.CLAUDE) return "claude";
 
@@ -44,7 +44,7 @@ function resolveKimiProtocol(
 }
 
 function getThinkingPolicy(credentials: ProviderCredentials): KimiThinkingPolicy {
-  return (asRecord(credentials.providerSpecificData?._omnirouteKimiThinking) ||
+  return (asRecord(credentials.providerSpecificData?._aeraRouterKimiThinking) ||
     {}) as KimiThinkingPolicy;
 }
 

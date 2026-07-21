@@ -1,6 +1,6 @@
-import { getEmbeddingProvider } from "@omniroute/open-sse/config/embeddingRegistry.ts";
-import { getRerankProvider } from "@omniroute/open-sse/config/rerankRegistry.ts";
-import { getRegistryEntry } from "@omniroute/open-sse/config/providerRegistry.ts";
+import { getEmbeddingProvider } from "@aera-router/open-sse/config/embeddingRegistry.ts";
+import { getRerankProvider } from "@aera-router/open-sse/config/rerankRegistry.ts";
+import { getRegistryEntry } from "@aera-router/open-sse/config/providerRegistry.ts";
 import {
   isClaudeCodeCompatibleProvider,
   isAnthropicCompatibleProvider,
@@ -14,15 +14,15 @@ import { SAFE_OUTBOUND_FETCH_PRESETS, safeOutboundFetch } from "@/shared/network
 import { getProviderOutboundGuard } from "@/shared/network/outboundUrlGuardPolicy";
 import { resolveNvidiaValidationModel } from "@/lib/providers/nvidiaValidationModel";
 import { MODAL_DEFAULT_VALIDATION_MODEL_ID } from "@/shared/constants/modal";
-import { validateQoderCliPat } from "@omniroute/open-sse/services/qoderCli.ts";
+import { validateQoderCliPat } from "@aera-router/open-sse/services/qoderCli.ts";
 import { validateImageProviderApiKey } from "@/lib/providers/imageValidation";
 import { KiroService } from "@/lib/oauth/services/kiro";
-import { usesCcWireImage } from "@omniroute/open-sse/services/ccWireImageBuiltins.ts";
+import { usesCcWireImage } from "@aera-router/open-sse/services/ccWireImageBuiltins.ts";
 import {
   isAlibabaRegionalProvider,
   resolveAlibabaProviderBaseUrl,
 } from "@/shared/constants/alibabaProviderRegions";
-import { buildProviderHeaders, buildProviderUrl } from "@omniroute/open-sse/services/provider.ts";
+import { buildProviderHeaders, buildProviderUrl } from "@aera-router/open-sse/services/provider.ts";
 
 import {
   OPENAI_LIKE_FORMATS,
@@ -443,7 +443,7 @@ export async function validateProviderApiKey({ provider, apiKey, providerSpecifi
     // key to check upstream. The only meaningful validation is confirming the
     // `auggie` binary is installed and runnable on this machine.
     auggie: async () => {
-      const { checkAuggieCliVersion } = await import("@omniroute/open-sse/executors/auggie.ts");
+      const { checkAuggieCliVersion } = await import("@aera-router/open-sse/executors/auggie.ts");
       const result = await checkAuggieCliVersion();
       if (!result.ok) {
         return {
@@ -622,7 +622,7 @@ export async function validateProviderApiKey({ provider, apiKey, providerSpecifi
     vertex: async ({ apiKey }: any) => {
       try {
         const { parseSAFromApiKey, getAccessToken, isExpressApiKey } =
-          await import("@omniroute/open-sse/executors/vertex.ts");
+          await import("@aera-router/open-sse/executors/vertex.ts");
         // Express-mode API keys are opaque strings sent directly as the ?key= query param — there is
         // no JWT to mint, so accept any non-empty Express key (the live chat/media call validates it).
         if (isExpressApiKey(apiKey)) {
@@ -639,7 +639,7 @@ export async function validateProviderApiKey({ provider, apiKey, providerSpecifi
     "vertex-partner": async ({ apiKey }: any) => {
       try {
         const { parseSAFromApiKey, getAccessToken, isExpressApiKey } =
-          await import("@omniroute/open-sse/executors/vertex.ts");
+          await import("@aera-router/open-sse/executors/vertex.ts");
         if (isExpressApiKey(apiKey)) {
           return { valid: true, error: null };
         }

@@ -5,7 +5,7 @@
  */
 import { getMitmStatus, getAllAgentsStatus, getCachedPassword } from "@/mitm/manager";
 import { isSudoPasswordRequired } from "@/mitm/dns/dnsConfig";
-import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
+import { sanitizeErrorMessage } from "@aera-router/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
 export async function GET(): Promise<Response> {

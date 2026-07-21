@@ -36,7 +36,7 @@ export function buildSlackPayload(
         elements: [
           {
             type: "mrkdwn",
-            text: `OmniRoute · ${new Date().toISOString()}`,
+            text: `Aera Router · ${new Date().toISOString()}`,
           },
         ],
       },

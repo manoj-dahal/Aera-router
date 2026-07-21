@@ -1,49 +1,49 @@
-# Quick Start: Get OmniRoute Running in 3 Minutes
+# Quick Start: Get Aera Router Running in 3 Minutes
 
-> **TL;DR**: Install → Connect a free provider → Point your IDE to OmniRoute. Done.
+> **TL;DR**: Install → Connect a free provider → Point your IDE to Aera Router. Done.
 
 ---
 
-## Step 1: Install OmniRoute
+## Step 1: Install Aera Router
 
 Choose your preferred method:
 
 ### Option A: npm (Recommended)
 
 ```bash
-npm install -g omniroute
+npm install -g aera-router
 ```
 
 ### Option B: Docker
 
 ```bash
-docker run -d --name omniroute -p 20128:20128 diegosouzapw/omniroute:latest
+docker run -d --name aera-router -p 20128:20128 diegosouzapw/aera-router:latest
 ```
 
 ### Option C: From Source
 
 ```bash
-git clone https://github.com/diegosouzapw/OmniRoute.git
-cd OmniRoute
+git clone https://github.com/manoj-dahal/Aera-router.git
+cd Aera Router
 npm install
 npm run dev
 ```
 
 ---
 
-## Step 2: Start OmniRoute
+## Step 2: Start Aera Router
 
 ```bash
-omniroute
+aera-router
 ```
 
-OmniRoute starts at `http://localhost:20128`. The dashboard opens automatically.
+Aera Router starts at `http://localhost:20128`. The dashboard opens automatically.
 
 ---
 
 ## Step 3: Connect a Free Provider
 
-You can use OmniRoute **without paying anything** by connecting a free provider.
+You can use Aera Router **without paying anything** by connecting a free provider.
 
 ### Option A: Kiro (Free Claude — No Credit Card)
 
@@ -73,7 +73,7 @@ You can use OmniRoute **without paying anything** by connecting a free provider.
 
 ## Step 4: Verify It Works
 
-From [API Keys](http://localhost:20128/dashboard/api-manager), create a new key. Store this key since it will not appear again. Do note that this key is for tools to access OmniRoute, not to access upstream providers.
+From [API Keys](http://localhost:20128/dashboard/api-manager), create a new key. Store this key since it will not appear again. Do note that this key is for tools to access Aera Router, not to access upstream providers.
 
 ```bash
 curl http://localhost:20128/v1/models -H "Authorization: Bearer YOUR_KEY"
@@ -83,7 +83,7 @@ You should see your connected models listed.
 
 ---
 
-## Step 5: Point Your IDE or CLI to OmniRoute
+## Step 5: Point Your IDE or CLI to Aera Router
 
 In your IDE or CLI tool, set:
 
@@ -93,7 +93,7 @@ API Key:  [copy from Dashboard → Endpoints]
 Model:    auto
 ```
 
-That's it! Your IDE now uses OmniRoute with automatic provider selection.
+That's it! Your IDE now uses Aera Router with automatic provider selection.
 
 ### IDE Example: VSCode/Continue.dev
 
@@ -101,14 +101,14 @@ That's it! Your IDE now uses OmniRoute with automatic provider selection.
 2. Update your `~/.continue/config.yaml` to add the following lines:
 
 ```
-  - name: OmniRoute - Auto
+  - name: Aera Router - Auto
     provider: openai
     model: auto
     apiBase: http://localhost:20128/v1
     apiKey: <YOUR_KEY>
 ```
 
-3. In the Continue.dev chat pane, select `OmniRoute - Auto` and you will make requests to OmniRoute.
+3. In the Continue.dev chat pane, select `Aera Router - Auto` and you will make requests to Aera Router.
 4. (Optional) Exercise for the reader - have your IDE update the `config.yaml` with all the other prebuilt configurations 😊
 
 ### CLI Example: Codex CLI
@@ -117,26 +117,26 @@ That's it! Your IDE now uses OmniRoute with automatic provider selection.
    For macOS/Linux (add to your `~/.bashrc` or `~/.zshrc`):
 
 ```bash
-export OMNIROUTE_API_KEY="<YOUR_KEY>"
+export AERA_ROUTER_API_KEY="<YOUR_KEY>"
 ```
 
 For Windows (Command Prompt):
 
 ```
-setx OMNIROUTE_API_KEY <YOUR_KEY>
+setx AERA_ROUTER_API_KEY <YOUR_KEY>
 ```
 
-2. Now let's launch Codex, but configured for OmniRoute. Run:
+2. Now let's launch Codex, but configured for Aera Router. Run:
 
 ```
-omniroute launch-codex --model auto
+aera-router launch-codex --model auto
 ```
 
-You can do this manually via `codex` and command line parameters to specify endpoint and api key, but with the above command, OmniRoute takes care of everything for you.
+You can do this manually via `codex` and command line parameters to specify endpoint and api key, but with the above command, Aera Router takes care of everything for you.
 
-3. The CLI should be sending requests to OmniRoute now.
+3. The CLI should be sending requests to Aera Router now.
 
-### Confirm your tool is routing to OmniRoute
+### Confirm your tool is routing to Aera Router
 
 You can see the details of the request by clicking [Monitoring/Logs](http://localhost:20128/dashboard/logs) from the left sidebar. Clicking through shows you more details. As a side note, you can see what info gets sent up from your favorite harness. This is helpful from an educational and debugging perspective.
 
@@ -144,7 +144,7 @@ You can see the details of the request by clicking [Monitoring/Logs](http://loca
 
 ## What's Next?
 
-- **[Auto-Combo Guide](./AUTO-COMBO-GUIDE.md)** — Let OmniRoute pick the best AI for you
+- **[Auto-Combo Guide](./AUTO-COMBO-GUIDE.md)** — Let Aera Router pick the best AI for you
 - **[Providers Guide](./PROVIDERS-GUIDE.md)** — Connect more providers (free and paid)
 - **[Free Tiers Guide](./FREE-TIERS-GUIDE.md)** — Get free AI with no credit card
 - **[Troubleshooting](./TROUBLESHOOTING.md)** — Fix common issues
@@ -159,19 +159,19 @@ You can see the details of the request by clicking [Monitoring/Logs](http://loca
 
 ### "What is `auto`?"
 
-`auto` tells OmniRoute to automatically pick the best provider for each request. It considers speed, cost, quality, and availability. See the [Auto-Combo Guide](./AUTO-COMBO-GUIDE.md) for details.
+`auto` tells Aera Router to automatically pick the best provider for each request. It considers speed, cost, quality, and availability. See the [Auto-Combo Guide](./AUTO-COMBO-GUIDE.md) for details.
 
 ### "How much does it cost?"
 
-OmniRoute itself is **free and open-source**. You only pay for the providers you use. Many providers have free tiers — see the [Free Tiers Guide](./FREE-TIERS-GUIDE.md).
+Aera Router itself is **free and open-source**. You only pay for the providers you use. Many providers have free tiers — see the [Free Tiers Guide](./FREE-TIERS-GUIDE.md).
 
 ### "Can I use it with Claude Code / Cursor / Copilot?"
 
-**Yes!** OmniRoute works with any tool that supports OpenAI format. Just set the base URL to `http://localhost:20128/v1`. See the [CLI Tools Guide](../reference/CLI-TOOLS.md) for specific setup instructions.
+**Yes!** Aera Router works with any tool that supports OpenAI format. Just set the base URL to `http://localhost:20128/v1`. See the [CLI Tools Guide](../reference/CLI-TOOLS.md) for specific setup instructions.
 
 ### "What if a provider goes down?"
 
-OmniRoute automatically skips failed providers and tries the next one. You don't need to do anything. See the [Auto-Combo Guide](./AUTO-COMBO-GUIDE.md) for details.
+Aera Router automatically skips failed providers and tries the next one. You don't need to do anything. See the [Auto-Combo Guide](./AUTO-COMBO-GUIDE.md) for details.
 
 ---
 
@@ -179,4 +179,4 @@ OmniRoute automatically skips failed providers and tries the next one. You don't
 
 - **[Troubleshooting](./TROUBLESHOOTING.md)** — Common issues and fixes
 - **[Discord](https://discord.gg/U47eFqAXCn)** — Community support
-- **[GitHub Issues](https://github.com/diegosouzapw/OmniRoute/issues)** — Report bugs
+- **[GitHub Issues](https://github.com/manoj-dahal/Aera-router/issues)** — Report bugs

@@ -1,5 +1,5 @@
 // CLI Tools configuration
-import { getClaudeCodeDefaultModels } from "@omniroute/open-sse/config/providerRegistry";
+import { getClaudeCodeDefaultModels } from "@aera-router/open-sse/config/providerRegistry";
 import type { CliCatalogEntry } from "@/shared/schemas/cliCatalog";
 import { GROK_BUILD_CLI_TOOL } from "@/shared/constants/cliToolsGrokBuild";
 
@@ -11,7 +11,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     name: "Claude Code",
     image: "/providers/claude.svg",
     color: "#D97757",
-    description: "Anthropic Claude Code CLI — ANTHROPIC_BASE_URL points to OmniRoute",
+    description: "Anthropic Claude Code CLI — ANTHROPIC_BASE_URL points to Aera Router",
     docsUrl: "https://docs.anthropic.com/en/docs/claude-code/overview",
     configType: "env",
     category: "code",
@@ -73,7 +73,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     name: "OpenAI Codex CLI",
     image: "/providers/codex.svg",
     color: "#10A37F",
-    description: "OpenAI Codex CLI — OpenAI-compatible base URL targets OmniRoute",
+    description: "OpenAI Codex CLI — OpenAI-compatible base URL targets Aera Router",
     docsUrl: "https://github.com/openai/codex",
     configType: "custom",
     category: "code",
@@ -280,7 +280,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
       },
       {
         type: "warning",
-        text: 'Thinking variant example: opencode run "implement this feature" --model omniroute/claude-sonnet-4-5-thinking --variant high',
+        text: 'Thinking variant example: opencode run "implement this feature" --model aera-router/claude-sonnet-4-5-thinking --variant high',
       },
     ],
     guideSteps: [
@@ -299,9 +299,9 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
       code: `{
   "$schema": "https://opencode.ai/config.json",
   "provider": {
-    "omniroute": {
+    "aera-router": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "OmniRoute",
+      "name": "Aera Router",
       "options": {
         "baseURL": "{{baseUrl}}",
         "apiKey": "{{apiKey}}"
@@ -347,7 +347,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
       {
         step: 5,
         title: "Save Provider Block",
-        desc: "Use the JSON block below as the OpenAI-compatible provider definition for OmniRoute.",
+        desc: "Use the JSON block below as the OpenAI-compatible provider definition for Aera Router.",
       },
     ],
     codeBlock: {
@@ -406,7 +406,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     name: "Qwen Code",
     image: "/providers/qwen.svg",
     color: "#10B981",
-    description: "Qwen Code CLI — current V4 OpenAI-compatible model provider via OmniRoute",
+    description: "Qwen Code CLI — current V4 OpenAI-compatible model provider via Aera Router",
     docsUrl: "https://qwenlm.github.io/qwen-code-docs/en/users/configuration/model-providers/",
     configType: "guide",
     category: "code",
@@ -418,11 +418,11 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     notes: [
       {
         type: "info",
-        text: "OmniRoute is registered under modelProviders.openai using Qwen Code's current bare-array V4 format.",
+        text: "Aera Router is registered under modelProviders.openai using Qwen Code's current bare-array V4 format.",
       },
       {
         type: "info",
-        text: "The API key is stored only as OMNIROUTE_API_KEY in ~/.qwen/.env, leaving your existing provider credentials untouched.",
+        text: "The API key is stored only as AERA_ROUTER_API_KEY in ~/.qwen/.env, leaving your existing provider credentials untouched.",
       },
     ],
     guideSteps: [
@@ -443,8 +443,8 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     "openai": [
       {
         "id": "{{model}}",
-        "name": "{{model}} (OmniRoute)",
-        "envKey": "OMNIROUTE_API_KEY",
+        "name": "{{model}} (Aera Router)",
+        "envKey": "AERA_ROUTER_API_KEY",
         "baseUrl": "{{baseUrl}}"
       }
     ]
@@ -728,7 +728,7 @@ OPENAI_API_KEY: "{{apiKey}}"`,
     image: "/providers/omp.png",
     color: "#111111",
     docsUrl: "https://github.com/can1357/oh-my-pi",
-    description: "Oh My Pi terminal coding agent via OmniRoute",
+    description: "Oh My Pi terminal coding agent via Aera Router",
     configType: "custom",
     category: "agent",
     vendor: "OSS",
@@ -738,7 +738,7 @@ OPENAI_API_KEY: "{{apiKey}}"`,
     notes: [
       {
         type: "info",
-        text: "Oh My Pi reads custom OpenAI-compatible providers from ~/.omp/agent/models.yml. OmniRoute adds itself as a provider with auto-discovery — models appear automatically in omp's /model menu.",
+        text: "Oh My Pi reads custom OpenAI-compatible providers from ~/.omp/agent/models.yml. Aera Router adds itself as a provider with auto-discovery — models appear automatically in omp's /model menu.",
       },
       {
         type: "warning",
@@ -762,11 +762,11 @@ OPENAI_API_KEY: "{{apiKey}}"`,
     notes: [
       {
         type: "info",
-        text: "Letta CLI uses pi-ai which sends OpenAI-compatible requests. OmniRoute configures it as an OpenAI provider with custom base URL.",
+        text: "Letta CLI uses pi-ai which sends OpenAI-compatible requests. Aera Router configures it as an OpenAI provider with custom base URL.",
       },
       {
         type: "info",
-        text: "CLI (Local Mode): OmniRoute auto-configures ~/.letta/lc-local-backend/providers/auth.json. Use 'letta --info' to check if local mode is enabled.",
+        text: "CLI (Local Mode): Aera Router auto-configures ~/.letta/lc-local-backend/providers/auth.json. Use 'letta --info' to check if local mode is enabled.",
       },
       {
         type: "warning",

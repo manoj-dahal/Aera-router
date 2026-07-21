@@ -869,8 +869,8 @@
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
         "HTTP-Referer": "https://cline.bot",
-        "User-Agent": "OmniRoute/<APP>",
-        "X-CLIENT-TYPE": "omniroute",
+        "User-Agent": "Aera Router/<APP>",
+        "X-CLIENT-TYPE": "aera-router",
         "X-CLIENT-VERSION": "<APP>",
         "X-CORE-VERSION": "<APP>",
         "X-IS-MULTIROOT": "false",
@@ -882,8 +882,8 @@
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
         "HTTP-Referer": "https://cline.bot",
-        "User-Agent": "OmniRoute/<APP>",
-        "X-CLIENT-TYPE": "omniroute",
+        "User-Agent": "Aera Router/<APP>",
+        "X-CLIENT-TYPE": "aera-router",
         "X-CLIENT-VERSION": "<APP>",
         "X-CORE-VERSION": "<APP>",
         "X-IS-MULTIROOT": "false",
@@ -896,8 +896,8 @@
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
         "HTTP-Referer": "https://cline.bot",
-        "User-Agent": "OmniRoute/<APP>",
-        "X-CLIENT-TYPE": "omniroute",
+        "User-Agent": "Aera Router/<APP>",
+        "X-CLIENT-TYPE": "aera-router",
         "X-CLIENT-VERSION": "<APP>",
         "X-CORE-VERSION": "<APP>",
         "X-IS-MULTIROOT": "false",
@@ -2602,18 +2602,18 @@
         "Accept": "text/event-stream",
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
-        "X-KILOCODE-EDITORNAME": "OmniRoute"
+        "X-KILOCODE-EDITORNAME": "Aera Router"
       },
       "nonStream": {
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
-        "X-KILOCODE-EDITORNAME": "OmniRoute"
+        "X-KILOCODE-EDITORNAME": "Aera Router"
       },
       "oauth": {
         "Accept": "text/event-stream",
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
-        "X-KILOCODE-EDITORNAME": "OmniRoute"
+        "X-KILOCODE-EDITORNAME": "Aera Router"
       }
     },
     "url": {
@@ -3225,18 +3225,18 @@
         "Accept": "text/event-stream",
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
-        "User-Agent": "OmniRoute/1.0"
+        "User-Agent": "Aera Router/1.0"
       },
       "nonStream": {
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
-        "User-Agent": "OmniRoute/1.0"
+        "User-Agent": "Aera Router/1.0"
       },
       "oauth": {
         "Accept": "text/event-stream",
         "Authorization": "Bearer <TOK>",
         "Content-Type": "application/json",
-        "User-Agent": "OmniRoute/1.0"
+        "User-Agent": "Aera Router/1.0"
       }
     },
     "url": {

@@ -27,7 +27,7 @@ import {
 type JsonRecord = Record<string, unknown>;
 
 const CODEWHISPERER_BASE_URL =
-  process.env.OMNIROUTE_CODEWHISPERER_BASE_URL ?? "https://codewhisperer.us-east-1.amazonaws.com";
+  process.env.AERA_ROUTER_CODEWHISPERER_BASE_URL ?? "https://codewhisperer.us-east-1.amazonaws.com";
 
 function isKiroOverageEnabled(data: JsonRecord): boolean {
   const overageConfiguration = toRecord(data.overageConfiguration);
@@ -384,9 +384,7 @@ export async function getKiroUsage(accessToken?: string, providerSpecificData?: 
     // HTTP-status failure (most informative) over a network-level error.
     throw new Error(
       outcome.lastHttpFailure ||
-        (errors.length > 0
-          ? errors[errors.length - 1]
-          : "no usage endpoint responded")
+        (errors.length > 0 ? errors[errors.length - 1] : "no usage endpoint responded")
     );
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

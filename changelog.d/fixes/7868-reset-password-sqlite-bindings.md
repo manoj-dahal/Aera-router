@@ -1,1 +1,1 @@
-- fix(cli): translate missing better-sqlite3 native bindings error into actionable `omniroute runtime repair` guidance in `reset-password`/setup CLI commands (#7868)
+- fix(cli): translate missing better-sqlite3 native bindings error into actionable `aera-router runtime repair` guidance in `reset-password`/setup CLI commands (#7868)

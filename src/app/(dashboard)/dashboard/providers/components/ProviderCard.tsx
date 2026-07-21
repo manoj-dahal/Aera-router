@@ -224,7 +224,7 @@ export default function ProviderCard({
       title={providerText(
         t,
         "kimiOfficialSupporterTooltip",
-        "Kimi (Moonshot AI) is an official OmniRoute launch partner"
+        "Kimi (Moonshot AI) is an official Aera Router launch partner"
       )}
     >
       <span className="material-symbols-outlined text-[10px] leading-none">verified</span>

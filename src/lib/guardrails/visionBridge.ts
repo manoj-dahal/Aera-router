@@ -284,8 +284,7 @@ export class VisionBridgeGuardrail extends BaseGuardrail {
     // "auto" is never the answer there, so the keep-credentialed-model skip
     // below does not apply to auto — only the reroute-target credential guard.
     if ((comboVisionBridgeDecision === "not-combo" || isAuto) && !forceVisionBridge) {
-      const checkCreds =
-        this.deps.hasUsableCredentials ?? hasUsableCredentialsForModel;
+      const checkCreds = this.deps.hasUsableCredentials ?? hasUsableCredentialsForModel;
       const originalUsable = await checkCreds(model);
 
       if (originalUsable === true && !isAuto) {
@@ -363,7 +362,7 @@ export class VisionBridgeGuardrail extends BaseGuardrail {
     // Collect descriptions maintaining original order. A failed describe yields
     // `null` so the original image is preserved downstream (#4012) — replacing it
     // with an "(unavailable)" stub silently destroyed images for vision-capable
-    // upstreams whose capability OmniRoute couldn't prove from the registry.
+    // upstreams whose capability Aera Router couldn't prove from the registry.
     const descriptions: (string | null)[] = results.map((result, i) => {
       if (result.status === "fulfilled") {
         return result.value;

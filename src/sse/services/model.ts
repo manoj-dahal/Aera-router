@@ -13,8 +13,8 @@ import {
   parseModel,
   getModelInfoCore,
   splitSyncedEffortSuffix,
-} from "@omniroute/open-sse/services/model.ts";
-import { REGISTRY } from "@omniroute/open-sse/config/providerRegistry.ts";
+} from "@aera-router/open-sse/services/model.ts";
+import { REGISTRY } from "@aera-router/open-sse/config/providerRegistry.ts";
 
 export { parseModel };
 
@@ -140,7 +140,10 @@ function resolveSyncedModelIdAndEffort(
   }
   if (findSyncedModelMeta(syncedModels, modelId)) return { modelId, effort: null };
 
-  for (const candidate of syncedModels as Array<{ id?: unknown; supportedThinkingEfforts?: unknown }>) {
+  for (const candidate of syncedModels as Array<{
+    id?: unknown;
+    supportedThinkingEfforts?: unknown;
+  }>) {
     if (typeof candidate?.id !== "string" || !Array.isArray(candidate.supportedThinkingEfforts)) {
       continue;
     }

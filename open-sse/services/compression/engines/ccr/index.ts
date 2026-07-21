@@ -464,7 +464,7 @@ export function getCcrStoreStats(principalId?: string, now = Date.now()): CcrSto
 // ─── MCP tool handler (pure function) ────────────────────────────────────────
 
 /**
- * Handler for the `omniroute_ccr_retrieve` MCP tool.
+ * Handler for the `aera_router_ccr_retrieve` MCP tool.
  *
  * The `callerId` parameter must be the authenticated principal id derived from
  * the MCP `extra` context (see compressionTools.ts). Only the principal that
@@ -522,7 +522,7 @@ export function buildCcrReference(
  * #7746 guard: how many leading characters of the original block to keep in front
  * of the marker. `maybeCcrReplace` treats an entire message/part as ONE candidate
  * block (see module docstring), so a bare marker alone would silently discard the
- * ENTIRE prompt for any caller that cannot resolve `omniroute_ccr_retrieve`
+ * ENTIRE prompt for any caller that cannot resolve `aera_router_ccr_retrieve`
  * (every plain OpenAI-compatible client — it is only ever exposed as an MCP tool).
  * Keeping a short, human-readable preamble means the model still sees the start
  * of the user's intent even when the marker itself is unreachable, while the full
@@ -594,8 +594,8 @@ function processMessages(
 
     // H-fix1: skip tool outputs (OpenAI `role:"tool"` and Anthropic user
     // messages whose content is exclusively `tool_result` parts). When
-    // OmniRoute is used as a chat-completion PROVIDER, the upstream LLM has no
-    // way to call `omniroute_ccr_retrieve` and expand markers — replacing tool
+    // Aera Router is used as a chat-completion PROVIDER, the upstream LLM has no
+    // way to call `aera_router_ccr_retrieve` and expand markers — replacing tool
     // outputs with `[CCR retrieve hash=…]` placeholders therefore breaks the agent
     // loop. Preserve tool outputs verbatim so the LLM can keep reasoning.
     if (msg.role === "tool") return { ...msg };
@@ -704,7 +704,7 @@ export const ccrEngine: CompressionEngine = {
   description:
     "Replaces large blocks of text with content-addressed retrieve markers " +
     "`[CCR retrieve hash=<24hex> chars=N]`. The original block is stored and " +
-    "retrievable via the `omniroute_ccr_retrieve` MCP tool (H4). " +
+    "retrievable via the `aera_router_ccr_retrieve` MCP tool (H4). " +
     "Store is principal-scoped: only the storing principal can retrieve their blocks.",
   icon: "archive",
   targets: ["messages"],

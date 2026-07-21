@@ -10,7 +10,7 @@ import {
   getGrokBuildOAuthHeaders,
   GROK_BUILD_OAUTH_ISSUER,
   GROK_BUILD_OAUTH_REFERRER,
-} from "@omniroute/open-sse/config/grokBuild.ts";
+} from "@aera-router/open-sse/config/grokBuild.ts";
 import { GROK_CLI_CONFIG } from "../constants/oauth";
 
 interface GrokCliAuthInfo {

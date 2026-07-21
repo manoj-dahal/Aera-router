@@ -24,8 +24,8 @@ describe("MCP audit shutdown", () => {
 
   beforeEach(() => {
     vi.resetModules();
-    globalThis.__omnirouteMcpAuditDb = undefined;
-    dataDir = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-mcp-audit-"));
+    globalThis.__aeraRouterMcpAuditDb = undefined;
+    dataDir = fs.mkdtempSync(path.join(os.tmpdir(), "aera-router-mcp-audit-"));
     dbFile = path.join(dataDir, "storage.sqlite");
     fs.writeFileSync(dbFile, "");
     process.env.DATA_DIR = dataDir;
@@ -33,43 +33,38 @@ describe("MCP audit shutdown", () => {
 
   afterEach(() => {
     delete process.env.DATA_DIR;
-    globalThis.__omnirouteMcpAuditDb = undefined;
+    globalThis.__aeraRouterMcpAuditDb = undefined;
     vi.restoreAllMocks();
   });
 
-  it(
-    "checkpoints and closes the audit database during shutdown",
-    async () => {
-      const mockDb: MockAuditDb = {
-        prepare: vi.fn(() => createStatementMock()),
-        pragma: vi.fn(),
-        close: vi.fn(),
-        open: true,
-      };
-      const MockDatabase = vi.fn(function MockDatabase() {
-        return mockDb;
-      });
+  it("checkpoints and closes the audit database during shutdown", async () => {
+    const mockDb: MockAuditDb = {
+      prepare: vi.fn(() => createStatementMock()),
+      pragma: vi.fn(),
+      close: vi.fn(),
+      open: true,
+    };
+    const MockDatabase = vi.fn(function MockDatabase() {
+      return mockDb;
+    });
 
-      vi.doMock("better-sqlite3", () => ({
-        default: MockDatabase,
-      }));
+    vi.doMock("better-sqlite3", () => ({
+      default: MockDatabase,
+    }));
 
-      const audit = await import("../audit.ts");
+    const audit = await import("../audit.ts");
 
-      await audit.logToolCall("omniroute_get_health", { ok: true }, { ok: true }, 12, true);
-      expect(mockDb.prepare).toHaveBeenCalledTimes(1);
+    await audit.logToolCall("aera_router_get_health", { ok: true }, { ok: true }, 12, true);
+    expect(mockDb.prepare).toHaveBeenCalledTimes(1);
 
-      expect(audit.closeAuditDb()).toBe(true);
-      expect(mockDb.pragma).toHaveBeenCalledWith("wal_checkpoint(TRUNCATE)");
-      expect(mockDb.close).toHaveBeenCalledTimes(1);
-      expect(audit.closeAuditDb()).toBe(false);
-    },
-    // Explicit generous timeout (vitest default is 5000ms): under contended
-    // CI-runner load, vi.resetModules() + a fresh dynamic import + mocked DB
-    // calls can exceed the default budget though the behavior is correct
-    // (issue #6803).
-    30000
-  );
+    expect(audit.closeAuditDb()).toBe(true);
+    expect(mockDb.pragma).toHaveBeenCalledWith("wal_checkpoint(TRUNCATE)");
+    expect(mockDb.close).toHaveBeenCalledTimes(1);
+    expect(audit.closeAuditDb()).toBe(false);
+  }, // CI-runner load, vi.resetModules() + a fresh dynamic import + mocked DB // Explicit generous timeout (vitest default is 5000ms): under contended
+  // calls can exceed the default budget though the behavior is correct
+  // (issue #6803).
+  30000);
 
   it("still closes the audit database when checkpoint fails", async () => {
     const mockDb: MockAuditDb = {
@@ -90,7 +85,7 @@ describe("MCP audit shutdown", () => {
 
     const audit = await import("../audit.ts");
 
-    await audit.logToolCall("omniroute_get_health", {}, {}, 5, true);
+    await audit.logToolCall("aera_router_get_health", {}, {}, 5, true);
     expect(audit.closeAuditDb()).toBe(true);
     expect(mockDb.close).toHaveBeenCalledTimes(1);
   });
@@ -135,7 +130,7 @@ describe("MCP audit shutdown", () => {
 
     const audit = await import("../audit.ts");
 
-    await audit.logToolCall("omniroute_get_health", { ok: true }, { ok: true }, 4, true);
+    await audit.logToolCall("aera_router_get_health", { ok: true }, { ok: true }, 4, true);
     expect(DatabaseSync).toHaveBeenCalledWith(dbFile);
     expect(mockNodeDb.prepare).toHaveBeenCalled();
 

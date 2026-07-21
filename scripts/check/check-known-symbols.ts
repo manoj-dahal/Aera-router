@@ -249,9 +249,9 @@ export function findNewMcpTools(frozen: readonly string[], live: Set<string>): s
  * the reason in the commit message.
  *
  * Sources:
- *   - MCP_TOOLS (33 base tools: omniroute_* + compression + agent_skills)
- *   - memoryTools (3): omniroute_memory_*
- *   - skillTools (4): omniroute_skills_*
+ *   - MCP_TOOLS (33 base tools: aera_router_* + compression + agent_skills)
+ *   - memoryTools (3): aera_router_memory_*
+ *   - skillTools (4): aera_router_skills_*
  *   - gamificationTools (8): gamification_*
  *   - pluginTools (8): plugin_*
  *   - notionTools (6): notion_*
@@ -260,48 +260,48 @@ export function findNewMcpTools(frozen: readonly string[], live: Set<string>): s
  */
 export const KNOWN_MCP_TOOL_NAMES: readonly string[] = [
   // MCP_TOOLS base (33)
-  "omniroute_get_health",
-  "omniroute_list_combos",
-  "omniroute_get_combo_metrics",
-  "omniroute_switch_combo",
-  "omniroute_check_quota",
-  "omniroute_route_request",
-  "omniroute_cost_report",
-  "omniroute_list_models_catalog",
-  "omniroute_web_search",
-  "omniroute_simulate_route",
-  "omniroute_set_budget_guard",
-  "omniroute_set_routing_strategy",
-  "omniroute_set_resilience_profile",
-  "omniroute_test_combo",
-  "omniroute_get_provider_metrics",
-  "omniroute_best_combo_for_task",
-  "omniroute_explain_route",
-  "omniroute_get_session_snapshot",
-  "omniroute_db_health_check",
-  "omniroute_sync_pricing",
-  "omniroute_cache_stats",
-  "omniroute_cache_flush",
-  "omniroute_compression_status",
-  "omniroute_compression_configure",
-  "omniroute_set_compression_engine",
-  "omniroute_list_compression_combos",
-  "omniroute_compression_combo_stats",
-  "omniroute_oneproxy_fetch",
-  "omniroute_oneproxy_rotate",
-  "omniroute_oneproxy_stats",
-  "omniroute_agent_skills_list",
-  "omniroute_agent_skills_get",
-  "omniroute_agent_skills_coverage",
+  "aera_router_get_health",
+  "aera_router_list_combos",
+  "aera_router_get_combo_metrics",
+  "aera_router_switch_combo",
+  "aera_router_check_quota",
+  "aera_router_route_request",
+  "aera_router_cost_report",
+  "aera_router_list_models_catalog",
+  "aera_router_web_search",
+  "aera_router_simulate_route",
+  "aera_router_set_budget_guard",
+  "aera_router_set_routing_strategy",
+  "aera_router_set_resilience_profile",
+  "aera_router_test_combo",
+  "aera_router_get_provider_metrics",
+  "aera_router_best_combo_for_task",
+  "aera_router_explain_route",
+  "aera_router_get_session_snapshot",
+  "aera_router_db_health_check",
+  "aera_router_sync_pricing",
+  "aera_router_cache_stats",
+  "aera_router_cache_flush",
+  "aera_router_compression_status",
+  "aera_router_compression_configure",
+  "aera_router_set_compression_engine",
+  "aera_router_list_compression_combos",
+  "aera_router_compression_combo_stats",
+  "aera_router_oneproxy_fetch",
+  "aera_router_oneproxy_rotate",
+  "aera_router_oneproxy_stats",
+  "aera_router_agent_skills_list",
+  "aera_router_agent_skills_get",
+  "aera_router_agent_skills_coverage",
   // memoryTools (3)
-  "omniroute_memory_search",
-  "omniroute_memory_add",
-  "omniroute_memory_clear",
+  "aera_router_memory_search",
+  "aera_router_memory_add",
+  "aera_router_memory_clear",
   // skillTools (4)
-  "omniroute_skills_list",
-  "omniroute_skills_enable",
-  "omniroute_skills_execute",
-  "omniroute_skills_executions",
+  "aera_router_skills_list",
+  "aera_router_skills_enable",
+  "aera_router_skills_execute",
+  "aera_router_skills_executions",
   // gamificationTools (8)
   "gamification_leaderboard",
   "gamification_rank",
@@ -444,7 +444,7 @@ async function main(): Promise<void> {
   const failures: string[] = [];
 
   // ── (1) Executor conformance ──────────────────────────────────────────────
-  const executorsMod = await import("@omniroute/open-sse/executors/index.ts");
+  const executorsMod = await import("@aera-router/open-sse/executors/index.ts");
   const getExecutor = executorsMod.getExecutor as (alias: string) => ExecutorLike;
   const BaseExecutor = executorsMod.BaseExecutor as new (...args: never[]) => unknown;
   const indexSource = readFileSync(resolvePath(REPO_ROOT, "open-sse/executors/index.ts"), "utf8");
@@ -519,11 +519,11 @@ async function main(): Promise<void> {
   }
 
   // ── (3) Translator pairs ──────────────────────────────────────────────────
-  await import("@omniroute/open-sse/translator/bootstrap.ts").then((m) =>
+  await import("@aera-router/open-sse/translator/bootstrap.ts").then((m) =>
     (m.bootstrapTranslatorRegistry as () => void)()
   );
-  const formatsMod = await import("@omniroute/open-sse/translator/formats.ts");
-  const registryMod = await import("@omniroute/open-sse/translator/registry.ts");
+  const formatsMod = await import("@aera-router/open-sse/translator/formats.ts");
+  const registryMod = await import("@aera-router/open-sse/translator/registry.ts");
   const FORMATS = formatsMod.FORMATS as Record<string, string>;
   const getRequestTranslator = registryMod.getRequestTranslator as (
     from: string,
@@ -554,14 +554,14 @@ async function main(): Promise<void> {
   const newPairs = findNewTranslatorPairs(KNOWN_TRANSLATOR_PAIRS, livePairs);
 
   // ── (4) MCP tools scope + snapshot ───────────────────────────────────────
-  const { MCP_TOOLS } = await import("@omniroute/open-sse/mcp-server/schemas/tools.ts");
-  const { memoryTools } = await import("@omniroute/open-sse/mcp-server/tools/memoryTools.ts");
-  const { skillTools } = await import("@omniroute/open-sse/mcp-server/tools/skillTools.ts");
+  const { MCP_TOOLS } = await import("@aera-router/open-sse/mcp-server/schemas/tools.ts");
+  const { memoryTools } = await import("@aera-router/open-sse/mcp-server/tools/memoryTools.ts");
+  const { skillTools } = await import("@aera-router/open-sse/mcp-server/tools/skillTools.ts");
   const { gamificationTools } =
-    await import("@omniroute/open-sse/mcp-server/tools/gamificationTools.ts");
-  const { pluginTools } = await import("@omniroute/open-sse/mcp-server/tools/pluginTools.ts");
-  const { notionTools } = await import("@omniroute/open-sse/mcp-server/tools/notionTools.ts");
-  const { obsidianTools } = await import("@omniroute/open-sse/mcp-server/tools/obsidianTools.ts");
+    await import("@aera-router/open-sse/mcp-server/tools/gamificationTools.ts");
+  const { pluginTools } = await import("@aera-router/open-sse/mcp-server/tools/pluginTools.ts");
+  const { notionTools } = await import("@aera-router/open-sse/mcp-server/tools/notionTools.ts");
+  const { obsidianTools } = await import("@aera-router/open-sse/mcp-server/tools/obsidianTools.ts");
 
   // Build the full live set of registered tools (deduped by RESERVED_MCP_NAMES logic:
   // agentSkillTools + compressionTools are already in MCP_TOOLS).
