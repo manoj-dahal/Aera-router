@@ -1,0 +1,1 @@
+- **fix(db):** bulk proxy imports now update an existing proxy when only its password changes instead of creating a duplicate ([#7707](https://github.com/manoj-dahal/Aera-router/pull/7707)) — thanks @floze-the-genius

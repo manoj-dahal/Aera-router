@@ -1,0 +1,1 @@
+- **fix(dashboard):** align onboarding tier descriptions and localize the tier step header and flow copy ([#7125](https://github.com/manoj-dahal/Aera-router/pull/7125)) — thanks @Wibias

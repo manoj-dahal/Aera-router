@@ -1,0 +1,1 @@
+- fix(ci): publish electron-updater `latest*.yml` manifests in electron release assets so auto-update can find them ([#6766](https://github.com/manoj-dahal/Aera-router/issues/6766))

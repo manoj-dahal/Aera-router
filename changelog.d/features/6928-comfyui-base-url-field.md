@@ -1,0 +1,1 @@
+- **feat(providers):** expose an editable base-URL field on the ComfyUI connection so Docker-network setups (e.g. `http://comfyui:8188`) work for image, video, and music generation ([#6928](https://github.com/manoj-dahal/Aera-router/issues/6928))

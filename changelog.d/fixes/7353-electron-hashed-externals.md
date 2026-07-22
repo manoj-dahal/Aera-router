@@ -1,0 +1,1 @@
+- **fix(electron):** Normalize hashed Turbopack external imports in packaged desktop builds, preventing instrumentation startup failures ([#7353](https://github.com/manoj-dahal/Aera-router/pull/7353)) — thanks @tianrking

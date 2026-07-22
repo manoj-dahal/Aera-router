@@ -1,0 +1,1 @@
+- **feat(cli):** add Grok Build CLI tool setup — writes a `[model.aera-router]` custom model into `~/.grok/config.toml` and restores your previous default on Reset. (thanks @rixzkiye)

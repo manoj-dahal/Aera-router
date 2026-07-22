@@ -1,0 +1,1 @@
+- **fix(executors):** Codex Responses Lite requests force serial tool calls required by the upstream API ([#7171](https://github.com/manoj-dahal/Aera-router/pull/7171)) — thanks @fenix007

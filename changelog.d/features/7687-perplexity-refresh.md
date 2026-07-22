@@ -1,0 +1,1 @@
+- **feat(perplexity):** Refresh Perplexity Web model mappings and Search API filters while keeping `/v1/models` scoped to API-key validation instead of curated catalog discovery ([#7687](https://github.com/manoj-dahal/Aera-router/pull/7687)) — thanks @backryun

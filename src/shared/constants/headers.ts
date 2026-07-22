@@ -1,0 +1,17 @@
+export const AERA_ROUTER_RESPONSE_HEADERS = {
+  cache: "X-Aera-Router-Cache",
+  cacheHit: "X-Aera-Router-Cache-Hit",
+  compression: "X-Aera-Router-Compression",
+  costSaved: "X-Aera-Router-Cost-Saved",
+  decision: "X-Aera-Router-Decision",
+  fallbackAttempts: "X-Aera-Router-Fallback-Attempts",
+  latencyMs: "X-Aera-Router-Latency-Ms",
+  model: "X-Aera-Router-Model",
+  progress: "X-Aera-Router-Progress",
+  provider: "X-Aera-Router-Provider",
+  requestId: "X-Aera-Router-Request-Id",
+  responseCost: "X-Aera-Router-Response-Cost",
+  tokensIn: "X-Aera-Router-Tokens-In",
+  tokensOut: "X-Aera-Router-Tokens-Out",
+  version: "X-Aera-Router-Version",
+} as const;
